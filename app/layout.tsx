@@ -7,8 +7,16 @@ import { ThemeProvider } from "@/components/layout/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Shadcn - Landing template",
-  description: "Landing template from Shadcn",
+  title: "Joy | Rewards & Loyalty Program for Shopify Business",
+  description: "Rewards & Loyalty Program for Shopify Business",
+  icons: {
+    icon: [
+      {
+        url: "https://joy.so/wp-content/uploads/2024/12/Joy-white.png",
+        href: "https://joy.so/wp-content/uploads/2024/12/Joy-white.png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -21,12 +29,11 @@ export default function RootLayout({
       <body className={cn("min-h-screen bg-background", inter.className)}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Navbar />
-
           {children}
         </ThemeProvider>
       </body>
