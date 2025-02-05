@@ -26,54 +26,40 @@ interface ReviewProps {
 
 const reviewList: ReviewProps[] = [
   {
-    image: "https://github.com/shadcn.png",
-    name: "John Doe",
-    userName: "Product Manager",
-    comment:
-      "Wow NextJs + Shadcn is awesome!. This template lets me change colors, fonts and images to match my brand identity. ",
+    image: "https://joy.so/wp-content/uploads/2024/12/Fresh-Brew-Cafe-feedback.avif",
+    name: "Fresh Brew Cafe",
+    userName: "Verified Customer",
+    comment: "Enjoyed the functionality and depth of the features. I was able to set up my coffee club membership tiers and add start up points, bonus points and discounts for each tier. I totally loved the loyalty page that you can set up on the website, looks amazing.",
     rating: 5.0,
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "Sophia Collins",
-    userName: "Cybersecurity Analyst",
-    comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna. ",
-    rating: 4.8,
-  },
-
-  {
-    image: "https://github.com/shadcn.png",
-    name: "Adam Johnson",
-    userName: "Chief Technology Officer",
-    comment:
-      "Lorem ipsum dolor sit amet,exercitation. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    rating: 4.9,
-  },
-  {
-    image: "https://github.com/shadcn.png",
-    name: "Ethan Parker",
-    userName: "Data Scientist",
-    comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    image: "https://joy.so/wp-content/uploads/2024/12/DEINELOCKEN-feedback.avif",
+    name: "DEINELOCKEN",
+    userName: "Verified Customer",
+    comment: "Been working with Joy multiple months now. We have been very satisfied with how things work here, including the seamless POS experience. Support team was quick to respond and walk us through the process. Great experience!",
     rating: 5.0,
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "Ava Mitchell",
-    userName: "IT Project Manager",
-    comment:
-      "Lorem ipsum dolor sit amet, tempor incididunt  aliqua. Ut enim ad minim veniam, quis nostrud incididunt consectetur adipiscing elit.",
+    image: "https://joy.so/wp-content/uploads/2024/12/Fallopian-Tube-Formula-feedback.avif",
+    name: "Fallopian Tube Formula",
+    userName: "Verified Customer",
+    comment: "This is a great app! My customers love it and it has brought me in quite a bit of sales so it's a win win! I love when I can make my customers happy and Joy does that. 10 stars for Joy!",
     rating: 5.0,
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "Isabella Reed",
-    userName: "DevOps Engineer",
-    comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    rating: 4.9,
+    image: "https://joy.so/wp-content/uploads/2024/12/Hobby-Corner-Egypt-freeback.avif",
+    name: "Hobby Corner Egypt",
+    userName: "Verified Customer",
+    comment: "I've been using the Joy app for loyalty points and rewards, and it has exceeded my expectations in every way! Setting up the program was a breeze, and the customization options are fantastic – I was able to easily align it with my store's branding.",
+    rating: 5.0,
   },
+  {
+    image: "https://joy.so/wp-content/uploads/2024/12/Shayna-Gibbons-Keeley-Boutique-feedback.avif",
+    name: "Shayna Gibbons Keeley Boutique",
+    userName: "Verified Customer",
+    comment: "I have found this application to be highly effective for my clients, and it is user-friendly. Whenever I have inquiries, the support team is extremely helpful and responds promptly.",
+    rating: 5.0,
+  }
 ];
 
 export const TestimonialSection = () => {
@@ -85,7 +71,7 @@ export const TestimonialSection = () => {
         </h2>
 
         <h2 className="text-3xl md:text-4xl text-center font-bold mb-4">
-          Hear What Our 1000+ Clients Say
+          Hear from our users
         </h2>
       </div>
 
@@ -117,10 +103,10 @@ export const TestimonialSection = () => {
                   <div className="flex flex-row items-center gap-4">
                     <Avatar>
                       <AvatarImage
-                        src="https://avatars.githubusercontent.com/u/75042455?v=4"
-                        alt="radix"
+                        src={review.image}
+                        alt={review.name}
                       />
-                      <AvatarFallback>SV</AvatarFallback>
+                      <AvatarFallback>{review.name.slice(0, 2)}</AvatarFallback>
                     </Avatar>
 
                     <div className="flex flex-col">

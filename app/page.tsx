@@ -4,12 +4,19 @@ import { ContactSection } from "@/components/layout/sections/contact";
 import { FAQSection } from "@/components/layout/sections/faq";
 import { FeaturesSection } from "@/components/layout/sections/features";
 import { FooterSection } from "@/components/layout/sections/footer";
-import { HeroSection } from "@/components/layout/sections/hero";
+import Hero from "@/components/layout/sections/hero";
 import { PricingSection } from "@/components/layout/sections/pricing";
 import { ServicesSection } from "@/components/layout/sections/services";
 import { SponsorsSection } from "@/components/layout/sections/sponsors";
 import { TeamSection } from "@/components/layout/sections/team";
 import { TestimonialSection } from "@/components/layout/sections/testimonial";
+import { LoyaltyPreview } from "@/components/layout/sections/loyalty-preview";
+import { FeaturesPreview } from "@/components/layout/sections/features-preview";
+import { WidgetsPreview } from "@/components/layout/sections/widgets-preview";
+import { LoyaltyFeatures } from "@/components/layout/sections/loyalty-features";
+import { ShopifyPOS } from "@/components/layout/sections/shopify-pos";
+import { StampedMigration } from "@/components/layout/sections/stamped-migration";
+import { CustomerStories } from "@/components/layout/sections/customer-stories";
 
 export const metadata = {
   title: "Shadcn - Landing template",
@@ -41,19 +48,20 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <>
-      <HeroSection />
+    <main className="flex min-h-screen flex-col items-center justify-between">
+      <Hero />
       <SponsorsSection />
-      <BenefitsSection />
-      <FeaturesSection />
-      <ServicesSection />
+      <LoyaltyPreview />
+      <FeaturesPreview />
+      <WidgetsPreview />
+      <LoyaltyFeatures />
+      <ShopifyPOS />
+      <StampedMigration />
+      <CustomerStories />
+  
       <TestimonialSection />
-      <TeamSection />
-      <CommunitySection />
-      <PricingSection />
-      <ContactSection />
-      <FAQSection />
+    
       <FooterSection />
-    </>
+    </main>
   );
 }

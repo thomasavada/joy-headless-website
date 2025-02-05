@@ -1,5 +1,5 @@
 "use client";
-import { ChevronsDown, Github, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import React from "react";
 import {
   Sheet,
@@ -21,168 +21,146 @@ import {
 import { Button } from "../ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { ToggleTheme } from "./toogle-theme";
 
 interface RouteProps {
   href: string;
   label: string;
 }
 
-interface FeatureProps {
-  title: string;
-  description: string;
-}
-
-const routeList: RouteProps[] = [
+const mainRoutes: RouteProps[] = [
   {
-    href: "#testimonials",
-    label: "Testimonials",
+    href: "https://joy.so/about-us/",
+    label: "About us",
   },
   {
-    href: "#team",
-    label: "Team",
+    href: "https://joy.so/pricing/",
+    label: "Pricing",
   },
   {
-    href: "#contact",
+    href: "https://joy.so/contact/",
     label: "Contact",
   },
   {
-    href: "#faq",
-    label: "FAQ",
+    href: "https://joy.so/case-study/",
+    label: "Cases Study",
   },
 ];
 
-const featureList: FeatureProps[] = [
+const resourceRoutes: RouteProps[] = [
   {
-    title: "Showcase Your Value ",
-    description: "Highlight how your product solves user problems.",
+    href: "https://joy.so/category/loyalty-program/",
+    label: "Blog",
   },
   {
-    title: "Build Trust",
-    description:
-      "Leverages social proof elements to establish trust and credibility.",
+    href: "https://joy.so/migrate/",
+    label: "Migration",
   },
   {
-    title: "Capture Leads",
-    description:
-      "Make your lead capture form visually appealing and strategically.",
+    href: "https://help.joy.so/",
+    label: "Help Docs",
   },
 ];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
-    <header className="shadow-inner bg-opacity-15 w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border border-secondary z-40 rounded-2xl flex justify-between items-center p-2 bg-card">
-      <Link href="/" className="font-bold text-lg flex items-center">
-        <ChevronsDown className="bg-gradient-to-tr border-secondary from-primary via-primary/70 to-primary rounded-lg w-9 h-9 mr-2 border text-white" />
-        Shadcn
+    <header className="shadow-inner bg-opacity-15 w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border border-secondary z-40 rounded-2xl flex justify-between items-center px-6 py-4 bg-card">
+      {/* Logo */}
+      <Link href="https://joy.so/" className="block">
+        <Image
+          src="https://joy.so/wp-content/uploads/2024/12/Joy-white.png"
+          alt="Joy retention | Loyalty for Shopify"
+          width={100}
+          height={40}
+          className="w-auto h-8"
+        />
       </Link>
-      {/* <!-- Mobile --> */}
-      <div className="flex items-center lg:hidden">
+
+      {/* Mobile Menu */}
+      <div className="flex items-center gap-4 lg:hidden">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <Menu
-              onClick={() => setIsOpen(!isOpen)}
-              className="cursor-pointer lg:hidden"
-            />
+            <Menu className="cursor-pointer lg:hidden" />
           </SheetTrigger>
 
-          <SheetContent
-            side="left"
-            className="flex flex-col justify-between rounded-tr-2xl rounded-br-2xl bg-card border-secondary"
-          >
+          <SheetContent side="left" className="flex flex-col justify-between">
             <div>
-              <SheetHeader className="mb-4 ml-4">
-                <SheetTitle className="flex items-center">
-                  <Link href="/" className="flex items-center">
-                    <ChevronsDown className="bg-gradient-to-tr border-secondary from-primary via-primary/70 to-primary rounded-lg w-9 h-9 mr-2 border text-white" />
-                    Shadcn
+              <SheetHeader className="mb-4">
+                <SheetTitle>
+                  <Link href="https://joy.so/">
+                    <Image
+                      src="https://joy.so/wp-content/uploads/2024/12/Joy-white.png"
+                      alt="Joy retention | Loyalty for Shopify"
+                      width={100}
+                      height={40}
+                      className="w-auto h-8"
+                    />
                   </Link>
                 </SheetTitle>
               </SheetHeader>
 
               <div className="flex flex-col gap-2">
-                {routeList.map(({ href, label }) => (
+                {mainRoutes.map((route) => (
                   <Button
-                    key={href}
+                    key={route.href}
                     onClick={() => setIsOpen(false)}
                     asChild
                     variant="ghost"
                     className="justify-start text-base"
                   >
-                    <Link href={href}>{label}</Link>
+                    <Link href={route.href}>{route.label}</Link>
                   </Button>
                 ))}
               </div>
             </div>
 
-            <SheetFooter className="flex-col sm:flex-col justify-start items-start">
-              <Separator className="mb-2" />
-
-              <ToggleTheme />
+            <SheetFooter>
+              <Button asChild className="w-full">
+                <Link href="http://shopify.pxf.io/Vx4jma">Start for free</Link>
+              </Button>
             </SheetFooter>
           </SheetContent>
         </Sheet>
       </div>
 
-      {/* <!-- Desktop --> */}
-      <NavigationMenu className="hidden lg:block mx-auto">
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="bg-card text-base">
-              Features
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <div className="grid w-[600px] grid-cols-2 gap-5 p-4">
-                <Image
-                  src="https://avatars.githubusercontent.com/u/75042455?v=4"
-                  alt="RadixLogo"
-                  className="h-full w-full rounded-md object-cover"
-                  width={600}
-                  height={600}
-                />
-                <ul className="flex flex-col gap-2">
-                  {featureList.map(({ title, description }) => (
-                    <li
-                      key={title}
-                      className="rounded-md p-3 text-sm hover:bg-muted"
-                    >
-                      <p className="mb-1 font-semibold leading-none text-foreground">
-                        {title}
-                      </p>
-                      <p className="line-clamp-2 text-muted-foreground">
-                        {description}
-                      </p>
+      {/* Desktop Menu */}
+      <div className="hidden lg:flex items-center gap-4">
+        <NavigationMenu>
+          <NavigationMenuList className="gap-2">
+            {mainRoutes.map((route) => (
+              <NavigationMenuItem key={route.href}>
+                <NavigationMenuLink asChild>
+                  <Link href={route.href} className="px-4 py-2">
+                    {route.label}
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            ))}
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-48 p-2">
+                  {resourceRoutes.map((route) => (
+                    <li key={route.href}>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href={route.href}
+                          className="block px-4 py-2 hover:bg-muted rounded"
+                        >
+                          {route.label}
+                        </Link>
+                      </NavigationMenuLink>
                     </li>
                   ))}
                 </ul>
-              </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
 
-          <NavigationMenuItem>
-            {routeList.map(({ href, label }) => (
-              <NavigationMenuLink key={href} asChild>
-                <Link href={href} className="text-base px-2">
-                  {label}
-                </Link>
-              </NavigationMenuLink>
-            ))}
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-
-      <div className="hidden lg:flex">
-        <ToggleTheme />
-
-        <Button asChild size="sm" variant="ghost" aria-label="View on GitHub">
-          <Link
-            aria-label="View on GitHub"
-            href="https://github.com/nobruf/shadcn-landing-page.git"
-            target="_blank"
-          >
-            <Github className="size-5" />
-          </Link>
+        <Button asChild>
+          <Link href="http://shopify.pxf.io/Vx4jma">Start for free</Link>
         </Button>
       </div>
     </header>

@@ -15,6 +15,7 @@ const nextConfig = {
         hostname: "github.com",
       },
     ],
+    domains: ['joy.so']
   },
 };
 

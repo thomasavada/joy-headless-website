@@ -1,71 +1,81 @@
 "use client";
 
-import { Icon } from "@/components/ui/icon";
+import Image from "next/image";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
-import { icons } from "lucide-react";
-interface sponsorsProps {
-  icon: string;
+
+interface SponsorProps {
+  imageUrl: string;
   name: string;
+  width: number;
+  height: number;
 }
 
-const sponsors: sponsorsProps[] = [
+const sponsors: SponsorProps[] = [
   {
-    icon: "Crown",
-    name: "Acmebrand",
+    imageUrl: "https://joy.so/wp-content/uploads/2024/12/C_S_logo-_1_-removebg-preview-1.png",
+    name: "Cool & Simple",
+    width: 215,
+    height: 37
   },
   {
-    icon: "Vegan",
-    name: "Acmelogo",
+    imageUrl: "https://joy.so/wp-content/uploads/2024/12/image-1-2.png",
+    name: "Allbirds",
+    width: 97,
+    height: 37
   },
   {
-    icon: "Ghost",
-    name: "Acmesponsor",
+    imageUrl: "https://joy.so/wp-content/uploads/2024/12/vinamilk-logo_brandlogos.net_quayf-1.png",
+    name: "Vinamilk",
+    width: 129,
+    height: 37
   },
   {
-    icon: "Puzzle",
-    name: "Acmeipsum",
+    imageUrl: "https://joy.so/wp-content/uploads/2024/12/image-5.png",
+    name: "HyperWork",
+    width: 200,
+    height: 37
   },
   {
-    icon: "Squirrel",
-    name: "Acme",
+    imageUrl: "https://joy.so/wp-content/uploads/2024/12/image-6.png",
+    name: "Glamour US",
+    width: 182,
+    height: 37
   },
   {
-    icon: "Cookie",
-    name: "Accmee",
-  },
-  {
-    icon: "Drama",
-    name: "Acmetech",
-  },
+    imageUrl: "https://joy.so/wp-content/uploads/2024/12/image-2-1.png",
+    name: "Korean Skincare",
+    width: 126,
+    height: 37
+  }
 ];
 
 export const SponsorsSection = () => {
   return (
-    <section id="sponsors" className="max-w-[75%] mx-auto pb-24 sm:pb-32">
-      <h2 className="text-lg md:text-xl text-center mb-6">
-        Our Platinum Sponsors
-      </h2>
+    <section id="sponsors" className="w-full">
+      <p className="text-base md:text-lg text-center text-muted-foreground mb-4">
+        Used by thousands of merchants around the world
+      </p>
 
-      <div className="mx-auto">
+      <div className="w-full">
         <Marquee
-          className="gap-[3rem]"
+          className="gap-[2rem]"
           fade
-          innerClassName="gap-[3rem]"
+          innerClassName="gap-[2rem]"
           pauseOnHover
         >
-          {sponsors.map(({ icon, name }) => (
+          {sponsors.map(({ imageUrl, name, width, height }) => (
             <div
               key={name}
-              className="flex items-center text-xl md:text-2xl font-medium"
+              className="flex items-center justify-center"
             >
-              <Icon
-                name={icon as keyof typeof icons}
-                size={32}
-                color="white"
-                className="mr-2"
+              <Image
+                src={imageUrl}
+                alt={name}
+                width={width}
+                height={height}
+                className="h-8 opacity-50 hover:opacity-100 transition-opacity"
               />
-              {name}
             </div>
           ))}
         </Marquee>
