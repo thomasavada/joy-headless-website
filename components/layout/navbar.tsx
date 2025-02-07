@@ -68,7 +68,7 @@ const resourceRoutes: RouteProps[] = [
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
-    <header className="shadow-inner bg-opacity-15 w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border border-secondary z-40 rounded-2xl flex justify-between items-center px-6 py-4 bg-card">
+    <header className="shadow-inner bg-opacity-15 w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border border-secondary z-40 rounded-2xl flex justify-between items-center px-6 py-1 bg-card">
       {/* Logo */}
       <Link href="https://joy.so/" className="block">
         <Image
@@ -76,7 +76,7 @@ export const Navbar = () => {
           alt="Joy retention | Loyalty for Shopify"
           width={100}
           height={40}
-          className="w-auto h-8"
+          className="w-auto h-5"
         />
       </Link>
 

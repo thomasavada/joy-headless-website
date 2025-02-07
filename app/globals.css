@@ -153,3 +153,19 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+/* Add these styles for heading anchor links */
+.anchor-link {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  margin-left: 0.5rem;
+}
+
+.group:hover .anchor-link {
+  opacity: 1;
+}
+
+/* Ensure anchor links are visible when directly accessed */
+:target {
+  scroll-margin-top: 100px;
+}

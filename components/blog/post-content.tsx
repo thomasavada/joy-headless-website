@@ -1,15 +1,48 @@
 "use client";
 import Image from 'next/image';
 import { Post } from '@/lib/ghost';
-import { CalendarDays, Clock } from "lucide-react";
+import { CalendarDays, Clock, Link2 } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { TableOfContents } from "@/components/ui/table-of-contents";
+import { useEffect, useState } from "react";
 
 interface PostContentProps {
   post: Post;
 }
 
 export function PostContent({ post }: PostContentProps) {
+  const [processedContent, setProcessedContent] = useState(post.html);
+
+  useEffect(() => {
+    // Process the content to add anchor links to headings
+    const doc = new DOMParser().parseFromString(post.html, 'text/html');
+    const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
+
+    headings.forEach((heading) => {
+      const text = heading.textContent || '';
+      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      heading.id = id;
+
+      // Create anchor link
+      const anchor = document.createElement('a');
+      anchor.href = `#${id}`;
+      anchor.className = 'anchor-link';
+      anchor.innerHTML = `
+        <span class="invisible ml-2 hover:visible group-hover:visible">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+        </span>
+      `;
+      
+      heading.classList.add('group');
+      heading.appendChild(anchor);
+    });
+
+    setProcessedContent(doc.body.innerHTML);
+  }, [post.html]);
+
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Blog", href: "/blog" },
@@ -127,11 +160,14 @@ export function PostContent({ post }: PostContentProps) {
               prose-code:text-primary prose-code:bg-primary/10 prose-code:rounded prose-code:px-1
               prose-img:rounded-xl prose-img:shadow-lg prose-img:mx-auto
               prose-pre:bg-card prose-pre:border prose-pre:border-border/40
-              [&>*]:mx-auto [&>p>img]:mx-auto"
+              [&>*]:mx-auto [&>p>img]:mx-auto
+              [&_.anchor-link]:no-underline
+              [&_.anchor-link]:text-muted-foreground
+              [&_.anchor-link:hover]:text-primary
+              prose-headings:scroll-mt-20"
             >
               <div 
-                className="prose-headings:scroll-mt-20"
-                dangerouslySetInnerHTML={{ __html: post.html }}
+                dangerouslySetInnerHTML={{ __html: processedContent }}
               />
             </div>
           </article>
