@@ -1,4 +1,4 @@
-import { getSinglePost, getPosts, Post } from '@/lib/ghost';
+import { getSinglePost, getPosts, getSettings, Post, Settings } from '@/lib/ghost';
 import { FooterSection } from "@/components/layout/sections/footer";
 import { notFound } from 'next/navigation';
 import { Metadata, ResolvingMetadata } from 'next';
@@ -16,18 +16,24 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const post = await getSinglePost(params.slug) as Post;
+  const [post, { settings }] = await Promise.all([
+    getSinglePost(params.slug) as Promise<Post>,
+    getSettings() as Promise<Settings>
+  ]);
 
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: `Not Found | ${settings.title}`,
       description: 'The requested blog post could not be found.',
     };
   }
 
   return {
-    title: post.meta_title || post.title,
+    title: post.meta_title || `${post.title} | ${settings.title}`,
     description: post.meta_description || post.excerpt,
+    alternates: {
+      canonical: post.canonical_url || post.url || `https://joy.so/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.og_title || post.title,
       description: post.og_description || post.excerpt,
@@ -36,6 +42,7 @@ export async function generateMetadata(
       authors: post.primary_author.name,
       publishedTime: post.published_at,
       modifiedTime: post.updated_at,
+      url: post.canonical_url || post.url || `https://joy.so/blog/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -56,6 +63,8 @@ interface Post {
   twitter_title?: string;
   twitter_description?: string;
   updated_at: string;
+  canonical_url?: string;
+  url?: string;
 }
 
 // Generate static pages for all posts at build time

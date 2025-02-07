@@ -20,6 +20,8 @@ export interface Post {
   twitter_title?: string;
   twitter_description?: string;
   codeinjection_head?: string; // This will contain the JSON-LD script
+  canonical_url?: string;
+  url?: string; // Ghost CMS provides this as fallback
 }
 
 export interface Tag {
@@ -35,6 +37,17 @@ export interface Author {
   slug: string;
   profile_image?: string;
   bio?: string;
+}
+
+// Update Settings interface to match Ghost API structure
+export interface Settings {
+  settings: {
+    title: string;
+    description: string;
+    icon?: string;
+    logo?: string;
+    cover_image?: string;
+  }
 }
 
 const ghostUrl = process.env.NEXT_PUBLIC_GHOST_URL?.replace(/\/$/, '');
@@ -110,5 +123,35 @@ export async function getPostsByTag(tag: string) {
   } catch (err) {
     console.error(err);
     return [];
+  }
+}
+
+// Update getSettings function
+export async function getSettings() {
+  try {
+    const url = `${ghostUrl}/ghost/api/content/settings/?key=${ghostKey}`;
+    
+    const res = await fetch(url, { 
+      next: { revalidate: 3600 }, // Cache for 1 hour
+      headers: {
+        'Accept-Version': 'v5.0',
+        'Accept': 'application/json',
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch settings');
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error('Error fetching settings:', err);
+    return {
+      settings: {
+        title: 'Joy | Rewards & Loyalty Program for Shopify Business',
+        description: 'Drive high conversion rates with Joy - an all-in-one solution for effortless loyalty program.'
+      }
+    };
   }
 } 

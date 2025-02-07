@@ -1,3 +1,5 @@
+import { getSettings, Settings } from '@/lib/ghost';
+import { Metadata } from 'next';
 import Hero from "@/components/layout/sections/hero";
 import { SponsorsSection } from "@/components/layout/sections/sponsors";
 import { LoyaltyPreview } from "@/components/layout/sections/loyalty-preview";
@@ -9,6 +11,9 @@ import { StampedMigration } from "@/components/layout/sections/stamped-migration
 import { CustomerStories } from "@/components/layout/sections/customer-stories";
 import { TestimonialSection } from "@/components/layout/sections/testimonial";
 import { FooterSection } from "@/components/layout/sections/footer";
+
+// Remove the metadata generation from the home page since we want to use the layout's metadata
+// The layout's metadata will be used as the default for the home page
 
 export default function HomePage() {
   return (

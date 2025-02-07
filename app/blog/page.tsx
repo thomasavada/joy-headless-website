@@ -1,18 +1,23 @@
-import { getPosts, Post } from '@/lib/ghost';
+import { getPosts, getSettings, Post, Settings } from '@/lib/ghost';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FooterSection } from "@/components/layout/sections/footer";
 import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Blog | Joy - Rewards & Loyalty Program for Shopify Business',
-  description: 'Explore articles about loyalty programs, customer retention strategies, and e-commerce growth tips for Shopify businesses.',
-  openGraph: {
-    title: 'Joy Blog - Loyalty Program Insights',
-    description: 'Discover strategies and tips for growing your Shopify business with loyalty programs.',
-    type: 'website',
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { settings } = await getSettings() as Settings;
+
+  return {
+    title: `Blog | ${settings.title}`,
+    description: settings.description,
+    openGraph: {
+      title: `Blog - ${settings.title}`,
+      description: settings.description,
+      type: 'website',
+      images: settings.cover_image ? [settings.cover_image] : [],
+    },
+  };
+}
 
 export default async function BlogPage() {
   const posts = await getPosts() as Post[];
