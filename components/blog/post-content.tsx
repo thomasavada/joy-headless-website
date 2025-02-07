@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { TableOfContents } from "@/components/ui/table-of-contents";
 import { useEffect, useState } from "react";
 import { ReadingProgress } from "@/components/blog/reading-progress";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 
 interface PostContentProps {
   post: Post;
@@ -177,6 +178,7 @@ export function PostContent({ post }: PostContentProps) {
           </div>
         </div>
       </main>
+      <ScrollToTop />
     </>
   );
 } 
