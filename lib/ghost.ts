@@ -9,9 +9,16 @@ export interface Post {
   feature_image: string;
   featured: boolean;
   published_at: string;
+  updated_at: string;
   excerpt: string;
   tags: Tag[];
   primary_author: Author;
+  meta_title?: string;
+  meta_description?: string;
+  og_title?: string;
+  og_description?: string;
+  twitter_title?: string;
+  twitter_description?: string;
 }
 
 export interface Tag {
