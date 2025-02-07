@@ -19,6 +19,7 @@ export interface Post {
   og_description?: string;
   twitter_title?: string;
   twitter_description?: string;
+  codeinjection_head?: string; // This will contain the JSON-LD script
 }
 
 export interface Tag {

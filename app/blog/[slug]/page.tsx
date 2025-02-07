@@ -3,6 +3,7 @@ import { FooterSection } from "@/components/layout/sections/footer";
 import { notFound } from 'next/navigation';
 import { Metadata, ResolvingMetadata } from 'next';
 import { PostContent } from '@/components/blog/post-content';
+import { JsonLd } from '@/components/blog/json-ld';
 
 interface Props {
   params: {
@@ -72,8 +73,44 @@ export default async function PostPage({ params }: Props) {
     notFound();
   }
 
+  // Create JSON-LD data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Joy Loyalty",
+      "url": "https://ghost.joy.so/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://ghost.joy.so/favicon.ico",
+        "width": 48,
+        "height": 48
+      }
+    },
+    "author": {
+      "@type": "Person",
+      "name": post.primary_author.name,
+      "url": `https://ghost.joy.so/author/${post.primary_author.slug}/`,
+      "sameAs": []
+    },
+    "headline": post.title,
+    "url": `https://ghost.joy.so/${post.slug}/`,
+    "datePublished": post.published_at,
+    "dateModified": post.updated_at,
+    "image": {
+      "@type": "ImageObject",
+      "url": post.feature_image,
+      "width": 1200,
+      "height": 800
+    },
+    "description": post.excerpt,
+    "mainEntityOfPage": `https://ghost.joy.so/${post.slug}/`
+  };
+
   return (
     <>
+      <JsonLd data={jsonLd} />
       <PostContent post={post} />
       <FooterSection />
     </>
