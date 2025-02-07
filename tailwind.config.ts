@@ -1,4 +1,5 @@
 const animate = require("tailwindcss-animate");
+const typography = require('@tailwindcss/typography');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -91,7 +92,22 @@ module.exports = {
         "collapsible-up": "collapsible-up 0.2s ease-in-out",
         blink: 'blink 1s step-end infinite'
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            'code::before': {
+              content: '""'
+            },
+            'code::after': {
+              content: '""'
+            }
+          }
+        }
+      }
     },
   },
-  plugins: [animate],
+  plugins: [
+    animate,
+    typography,
+  ],
 };

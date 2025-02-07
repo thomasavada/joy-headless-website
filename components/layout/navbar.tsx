@@ -33,6 +33,10 @@ const mainRoutes: RouteProps[] = [
     label: "About us",
   },
   {
+    href: "/blog",
+    label: "Blog",
+  },
+  {
     href: "https://joy.so/pricing/",
     label: "Pricing",
   },

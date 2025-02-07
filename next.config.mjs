@@ -7,8 +7,12 @@ const nextConfig = {
   },
   output: 'export',
   images: {
-    unoptimized: true, // Add this line
+    unoptimized: true,
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ghost.joy.so",
+      },
       {
         protocol: "https",
         hostname: "i.pravatar.cc",
@@ -22,7 +26,10 @@ const nextConfig = {
         hostname: "github.com",
       },
     ],
-    domains: ['joy.so']
+    domains: [
+      'joy.so',
+      'your-ghost-cms-domain.com' // Add your Ghost CMS domain here
+    ]
   },
 };
 
