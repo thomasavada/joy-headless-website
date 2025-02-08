@@ -89,10 +89,10 @@ export default function PricingPage() {
               <span className="text-[#00A6ED] text-sm font-medium">
                 Pricing
               </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
                 A customized pricing plan for every business size
               </h1>
-              <p className="text-lg sm:text-xl text-[#667085] leading-relaxed">
+              <p className="text-lg sm:text-xl text-white leading-relaxed">
                 Our pricing plans are tailored to meet the unique needs of businesses of all
                 sizes, ensuring flexibility and value at every stage of growth.
               </p>

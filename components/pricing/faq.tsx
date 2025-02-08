@@ -56,7 +56,7 @@ export function FAQ() {
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-semibold text-white mb-2">
+        <h2 className="text-2xl font-bold text-white mb-2">
           Frequently asked questions
         </h2>
         <div className="flex items-center justify-center gap-2 text-white">
@@ -75,17 +75,21 @@ export function FAQ() {
             className="bg-[#0B1121] rounded-lg border border-[#1D2939]"
           >
             <AccordionTrigger className="px-6 py-4 hover:no-underline">
-              <span className="text-white font-medium">{faq.question}</span>
+              <span className="text-white font-bold">
+                {faq.question}
+              </span>
             </AccordionTrigger>
             <AccordionContent className="px-6 pb-4">
               {Array.isArray(faq.answer) ? (
                 <div className="space-y-4">
                   {faq.answer.map((paragraph, i) => (
-                    <p key={i} className="text-white">{paragraph}</p>
+                    <p key={i} className="text-white font-normal">
+                      {paragraph}
+                    </p>
                   ))}
                 </div>
               ) : (
-                <p className="text-white">{faq.answer}</p>
+                <p className="text-white font-normal">{faq.answer}</p>
               )}
             </AccordionContent>
           </AccordionItem>

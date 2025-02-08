@@ -1,37 +1,37 @@
+import type { Config } from "tailwindcss";
+
 const animate = require("tailwindcss-animate");
 const typography = require('@tailwindcss/typography');
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const config = {
   darkMode: ["class"],
   safelist: ["dark"],
   prefix: "",
 
   content: [
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
 
   theme: {
     container: {
       center: true,
-      padding: "1.5rem",
+      padding: "2rem",
       screens: {
         "2xl": "1400px",
       },
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
+        border: "#1D2939",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
+        background: "#0B1121",
+        foreground: "white",
+        primary: "#00A6ED",
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
@@ -41,8 +41,8 @@ module.exports = {
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "white",
+          foreground: "white"
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
@@ -83,6 +83,54 @@ module.exports = {
         blink: {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0' }
+        },
+        "reveal-up": {
+          "0%": { 
+            transform: "translateY(20px)",
+            opacity: "0"
+          },
+          "100%": { 
+            transform: "translateY(0)",
+            opacity: "1"
+          }
+        },
+        "reveal-down": {
+          "0%": { 
+            transform: "translateY(-20px)",
+            opacity: "0"
+          },
+          "100%": { 
+            transform: "translateY(0)",
+            opacity: "1"
+          }
+        },
+        "reveal-left": {
+          "0%": { 
+            transform: "translateX(-20px)",
+            opacity: "0"
+          },
+          "100%": { 
+            transform: "translateX(0)",
+            opacity: "1"
+          }
+        },
+        "reveal-right": {
+          "0%": { 
+            transform: "translateX(20px)",
+            opacity: "0"
+          },
+          "100%": { 
+            transform: "translateX(0)",
+            opacity: "1"
+          }
+        },
+        "reveal-fade": {
+          "0%": { 
+            opacity: "0"
+          },
+          "100%": { 
+            opacity: "1"
+          }
         }
       },
       animation: {
@@ -90,7 +138,12 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "collapsible-down": "collapsible-down 0.2s ease-in-out",
         "collapsible-up": "collapsible-up 0.2s ease-in-out",
-        blink: 'blink 1s step-end infinite'
+        blink: 'blink 1s step-end infinite',
+        "reveal-up": "reveal-up 0.5s ease-out forwards",
+        "reveal-down": "reveal-down 0.5s ease-out forwards",
+        "reveal-left": "reveal-left 0.5s ease-out forwards",
+        "reveal-right": "reveal-right 0.5s ease-out forwards",
+        "reveal-fade": "reveal-fade 0.5s ease-out forwards"
       },
       typography: {
         DEFAULT: {
@@ -110,4 +163,6 @@ module.exports = {
     animate,
     typography,
   ],
-};
+} satisfies Config;
+
+export default config;

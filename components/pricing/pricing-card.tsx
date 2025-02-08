@@ -136,7 +136,7 @@ export const PricingCard = ({
         {/* Header with POS Toggle and Description */}
         <div className="text-center">
           <div className="flex items-center gap-3">
-            <h3 className="text-lg font-semibold tracking-tight">
+            <h3 className="text-lg font-semibold tracking-tight text-white">
               {title}
             </h3>
             {hasEnablePos && (
@@ -145,12 +145,12 @@ export const PricingCard = ({
                   checked={enablePos}
                   onCheckedChange={setEnablePos}
                 />
-                <span className="text-sm text-[#667085]">Enable POS</span>
+                <span className="text-sm text-white">Enable POS</span>
               </div>
             )}
           </div>
           {description && (
-            <p className="text-sm text-left mt-2 mb-6">
+            <p className="text-sm text-white text-left mt-2 mb-6">
               {description}
             </p>
           )}
@@ -168,7 +168,7 @@ export const PricingCard = ({
               )}
             </div>
             {additionalInfo && !hasEnablePos && (
-              <p className="text-sm text-[#667085]">{additionalInfo}</p>
+              <p className="text-sm text-white">{additionalInfo}</p>
             )}
           </div>
         </div>
@@ -180,7 +180,7 @@ export const PricingCard = ({
               value={selectedVolume}
               onValueChange={setSelectedVolume}
             >
-              <SelectTrigger className="w-full bg-[#1D2939] border-[#1D2939] text-[#667085] h-11">
+              <SelectTrigger className="w-full bg-[#1D2939] border-[#1D2939] text-white h-11">
                 <SelectValue placeholder="Select volume range" />
               </SelectTrigger>
               <SelectContent className="bg-[#1D2939] border-[#1D2939]">
@@ -188,7 +188,7 @@ export const PricingCard = ({
                   <SelectItem 
                     key={range} 
                     value={range}
-                    className="text-[#667085] hover:text-white hover:bg-[#00A6ED]/10"
+                    className="text-white hover:text-white hover:bg-[#00A6ED]/10"
                   >
                     {formatVolumeRange(range)}
                   </SelectItem>
@@ -203,7 +203,7 @@ export const PricingCard = ({
           {features.map((feature, index) => (
             <li key={index} className="flex items-start gap-3">
               <Check className="h-5 w-5 text-[#00A6ED] flex-shrink-0 mt-0.5" />
-              <span className="text-[#667085] text-sm text-left">{feature.text}</span>
+              <span className="text-white text-sm text-left">{feature.text}</span>
             </li>
           ))}
         </ul>
@@ -221,7 +221,7 @@ export const PricingCard = ({
 
         {/* Ideal For - Keep Centered */}
         {idealFor && (
-          <p className="text-sm text-[#667085] pt-4 text-center">
+          <p className="text-sm text-white pt-4 text-center">
             {idealFor}
           </p>
         )}
@@ -232,7 +232,7 @@ export const PricingCard = ({
             "w-full h-12 rounded-full font-medium",
             isPopular 
               ? "bg-[#00A6ED] hover:bg-[#00A6ED]/90 text-white border-0"
-              : "bg-white hover:bg-white/90 text-black border-0"
+              : "bg-white hover:bg-white/90 text-[#0B1121] border-0"
           )}
           variant="outline"
           size="lg"
