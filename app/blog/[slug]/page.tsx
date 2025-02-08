@@ -121,7 +121,6 @@ export default async function PostPage({ params }: Props) {
     <>
       <JsonLd data={jsonLd} />
       <PostContent post={post} />
-      <FooterSection />
     </>
   );
 }

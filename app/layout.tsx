@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/layout/navbar";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { getSettings, Settings } from '@/lib/ghost';
+import { FooterSection } from "@/components/layout/sections/footer";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -54,6 +56,7 @@ export default function RootLayout({
         >
           <Navbar />
           {children}
+          <FooterSection />
         </ThemeProvider>
       </body>
     </html>
