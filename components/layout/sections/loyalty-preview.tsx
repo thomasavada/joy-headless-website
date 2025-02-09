@@ -5,7 +5,7 @@ export const LoyaltyPreview = () => {
     <section className="w-full max-w-7xl mx-auto px-4 py-16 md:py-24">
       <div className="flex flex-col items-center gap-8">
         <div className="text-center">
-          <p className="text-sm text-primary mb-4">About Joy Loyalty</p>
+          <p className="text-sm text-primary mb-4 dark:text-primary-dark">About Joy Loyalty</p>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Giving merchants all<br />
             the essentials to grow

@@ -49,7 +49,7 @@ export const StampedMigration = () => {
       <div className="container px-4 mx-auto">
         <div className="max-w-4xl mx-auto flex flex-col items-center text-center space-y-8">
           {/* Badge */}
-          <span className="inline-flex items-center px-4 py-2 text-sm text-primary border border-primary/20 rounded-full bg-primary/5">
+          <span className="inline-flex items-center px-4 py-2 text-sm text-primary dark:text-primary-dark border border-primary/20 dark:border-primary-dark/20 rounded-full bg-primary/5 dark:bg-primary-dark/5">
             Migrate to Joy Loyalty
           </span>
 
@@ -65,7 +65,7 @@ export const StampedMigration = () => {
           {/* CTA Button */}
           <Link
             href="#contact"
-            className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-primary rounded-full hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-primary dark:bg-primary-dark rounded-full hover:bg-primary/90 dark:hover:bg-primary-dark/90 transition-colors"
           >
             Contact us
           </Link>

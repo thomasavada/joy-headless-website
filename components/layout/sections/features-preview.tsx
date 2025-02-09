@@ -38,7 +38,7 @@ export const FeaturesPreview = () => {
         <div className="flex md:flex-row items-start gap-8">
           {/* Left Content */}
           <div className="md:w-1/2">
-            <span className="inline-flex items-center px-4 py-2 text-sm text-primary border border-primary/20 rounded-full bg-primary/5 mb-6">
+            <span className="inline-flex items-center px-4 py-2 text-sm text-primary dark:text-primary-dark border border-primary/20 rounded-full bg-primary/5 mb-6">
               About Joy Loyalty
             </span>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">

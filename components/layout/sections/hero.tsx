@@ -36,7 +36,7 @@ const Hero = () => {
         </Link>
         <Link 
           href="/book-demo"
-          className="inline-flex items-center justify-center px-8 py-3 text-base font-medium bg-white rounded-full border border-transparent hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-primary-dark text-foreground dark:text-foreground-dark"
+          className="inline-flex items-center justify-center px-8 py-3 text-base font-medium bg-white rounded-full border border-transparent hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-primary-dark text-foreground dark:text-foreground"
         >
           Book Demo
         </Link>

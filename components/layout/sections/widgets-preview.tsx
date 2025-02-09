@@ -39,7 +39,7 @@ export const WidgetsPreview = () => {
             </p>
             <a 
               href="#"
-              className="inline-flex items-center text-primary hover:underline"
+              className="inline-flex items-center text-primary dark:text-primary-dark hover:underline"
             >
               Learn More
               <svg 

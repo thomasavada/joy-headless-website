@@ -44,7 +44,7 @@ const stories = [
 
 export const CustomerStories = () => {
   return (
-    <section className="w-full bg-[#0A0C10] py-20">
+    <section className="w-full py-20">
       <div className="container px-4 mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground dark:text-foreground-dark">
           Customer success stories

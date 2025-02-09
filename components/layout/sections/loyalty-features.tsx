@@ -51,7 +51,7 @@ export const LoyaltyFeatures = () => {
             
             <Link 
               href="#"
-              className="inline-flex items-center  hover:underline"
+              className="inline-flex items-center  hover:underline text-primary dark:text-primary-dark"
             >
               Learn More
               <svg 

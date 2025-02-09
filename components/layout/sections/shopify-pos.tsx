@@ -102,7 +102,7 @@ export const ShopifyPOS = () => {
       <div className="container px-4 mx-auto flex flex-col items-center">
         {/* Header Content */}
         <div className="text-center max-w-3xl mx-auto space-y-6 mb-16">
-          <span className="inline-flex items-center px-4 py-2 text-sm text-primary border border-primary/20 rounded-full bg-primary/5">
+          <span className="inline-flex items-center px-4 py-2 text-sm text-primary dark:text-primary-dark border border-primary/20 dark:border-primary-dark/20 rounded-full bg-primary/5 dark:bg-primary-dark/5">
             Loyalty for Point of Sales
           </span>
           <h2 className="text-4xl md:text-5xl font-bold">
