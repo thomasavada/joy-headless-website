@@ -30,7 +30,7 @@ interface RouteProps {
 
 const mainRoutes: RouteProps[] = [
   {
-    href: "https://joy.so/about-us/",
+    href: "/about-us/",
     label: "About us",
   },
   {
@@ -38,15 +38,15 @@ const mainRoutes: RouteProps[] = [
     label: "Blog",
   },
   {
-    href: "https://joy.so/pricing/",
+    href: "/pricing/",
     label: "Pricing",
   },
   {
-    href: "https://joy.so/contact/",
+    href: "/contact/",
     label: "Contact",
   },
   {
-    href: "https://joy.so/case-study/",
+    href: "/case-study/",
     label: "Cases Study",
   },
 ];

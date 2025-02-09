@@ -57,7 +57,11 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        primary: "#06038D",
+        primary: {
+          DEFAULT: "#06038D",
+          dark: "#00c9ff",
+          light: "#06038D"
+        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",

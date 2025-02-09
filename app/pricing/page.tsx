@@ -1,15 +1,12 @@
-import { Metadata } from "next";
+'use client';
+
 import { PricingCard } from "@/components/pricing/pricing-card";
 import { SponsorsSection } from "@/components/layout/sections/sponsors";
 import { Reveal } from "@/components/ui/reveal";
 import { PlanComparison } from "@/components/pricing/plan-comparison";
 import { CantDecide } from "@/components/pricing/cant-decide";
 import { FAQ } from "@/components/pricing/faq";
-
-export const metadata: Metadata = {
-  title: "Pricing - Joy",
-  description: "Choose the perfect plan for your business",
-};
+import { PricingProvider } from "@/components/pricing/pricing-context";
 
 const pricingPlans = [
   {
@@ -104,16 +101,18 @@ export default function PricingPage() {
       {/* Pricing Cards Section */}
       <section className="w-full py-12 sm:py-24">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {pricingPlans.map((plan) => (
-              <Reveal key={plan.title}>
-                <PricingCard 
-                  {...plan} 
-                  className="text-center"
-                />
-              </Reveal>
-            ))}
-          </div>
+          <PricingProvider>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {pricingPlans.map((plan) => (
+                <Reveal key={plan.title}>
+                  <PricingCard 
+                    {...plan} 
+                    className="text-center"
+                  />
+                </Reveal>
+              ))}
+            </div>
+          </PricingProvider>
         </div>
       </section>
 

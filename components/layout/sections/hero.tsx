@@ -11,7 +11,7 @@ const Hero = () => {
     <section className="relative flex flex-col items-center justify-center px-4 py-20 text-center bg-background">
       {/* Badge */}
       <div className="mb-8">
-        <span className="inline-flex items-center px-4 py-2 text-sm text-primary border border-primary/20 rounded-full dark:bg-white">
+      <span className="inline-flex items-center px-4 py-2 text-sm text-primary border border-primary/20 rounded-full bg-primary/5">
           Built for Shopify
         </span>
       </div>

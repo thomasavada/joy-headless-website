@@ -12,6 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+import { usePricing } from './pricing-context';
 
 interface PricingFeature {
   text: string;
@@ -77,31 +79,25 @@ export const PricingCard = ({
   description,
 }: PricingCardProps) => {
   const [enablePos, setEnablePos] = useState(false);
-  const [selectedVolume, setSelectedVolume] = useState(
-    title === "Advanced" ? advancedRanges[0].range : professionalRanges[0].range
-  );
+  const { orderVolume } = usePricing();
   const basePrice = parseFloat(price.replace('$', ''));
   
   const getDisplayPrice = () => {
-    if (title === "Professional" || title === "Advanced") {
-      const [start] = selectedVolume.split('-').map(Number);
-      const ranges = title === "Advanced" ? advancedRanges : professionalRanges;
-      
-      // If under base orders limit, return base price
-      const baseOrderLimit = title === "Advanced" ? 2000 : 1000;
-      if (start <= baseOrderLimit) {
-        return enablePos ? basePrice + 15 : basePrice;
-      }
+    if (price === 'Free' || price === 'Custom') return price;
 
-      // Calculate additional cost for orders over limit
-      const additionalHundreds = Math.ceil((start - baseOrderLimit) / 100);
-      const pricePerHundred = title === "Advanced" ? 10 : 15;
-      const additionalCost = additionalHundreds * pricePerHundred;
-      const totalPrice = basePrice + additionalCost;
-      
-      return enablePos ? totalPrice + 15 : totalPrice;
+    // Calculate additional cost based on order volume
+    const baseOrderLimit = title === "Advanced" ? 2000 : 1000;
+    if (orderVolume <= baseOrderLimit) {
+      return enablePos ? basePrice + 15 : basePrice;
     }
-    return basePrice;
+
+    // Calculate additional cost for orders over limit
+    const additionalHundreds = Math.ceil((orderVolume - baseOrderLimit) / 100);
+    const pricePerHundred = title === "Advanced" ? 10 : 15;
+    const additionalCost = additionalHundreds * pricePerHundred;
+    const totalPrice = basePrice + additionalCost;
+    
+    return enablePos ? totalPrice + 15 : totalPrice;
   };
 
   const displayPrice = getDisplayPrice();
@@ -138,9 +134,9 @@ export const PricingCard = ({
       className
     )}>
       <div className="space-y-6">
-        {/* Header with POS Toggle and Description */}
-        <div className="text-center">
-          <div className="flex items-center gap-3">
+        {/* Header with POS Toggle */}
+        <div>
+          <div className="flex items-center gap-3 mb-2">
             <h3 className="text-lg font-semibold tracking-tight text-foreground dark:text-foreground-dark">
               {title}
             </h3>
@@ -157,55 +153,28 @@ export const PricingCard = ({
             )}
           </div>
           {description && (
-            <p className="text-sm text-foreground dark:text-foreground-dark">
+            <p className="text-sm text-foreground dark:text-foreground-dark text-left">
               {description}
             </p>
           )}
-          
-          {/* Pricing */}
-          <div className="space-y-2">
-            <div className="flex items-baseline gap-2 justify-center">
-              <span className="text-white text-5xl font-bold">
-                {price === 'Free' || price === 'Custom' 
-                  ? price 
-                  : formatPrice(displayPrice)}
-              </span>
-              {period && price !== "Custom" && (
-                <span className="text-[#667085]">{period}</span>
-              )}
-            </div>
-            {additionalInfo && !hasEnablePos && (
-              <p className="text-sm text-[#667085]">{additionalInfo}</p>
+        </div>
+        
+        {/* Pricing */}
+        <div className="text-center space-y-2">
+          <div className="flex items-baseline gap-2 justify-center">
+            <span className="text-white text-5xl font-bold">
+              {formatPrice(getDisplayPrice())}
+            </span>
+            {period && price !== "Custom" && (
+              <span className="text-[#667085]">{period}</span>
             )}
           </div>
+          {additionalInfo && !hasEnablePos && (
+            <p className="text-sm text-[#667085]">{additionalInfo}</p>
+          )}
         </div>
 
-        {/* Volume Calculator */}
-        {(title === "Professional" || title === "Advanced") && (
-          <div className="w-full">
-            <Select
-              value={selectedVolume}
-              onValueChange={setSelectedVolume}
-            >
-              <SelectTrigger className="w-full bg-[#1D2939] border-[#1D2939] text-[#667085] h-11">
-                <SelectValue placeholder="Select volume range" />
-              </SelectTrigger>
-              <SelectContent className="bg-[#1D2939] border-[#1D2939]">
-                {(title === "Advanced" ? advancedRanges : professionalRanges).map(({ range }) => (
-                  <SelectItem 
-                    key={range} 
-                    value={range}
-                    className="text-[#667085] hover:text-white hover:bg-[#00A6ED]/10"
-                  >
-                    {formatVolumeRange(range)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        )}
-
-        {/* Features - Now Left Aligned */}
+        {/* Features */}
         <ul className="space-y-4 mb-6">
           {features.map((feature, index) => (
             <li key={index} className="flex items-start gap-3">
@@ -224,9 +193,6 @@ export const PricingCard = ({
             <p>{getAdditionalOrdersPrice()} per additional 100 orders.</p>
           </div>
         )}
-
-        {/* Divider */}
-        <div className="border-t border-[#1D2939]" />
 
         {/* Ideal For - Keep Centered */}
         {idealFor && (
