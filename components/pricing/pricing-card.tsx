@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { usePricing } from './pricing-context';
+import { Badge } from "@/components/ui/badge";
 
 interface PricingFeature {
   text: string;
@@ -33,6 +34,7 @@ interface PricingCardProps {
   className?: string;
   hasEnablePos?: boolean;
   description?: string;
+  badge?: string;
 }
 
 interface VolumeRange {
@@ -77,6 +79,7 @@ export const PricingCard = ({
   className,
   hasEnablePos,
   description,
+  badge,
 }: PricingCardProps) => {
   const [enablePos, setEnablePos] = useState(false);
   const { orderVolume } = usePricing();
@@ -129,7 +132,7 @@ export const PricingCard = ({
   return (
     <div className={cn(
       "relative rounded-xl p-8 bg-background dark:bg-background-dark border transition-all duration-300",
-      isPopular && "border-primary",
+      isPopular && "border-primary dark:border-primary-dark",
       !isPopular && "border-border dark:border-border-dark",
       className
     )}>
@@ -137,7 +140,7 @@ export const PricingCard = ({
         {/* Header with POS Toggle */}
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <h3 className="text-lg font-semibold tracking-tight text-foreground dark:text-foreground-dark">
+            <h3 className="text-lg font-semibold tracking-tight text-black dark:text-white">
               {title}
             </h3>
             {hasEnablePos && (
@@ -146,14 +149,14 @@ export const PricingCard = ({
                   checked={enablePos}
                   onCheckedChange={setEnablePos}
                 />
-                <span className="text-sm text-muted dark:text-muted-dark">
+                <span className="text-sm text-gray-600 dark:text-white/70">
                   Enable POS
                 </span>
               </div>
             )}
           </div>
           {description && (
-            <p className="text-sm text-foreground dark:text-foreground-dark text-left">
+            <p className="text-sm text-gray-600 dark:text-white/70 text-left">
               {description}
             </p>
           )}
@@ -162,15 +165,15 @@ export const PricingCard = ({
         {/* Pricing */}
         <div className="text-center space-y-2">
           <div className="flex items-baseline gap-2 justify-center">
-            <span className="text-white text-5xl font-bold">
+            <span className="text-black dark:text-white text-5xl font-bold">
               {formatPrice(getDisplayPrice())}
             </span>
             {period && price !== "Custom" && (
-              <span className="text-[#667085]">{period}</span>
+              <span className="text-gray-600 dark:text-white/70 text-left">{period}</span>
             )}
           </div>
           {additionalInfo && !hasEnablePos && (
-            <p className="text-sm text-[#667085]">{additionalInfo}</p>
+            <p className="text-sm text-gray-600 dark:text-white/70 text-left">{additionalInfo}</p>
           )}
         </div>
 
@@ -178,8 +181,8 @@ export const PricingCard = ({
         <ul className="space-y-4 mb-6">
           {features.map((feature, index) => (
             <li key={index} className="flex items-start gap-3">
-              <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-              <span className="text-muted dark:text-muted-dark text-sm">
+              <Check className="h-5 w-5 text-primary dark:text-primary-dark flex-shrink-0 mt-0.5" />
+              <span className="text-gray-600 dark:text-white/70 text-sm text-left">
                 {feature.text}
               </span>
             </li>
@@ -188,32 +191,39 @@ export const PricingCard = ({
 
         {/* Additional Orders Info */}
         {getAdditionalOrdersPrice() && (
-          <div className="flex items-start gap-2 text-sm text-white">
+          <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-white/70 text-left">
             <Info className="h-4 w-4 flex-shrink-0 mt-0.5" />
             <p>{getAdditionalOrdersPrice()} per additional 100 orders.</p>
           </div>
         )}
 
-        {/* Ideal For - Keep Centered */}
+        {/* Ideal For */}
         {idealFor && (
-          <p className="text-sm text-[#667085] pt-4 text-center">
+          <p className="text-left text-sm text-gray-600 dark:text-white/70 pt-4">
             {idealFor}
           </p>
         )}
 
-        {/* CTA - Keep Centered */}
+        {/* CTA Button */}
         <Button 
           className={cn(
             "w-full h-12 rounded-full font-medium",
             isPopular 
-              ? "bg-[#00A6ED] hover:bg-[#00A6ED]/90 text-white border-0"
-              : "bg-white hover:bg-white/90 text-[#0B1121] border-0"
+              ? "bg-primary dark:bg-primary-dark hover:bg-primary/90 dark:hover:bg-primary-dark/90 dark:text-white"
+              : "bg-white dark:bg-white hover:bg-white/90 dark:hover:bg-white/90 text-black border-0"
           )}
           variant="outline"
           size="lg"
         >
           {ctaText}
         </Button>
+
+        {/* Badge */}
+        {badge && (
+          <Badge className="bg-primary/10 dark:bg-primary-dark/10 text-primary dark:text-primary-dark">
+            {badge}
+          </Badge>
+        )}
       </div>
     </div>
   );

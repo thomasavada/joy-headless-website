@@ -46,7 +46,7 @@ export const CustomerStories = () => {
   return (
     <section className="w-full bg-[#0A0C10] py-20">
       <div className="container px-4 mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground dark:text-foreground-dark">
           Customer success stories
         </h2>
 
@@ -100,7 +100,7 @@ export const CustomerStories = () => {
                     {story.stats.map((stat, idx) => (
                       <div key={idx} className="flex items-center gap-3">
                         <div className="p-1.5 bg-[#1E2330] rounded">
-                          <ArrowUpRight className="w-4 h-4 text-[#00A3FF]" />
+                          <ArrowUpRight className="w-4 h-4 text-primary dark:text-primary-dark" />
                         </div>
                         <div>
                           <p className="text-lg font-bold text-white">{stat.value}</p>
@@ -117,13 +117,13 @@ export const CustomerStories = () => {
           </Swiper>
 
           <button 
-            className="swiper-button-prev !hidden md:!flex absolute left-0 top-1/2 -translate-y-1/2 z-10 text-white hover:text-[#00A3FF] transition-colors after:!content-none"
+            className="swiper-button-prev !hidden md:!flex absolute left-0 top-1/2 -translate-y-1/2 z-10 text-white hover:text-primary dark:hover:text-primary-dark transition-colors after:!content-none"
             aria-label="Previous slide"
           >
             <ChevronLeft className="w-8 h-8" />
           </button>
           <button 
-            className="swiper-button-next !hidden md:!flex absolute right-0 top-1/2 -translate-y-1/2 z-10 text-white hover:text-[#00A3FF] transition-colors after:!content-none"
+            className="swiper-button-next !hidden md:!flex absolute right-0 top-1/2 -translate-y-1/2 z-10 text-white hover:text-primary dark:hover:text-primary-dark transition-colors after:!content-none"
             aria-label="Next slide"
           >
             <ChevronRight className="w-8 h-8" />
@@ -134,7 +134,7 @@ export const CustomerStories = () => {
           <Link 
             href="https://joy.so/case-study/"
             target="_blank"
-            className="inline-flex items-center gap-2 text-[#00A3FF] hover:underline"
+            className="inline-flex items-center gap-2 text-primary dark:text-primary-dark hover:underline"
           >
             See More
             <ChevronRight className="w-4 h-4" />

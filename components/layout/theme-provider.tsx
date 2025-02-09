@@ -25,7 +25,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       attribute="class"
       defaultTheme={pathname.startsWith('/blog') ? 'light' : 'dark'}
       enableSystem={false}
-      forcedTheme={pathname.startsWith('/blog') ? 'light' : 'dark'} // Force theme based on path
+      forcedTheme={pathname.startsWith('/blog') ? 'light' : 'dark'}
     >
       {children}
     </NextThemesProvider>
