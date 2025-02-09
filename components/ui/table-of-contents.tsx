@@ -64,6 +64,7 @@ export function TableOfContents({ content }: TableOfContentsProps) {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className="text-muted-foreground/70 dark:text-muted-foreground/60"
         >
           <path d="M4 6h16" />
           <path d="M4 12h16" />

@@ -51,7 +51,7 @@ export const LoyaltyFeatures = () => {
             
             <Link 
               href="#"
-              className="inline-flex items-center text-primary hover:underline"
+              className="inline-flex items-center  hover:underline"
             >
               Learn More
               <svg 
@@ -67,8 +67,10 @@ export const LoyaltyFeatures = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-12">
               {features.map((feature) => (
                 <div key={feature.title} className="space-y-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
-                    {feature.icon}
+                  <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
+                    <div className="text-foreground/80 dark:text-foreground/70">
+                      {feature.icon}
+                    </div>
                   </div>
                   <h3 className="text-lg font-semibold">{feature.title}</h3>
                   <p className="text-sm text-muted-foreground">
