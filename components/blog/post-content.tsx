@@ -92,13 +92,13 @@ export function PostContent({ post }: PostContentProps) {
                   </div>
                 )}
 
-                {/* Title and Excerpt */}
-                <h1 className="text-3xl font-bold mb-4 leading-tight">
+                {/* Title and Excerpt - Adjusted for better readability */}
+                <h1 className="text-3xl font-bold mb-6 leading-tight">
                   {post.title}
                 </h1>
                 
                 {post.excerpt && (
-                  <p className="text-[14px] text-muted dark:text-muted-dark mb-6 leading-relaxed max-w-[95%]">
+                  <p className="text-[15px] text-muted-foreground mb-6 leading-relaxed max-w-[95%]">
                     {post.excerpt}
                   </p>
                 )}
@@ -157,7 +157,7 @@ export function PostContent({ post }: PostContentProps) {
               </div>
             </div>
 
-            {/* Main Content */}
+            {/* Main Content - Adjusted for better readability */}
             <article className="max-w-3xl">
               {/* Schedule Demo Callout */}
               <div className="lg:hidden mb-12">
@@ -193,23 +193,26 @@ export function PostContent({ post }: PostContentProps) {
                 </a>
               </div>
 
-              {/* Content */}
+              {/* Content - Updated typography with brand fonts */}
               <div className="prose dark:prose-invert max-w-none
-                prose-p:text-[15px] prose-p:leading-7 prose-p:mb-4
-                prose-headings:font-semibold prose-headings:leading-tight prose-headings:text-foreground
-                prose-h1:text-3xl prose-h1:mb-6 prose-h1:font-bold
-                prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:font-medium
-                prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:font-medium
-                prose-a:text-primary prose-a:underline hover:prose-a:text-primary/90
-                prose-li:text-[15px] prose-li:mb-2 prose-li:leading-7
+                font-sans
+                prose-p:text-[15px] prose-p:leading-[1.7] prose-p:mb-3 prose-p:text-muted-foreground/80
+                prose-headings:font-heading prose-headings:leading-snug prose-headings:tracking-tight
+                prose-h1:text-[28px] prose-h1:mb-3 prose-h1:font-medium prose-h1:text-foreground/95
+                prose-h2:text-[22px] prose-h2:mt-6 prose-h2:mb-2 prose-h2:font-medium prose-h2:text-foreground/95
+                prose-h3:text-[18px] prose-h3:mt-4 prose-h3:mb-2 prose-h3:font-medium prose-h3:text-foreground/95
+                prose-strong:font-medium prose-strong:text-foreground/90
+                prose-em:text-muted-foreground/70 prose-em:font-normal
+                prose-a:text-primary/90 prose-a:underline hover:prose-a:text-primary prose-a:font-medium
+                prose-li:text-[15px] prose-li:mb-1 prose-li:leading-[1.7] prose-li:text-muted-foreground/80
                 prose-img:rounded-lg prose-img:shadow-lg
-                prose-pre:bg-muted/10 prose-pre:border prose-pre:border-border/40
-                prose-code:text-primary prose-code:bg-primary/10 prose-code:rounded prose-code:px-1
-                prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground
+                prose-pre:bg-muted/5 prose-pre:border prose-pre:border-border/30 prose-pre:font-mono
+                prose-code:text-primary/90 prose-code:bg-primary/5 prose-code:rounded prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono
+                prose-blockquote:border-l-primary/30 prose-blockquote:text-muted-foreground/70 prose-blockquote:italic
                 [&>*:first-child]:mt-0
                 [&_.anchor-link]:no-underline
-                [&_.anchor-link]:text-muted-foreground
-                [&_.anchor-link:hover]:text-primary
+                [&_.anchor-link]:text-muted-foreground/50
+                [&_.anchor-link:hover]:text-primary/70
                 prose-headings:scroll-mt-20"
               >
                 <div 

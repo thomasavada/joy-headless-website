@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins, Bai_Jamjuree } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/layout/navbar";
@@ -8,6 +8,18 @@ import { getSettings, Settings } from '@/lib/ghost';
 import { FooterSection } from "@/components/layout/sections/footer";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-poppins",
+});
+
+const baiJamjuree = Bai_Jamjuree({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-bai-jamjuree",
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const { settings } = await getSettings() as Settings;
@@ -49,7 +61,10 @@ export default function RootLayout({
     <html lang="pt-br" suppressHydrationWarning>
       <body className={cn(
         "min-h-screen bg-background dark:bg-background-dark transition-colors",
-        inter.className
+        inter.className,
+        poppins.variable,
+        baiJamjuree.variable,
+        "font-sans"
       )}>
         <ThemeProvider
           attribute="class"
