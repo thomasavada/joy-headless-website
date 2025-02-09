@@ -154,4 +154,51 @@ export async function getSettings() {
       }
     };
   }
-} 
+}
+
+export async function getRelatedPosts(post: Post) {
+  try {
+    // Get posts with the same primary tag
+    const primaryTag = post.primary_tag?.slug;
+    
+    if (primaryTag) {
+      const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&filter=tag:${primaryTag}&include=tags,authors&limit=4`;
+      
+      const res = await fetch(url, { 
+        next: { revalidate: 60 },
+        headers: {
+          'Accept-Version': 'v5.0',
+          'Accept': 'application/json',
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch related posts');
+      }
+
+      const data = await res.json();
+      return data.posts;
+    }
+    
+    // Fallback: get latest posts if no primary tag
+    const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&include=tags,authors&limit=4`;
+    
+    const res = await fetch(url, { 
+      next: { revalidate: 60 },
+      headers: {
+        'Accept-Version': 'v5.0',
+        'Accept': 'application/json',
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch latest posts');
+    }
+
+    const data = await res.json();
+    return data.posts;
+  } catch (error) {
+    console.error('Error fetching related posts:', error);
+    return [];
+  }
+}

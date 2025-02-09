@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { Metadata, ResolvingMetadata } from 'next';
 import { PostContent } from '@/components/blog/post-content';
 import { JsonLd } from '@/components/blog/json-ld';
+import { RelatedPosts } from "@/components/blog/related-posts";
+import { getPost, getRelatedPosts } from "@/lib/ghost";
 
 interface Props {
   params: {
@@ -77,6 +79,7 @@ export async function generateStaticParams() {
 
 export default async function PostPage({ params }: Props) {
   const post = await getSinglePost(params.slug) as Post;
+  const relatedPosts = await getRelatedPosts(post);
 
   if (!post) {
     notFound();
@@ -121,6 +124,9 @@ export default async function PostPage({ params }: Props) {
     <>
       <JsonLd data={jsonLd} />
       <PostContent post={post} />
+      <div className="container mx-auto px-4 max-w-6xl">
+        <RelatedPosts posts={relatedPosts} currentPostId={post.id} />
+      </div>
     </>
   );
 }
