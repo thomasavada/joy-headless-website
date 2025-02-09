@@ -80,11 +80,11 @@ export function PostContent({ post }: PostContentProps) {
 
                 {/* Tags */}
                 {post.tags?.length > 0 && (
-                  <div className="flex gap-2 mb-6">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {post.tags.map(tag => (
                       <span 
                         key={tag.id}
-                        className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
+                        className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
                       >
                         {tag.name}
                       </span>
@@ -170,7 +170,7 @@ export function PostContent({ post }: PostContentProps) {
                   <div className="flex flex-col gap-2">
                     <h3 className="font-medium">Request a demo</h3>
                     <p className="text-sm text-muted-foreground">
-                      Get on a demo with Rivo, and we'll walk you through the app and help you migrate over from another solution.
+                      Get on a demo with Joy, and we'll walk you through the app and help you migrate over from another solution.
                     </p>
                     <div className="flex items-center gap-2 text-primary text-sm font-medium mt-2">
                       Request a demo

@@ -60,9 +60,7 @@ if (!ghostUrl || !ghostKey) {
 // API Functions
 export async function getPosts() {
   try {
-    const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&include=tags,authors`;
-    console.log("Fetching from URL:", url);
-    
+    const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&include=tags,authors&order=published_at%20DESC`;
     const res = await fetch(url, { 
       next: { revalidate: 60 },
       headers: {
@@ -70,18 +68,65 @@ export async function getPosts() {
         'Accept': 'application/json',
       }
     });
-    
+
     if (!res.ok) {
-      const error = await res.json();
-      console.error("API Error:", error);
+      console.error('Failed to fetch posts:', await res.text());
       return [];
     }
-    
+
     const data = await res.json();
-    console.log("Response data:", data);
     return data.posts;
   } catch (err) {
-    console.error("Fetch error:", err);
+    console.error('Error fetching posts:', err);
+    return [];
+  }
+}
+
+export async function getFeaturedPosts() {
+  try {
+    const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&filter=featured:true&include=tags,authors&limit=all&order=published_at%20DESC`;
+    const res = await fetch(url, { 
+      next: { revalidate: 60 },
+      headers: {
+        'Accept-Version': 'v5.0',
+        'Accept': 'application/json',
+      }
+    });
+
+    if (!res.ok) {
+      console.error('Failed to fetch featured posts:', await res.text());
+      return [];
+    }
+
+    const data = await res.json();
+    console.log('Featured posts:', data.posts);
+    return data.posts;
+  } catch (err) {
+    console.error('Error fetching featured posts:', err);
+    return [];
+  }
+}
+
+export async function getRegularPosts() {
+  try {
+    const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&filter=featured:false&include=tags,authors&limit=all&order=published_at%20DESC`;
+    const res = await fetch(url, { 
+      next: { revalidate: 60 },
+      headers: {
+        'Accept-Version': 'v5.0',
+        'Accept': 'application/json',
+      }
+    });
+
+    if (!res.ok) {
+      console.error('Failed to fetch regular posts:', await res.text());
+      return [];
+    }
+
+    const data = await res.json();
+    return data.posts;
+  } catch (err) {
+    console.error('Error fetching regular posts:', err);
     return [];
   }
 }
