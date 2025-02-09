@@ -9,7 +9,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   
   useEffect(() => {
     // Set theme based on path
-    if (pathname.startsWith('/blog')) {
+    if (pathname.startsWith('/blog') || pathname.startsWith('/integrations')) {
       document.documentElement.classList.remove('dark');
       document.documentElement.classList.add('light');
       localStorage.setItem('theme', 'light');
