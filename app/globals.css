@@ -76,39 +76,17 @@ html {
 /* *=========== Orange theme =========== */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-
-    --primary: 196 100% 50%;  /* Bright blue from the "Get Started" button */
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 222 47% 11%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 262 83% 58%;  /* Purple from the card */
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 196 100% 50%;
-    --radius: 0.5rem;
+    --background: 0 0% 100%;          /* White for light mode */
+    --background-dark: 222 89% 4%;    /* #0B1121 for dark mode */
+    --tw-text-opacity: 1;
+    --foreground: 17 24 39;  /* RGB values for #111827 */
   }
 
   .dark {
-    --background: 222 47% 11%;  /* Dark navy background from image */
-    --foreground: 210 40% 98%;
+    --background: 222 89% 4%;         /* #0B1121 for dark mode */
+    --background-dark: 222 89% 4%;    /* #0B1121 for dark mode */
+    --tw-text-opacity: 1;
+    --foreground: 255 255 255;  /* RGB values for white */
 
     --card: 222 47% 11%;
     --card-foreground: 210 40% 98%;
@@ -150,7 +128,10 @@ html {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground dark:text-foreground-dark;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-foreground dark:text-foreground-dark;
   }
 }
 

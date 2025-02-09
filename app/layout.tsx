@@ -47,11 +47,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" suppressHydrationWarning>
-      <body className={cn("min-h-screen bg-background", inter.className)}>
+      <body className={cn(
+        "min-h-screen bg-background dark:bg-background-dark transition-colors",
+        inter.className
+      )}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem={false}
+          enableSystem
           disableTransitionOnChange
         >
           <Navbar />
