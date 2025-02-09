@@ -9,10 +9,37 @@ export default async function IntegrationsPage() {
   const { data: integrations } = await fetchIntegrations();
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold text-center mb-12 text-foreground">Integrations</h1>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="container mx-auto px-4">
+      {/* Hero Section */}
+      <div className="py-20 text-center space-y-6">
+        <h1 className="text-4xl md:text-5xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
+          Joy integrates with your most-loved tools
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Connect Joy with 15+ carefully curated integrations to streamline your workflow and enhance your store's performance
+        </p>
+        <div className="flex items-center justify-center gap-4 pt-4">
+          <a
+            href="#integrations-grid"
+            className="inline-flex items-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded-full transition-colors"
+            tabIndex={0}
+            aria-label="Browse available integrations"
+          >
+            Browse integrations
+          </a>
+          <a
+            href="/contact"
+            className="inline-flex items-center px-6 py-3 text-sm font-medium text-primary border border-primary/20 rounded-full bg-white dark:bg-white/5 hover:bg-primary/5 dark:hover:bg-white/10 transition-colors"
+            tabIndex={0}
+            aria-label="Request new integration"
+          >
+            Request integration
+          </a>
+        </div>
+      </div>
+
+      {/* Integrations Grid */}
+      <div id="integrations-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-16">
         {integrations.map((integration: Integration) => (
           <Link
             href={`/integrations/${integration.slug}`}
