@@ -80,6 +80,7 @@ html {
     --background-dark: 222 89% 4%;    /* #0B1121 for dark mode */
     --tw-text-opacity: 1;
     --foreground: 17 24 39;  /* RGB values for #111827 */
+    --radius: 0.5rem;  /* 8px */
   }
 
   .dark {

@@ -41,8 +41,8 @@ const config = {
           dark: "rgb(255 255 255)"
         },
         muted: {
-          DEFAULT: "#6B7280",
-          dark: "#E5E7EB"
+          DEFAULT: "#4B5563",
+          dark: "#D1D5DB"
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
@@ -56,7 +56,7 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        primary: "#00A6ED",
+        primary: "#06038D",
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
@@ -68,9 +68,9 @@ const config = {
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
         "accordion-down": {
