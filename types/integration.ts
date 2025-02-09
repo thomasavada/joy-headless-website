@@ -49,6 +49,20 @@ export interface Integration {
     updatedAt: string;
     publishedAt: string;
   } | null;
+  images: Array<{
+    id: number;
+    url: string;
+    alternativeText: string | null;
+    width: number;
+    height: number;
+    formats?: {
+      thumbnail?: {
+        url: string;
+        width: number;
+        height: number;
+      };
+    };
+  }> | null;
 }
 
 export interface IntegrationsResponse {
