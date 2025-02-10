@@ -1,10 +1,10 @@
 # Settings for Cloud Run
 runConfig:
   minInstances: 1
-  maxInstances: 10
-  concurrency: 80
-  cpu: 1
-  memoryMiB: 512
+  maxInstances: 5
+  concurrency: 40
+  cpu: 1.5
+  memoryMiB: 1024
 
 # Environment variables and secrets
 env:
@@ -36,4 +36,15 @@ env:
     secret: STRAPI_API_KEY
     availability:
       - BUILD
+      - RUNTIME
+
+  # Runtime-only environment variables
+  - variable: GHOST_URL
+    secret: ghost_url_secret
+    availability:
+      - RUNTIME
+
+  - variable: GHOST_KEY
+    secret: ghost_key_secret
+    availability:
       - RUNTIME
