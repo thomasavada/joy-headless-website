@@ -1,15 +1,7 @@
 "use client";
-import { Menu } from "lucide-react";
+import {Menu} from "lucide-react";
 import React from "react";
-import {
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../ui/sheet";
-import { Separator } from "../ui/separator";
+import {Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger,} from "../ui/sheet";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -18,10 +10,10 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
-import { Button } from "../ui/button";
+import {Button} from "../ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { ThemeToggle } from "@/components/theme-toggle";
+import {ThemeToggle} from "@/components/theme-toggle";
 
 interface RouteProps {
   href: string;
@@ -136,8 +128,8 @@ export const Navbar = () => {
               {mainRoutes.map((route) => (
                 <NavigationMenuItem key={route.href}>
                   <NavigationMenuLink asChild>
-                    <Link 
-                      href={route.href} 
+                    <Link
+                      href={route.href}
                       className="px-4 py-2 text-foreground dark:text-foreground-dark hover:text-primary"
                     >
                       {route.label}
@@ -172,7 +164,7 @@ export const Navbar = () => {
 
           <ThemeToggle />
 
-          <Button 
+          <Button
             asChild
             className="bg-primary hover:bg-primary/90 text-white"
           >

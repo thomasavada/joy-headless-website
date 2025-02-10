@@ -1,8 +1,4 @@
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import Image from "next/image";
-import { log } from "console";
+import {useEffect, useState} from "react";
 
 interface TableOfContentsProps {
   content: string;
@@ -102,9 +98,9 @@ export function TableOfContents({ content }: TableOfContentsProps) {
 
       {/* Schedule Demo - Desktop */}
       <div className="pt-6 mt-6 border-t">
-        <a 
-          href="https://cal.com/sales-avada/joy-demo-call" 
-          target="_blank" 
+        <a
+          href="https://cal.com/sales-avada/joy-demo-call"
+          target="_blank"
           rel="noopener noreferrer"
           className="block bg-card rounded-lg border p-4 hover:bg-accent/50 transition-colors"
         >
@@ -135,4 +131,4 @@ export function TableOfContents({ content }: TableOfContentsProps) {
       </div>
     </nav>
   );
-} 
+}

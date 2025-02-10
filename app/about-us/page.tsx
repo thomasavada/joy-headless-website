@@ -1,4 +1,4 @@
-import { FooterSection } from "@/components/layout/sections/footer";
+import {FooterSection} from "@/components/layout/sections/footer";
 
 export default function AboutPage() {
   return (
@@ -7,4 +7,4 @@ export default function AboutPage() {
       <FooterSection />
     </main>
   );
-} 
+}

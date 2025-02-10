@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 const LOYALTY_PROGRAMS = [
   "Stamped",
@@ -73,4 +73,4 @@ export const StampedMigration = () => {
       </div>
     </section>
   );
-}; 
+};

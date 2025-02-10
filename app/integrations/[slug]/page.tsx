@@ -1,14 +1,13 @@
 import Image from 'next/image';
-import { fetchIntegrationBySlug, fetchIntegrations } from '@/lib/strapi';
-import { Markdown } from '@/components/ui/markdown';
-import { Integration } from '@/types/integration';
+import {fetchIntegrationBySlug, fetchIntegrations} from '@/lib/strapi';
+import {Markdown} from '@/components/ui/markdown';
+import {Integration} from '@/types/integration';
 import Link from 'next/link';
-import { cn } from "@/lib/utils";
-import { ImageCarousel } from '@/components/ui/image-carousel';
+import {ImageCarousel} from '@/components/ui/image-carousel';
 
 
 interface IntegrationPageProps {
-  params: { 
+  params: {
     slug: string;
   };
 }
@@ -16,7 +15,7 @@ interface IntegrationPageProps {
 // Generate static params for all integrations
 export async function generateStaticParams() {
   const { data: integrations } = await fetchIntegrations();
-  
+
   return integrations.map((integration: Integration) => ({
     slug: integration.slug,
   }));
@@ -28,11 +27,11 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
 
   // Fetch all integrations for related section
   const { data: allIntegrations } = await fetchIntegrations();
-  
+
   // Get related integrations based on category, excluding current one
   const relatedIntegrations = allIntegrations
-    .filter((related: Integration) => 
-      related.category === integration.category && 
+    .filter((related: Integration) =>
+      related.category === integration.category &&
       related.id !== integration.id
     )
     .slice(0, 3); // Limit to 3 related integrations
@@ -119,7 +118,7 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
             {/* CTA Button */}
             <div className="pt-6">
               {integration.install_link && (
-                <a 
+                <a
                   href={integration.install_link}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -158,7 +157,7 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
             {/* Bottom CTA */}
             <div className="pt-8 flex gap-4">
               {integration.documentation_link && (
-                <a 
+                <a
                   href={integration.documentation_link}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -168,7 +167,7 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
                 </a>
               )}
               {!integration.install_link && (
-                <a 
+                <a
                   href="#"
                   className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium border border-primary text-primary bg-transparent rounded-full hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 >
@@ -184,7 +183,7 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
       {relatedIntegrations.length > 0 && (
         <div className="mt-16 pt-16 border-t border-border">
           <h2 className="text-2xl font-bold text-foreground mb-8">Related Integrations</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {relatedIntegrations.map((related: Integration) => (
               <Link
@@ -208,7 +207,7 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
                       <span className="text-muted-foreground text-xs">No logo</span>
                     </div>
                   )}
-                  
+
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                       {related.name}
@@ -217,11 +216,11 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
                       {related.availability}
                     </span>
                   </div>
-                  
+
                   <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">
                     {related.short_description}
                   </p>
-                  
+
                   <div className="pt-4 border-t border-border">
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-muted-foreground">Built by: {related.built_by}</span>
@@ -238,4 +237,4 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
       )}
     </div>
   );
-} 
+}

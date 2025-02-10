@@ -1,12 +1,12 @@
 'use client';
 
-import { PricingCard } from "@/components/pricing/pricing-card";
-import { SponsorsSection } from "@/components/layout/sections/sponsors";
-import { Reveal } from "@/components/ui/reveal";
-import { PlanComparison } from "@/components/pricing/plan-comparison";
-import { CantDecide } from "@/components/pricing/cant-decide";
-import { FAQ } from "@/components/pricing/faq";
-import { PricingProvider } from "@/components/pricing/pricing-context";
+import {PricingCard} from "@/components/pricing/pricing-card";
+import {SponsorsSection} from "@/components/layout/sections/sponsors";
+import {Reveal} from "@/components/ui/reveal";
+import {PlanComparison} from "@/components/pricing/plan-comparison";
+import {CantDecide} from "@/components/pricing/cant-decide";
+import {FAQ} from "@/components/pricing/faq";
+import {PricingProvider} from "@/components/pricing/pricing-context";
 
 const pricingPlans = [
   {
@@ -105,8 +105,8 @@ export default function PricingPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {pricingPlans.map((plan) => (
                 <Reveal key={plan.title}>
-                  <PricingCard 
-                    {...plan} 
+                  <PricingCard
+                    {...plan}
                     className="text-center"
                   />
                 </Reveal>
@@ -145,4 +145,4 @@ export default function PricingPage() {
       </section>
     </main>
   );
-} 
+}

@@ -1,6 +1,6 @@
 'use client';
 
-import { PricingCard } from './pricing-card';
+import {PricingCard} from './pricing-card';
 
 const pricingData = [
   {
@@ -60,4 +60,4 @@ export function PricingGrid() {
       ))}
     </div>
   );
-} 
+}

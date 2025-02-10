@@ -1,11 +1,9 @@
-import { getSinglePost, getPosts, getSettings, Post, Settings } from '@/lib/ghost';
-import { FooterSection } from "@/components/layout/sections/footer";
-import { notFound } from 'next/navigation';
-import { Metadata, ResolvingMetadata } from 'next';
-import { PostContent } from '@/components/blog/post-content';
-import { JsonLd } from '@/components/blog/json-ld';
-import { RelatedPosts } from "@/components/blog/related-posts";
-import { getPost, getRelatedPosts } from "@/lib/ghost";
+import {getPosts, getRelatedPosts, getSettings, getSinglePost, Post, Settings} from '@/lib/ghost';
+import {notFound} from 'next/navigation';
+import {Metadata, ResolvingMetadata} from 'next';
+import {PostContent} from '@/components/blog/post-content';
+import {JsonLd} from '@/components/blog/json-ld';
+import {RelatedPosts} from "@/components/blog/related-posts";
 
 interface Props {
   params: {
@@ -53,20 +51,6 @@ export async function generateMetadata(
       images: post.feature_image ? [post.feature_image] : [],
     },
   };
-}
-
-// Update the Post interface in lib/ghost.ts to include these fields
-interface Post {
-  // ... existing fields
-  meta_title?: string;
-  meta_description?: string;
-  og_title?: string;
-  og_description?: string;
-  twitter_title?: string;
-  twitter_description?: string;
-  updated_at: string;
-  canonical_url?: string;
-  url?: string;
 }
 
 // Generate static pages for all posts at build time

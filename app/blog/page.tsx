@@ -1,7 +1,7 @@
-import { getFeaturedPosts, getRegularPosts, getSettings, Post, Settings } from '@/lib/ghost';
-import { PostGrid } from '@/components/blog/post-grid';
-import { FooterSection } from "@/components/layout/sections/footer";
-import { Metadata } from 'next';
+import {getFeaturedPosts, getRegularPosts, getSettings, Post, Settings} from '@/lib/ghost';
+import {PostGrid} from '@/components/blog/post-grid';
+import {FooterSection} from "@/components/layout/sections/footer";
+import {Metadata} from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
   const { settings } = await getSettings() as Settings;
@@ -35,7 +35,7 @@ export default async function BlogPage() {
               Blog
             </h1>
             <p className="text-lg text-muted-foreground">
-              Insights, updates, and stories about loyalty programs, customer retention, 
+              Insights, updates, and stories about loyalty programs, customer retention,
               and building lasting relationships with your customers.
             </p>
           </div>
@@ -44,7 +44,7 @@ export default async function BlogPage() {
 
       {/* Blog Content */}
       <section className="container mx-auto px-4 py-16 max-w-6xl">
-        <PostGrid 
+        <PostGrid
           featuredPosts={featuredPosts}
           regularPosts={regularPosts}
         />
@@ -53,4 +53,4 @@ export default async function BlogPage() {
       <FooterSection />
     </main>
   );
-} 
+}

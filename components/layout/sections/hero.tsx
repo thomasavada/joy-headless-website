@@ -1,9 +1,4 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { useTheme } from "next-themes";
-import Image from "next/image";
 import Link from "next/link";
 
 const Hero = () => {
@@ -28,13 +23,13 @@ const Hero = () => {
 
       {/* CTA Buttons */}
       <div className="flex items-center justify-center gap-4 mt-10">
-        <Link 
+        <Link
           href="/get-started"
           className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-primary dark:bg-primary-dark rounded-full hover:bg-primary/90 dark:hover:bg-primary-dark/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-primary-dark"
         >
           Get Started
         </Link>
-        <Link 
+        <Link
           href="/book-demo"
           className="inline-flex items-center justify-center px-8 py-3 text-base font-medium bg-white rounded-full border border-transparent hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-primary-dark text-foreground dark:text-foreground"
         >

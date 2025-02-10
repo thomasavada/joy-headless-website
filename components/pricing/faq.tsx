@@ -1,13 +1,8 @@
 'use client';
 
 import React from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "@/components/ui/accordion";
+import {Button} from "@/components/ui/button";
 
 const faqData = [
   {
@@ -97,4 +92,4 @@ export function FAQ() {
       </Accordion>
     </div>
   );
-} 
+}

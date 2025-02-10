@@ -1,7 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { useInView } from "react-intersection-observer";
-import Image from "next/image";
+import {useEffect, useState} from "react";
+import {useInView} from "react-intersection-observer";
 
 export const FeaturesPreview = () => {
   const [count, setCount] = useState(0);
@@ -16,7 +15,7 @@ export const FeaturesPreview = () => {
       const steps = 50;
       const increment = 10 / steps;
       const stepDuration = duration / steps;
-      
+
       let current = 0;
       const timer = setInterval(() => {
         current += increment;
@@ -46,7 +45,7 @@ export const FeaturesPreview = () => {
               the essentials to grow<br />
               customer loyalty
             </h2>
-            
+
             {/* Stats with Counter */}
             <div ref={ref} className="flex items-center gap-2 text-2xl font-bold">
               <span>+{count.toFixed(1)}B</span>
@@ -57,7 +56,7 @@ export const FeaturesPreview = () => {
           </div>
 
           {/* Right Content - Background Image */}
-          <div 
+          <div
             className="md:w-1/2 h-[400px] relative"
             style={{
               backgroundImage: 'url(https://joy.so/wp-content/uploads/2024/12/image-1-1.png)',
@@ -70,4 +69,4 @@ export const FeaturesPreview = () => {
       </div>
     </section>
   );
-}; 
+};

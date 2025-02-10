@@ -1,13 +1,8 @@
 'use client';
 
 import React from "react";
-import { Check } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import {Check} from "lucide-react";
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "@/components/ui/accordion";
 
 interface ComparisonSection {
   title: string;
@@ -24,7 +19,7 @@ const comparisonData: ComparisonSection[] = [
   {
     title: "Pricing and Usage",
     features: [
-      { 
+      {
         feature: "Free orders per month threshold",
         starter: true,
         professional: true,
@@ -208,9 +203,9 @@ export function PlanComparison() {
     if (feature.value && feature.value[planIndex]) {
       return <span className="text-white">{feature.value[planIndex]}</span>;
     }
-    
-    const isIncluded = planIndex === 0 ? feature.starter 
-      : planIndex === 1 ? feature.professional 
+
+    const isIncluded = planIndex === 0 ? feature.starter
+      : planIndex === 1 ? feature.professional
       : feature.advanced;
 
     return isIncluded ? (
@@ -242,7 +237,7 @@ export function PlanComparison() {
                 <div className="col-span-1 text-center font-medium text-white">Starter</div>
                 <div className="col-span-1 text-center font-medium text-white">Professional</div>
                 <div className="col-span-1 text-center font-medium text-white">Advanced</div>
-                
+
                 {section.features.map((feature, index) => (
                   <React.Fragment key={index}>
                     <div className="col-span-1 text-white">{feature.feature}</div>
@@ -264,4 +259,4 @@ export function PlanComparison() {
       </Accordion>
     </div>
   );
-} 
+}

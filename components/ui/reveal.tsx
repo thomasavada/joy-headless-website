@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import {useEffect, useRef} from 'react';
+import {motion, useAnimation, useInView} from 'framer-motion';
 
 interface RevealProps {
   children: React.ReactNode;
@@ -36,4 +36,4 @@ export const Reveal = ({ children, width = "100%", className = "" }: RevealProps
       </motion.div>
     </div>
   );
-}; 
+};

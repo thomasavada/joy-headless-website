@@ -1,12 +1,12 @@
 "use client";
 
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
+import {ThemeProvider as NextThemesProvider} from "next-themes";
+import {usePathname} from 'next/navigation';
+import {useEffect} from 'react';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  
+
   useEffect(() => {
     // Set theme based on path
     if (pathname.startsWith('/blog') || pathname.startsWith('/integrations')) {

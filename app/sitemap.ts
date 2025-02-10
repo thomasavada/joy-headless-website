@@ -1,5 +1,5 @@
-import { MetadataRoute } from 'next';
-import { getPosts, getSettings } from '@/lib/ghost';
+import {MetadataRoute} from 'next';
+import {getPosts, getSettings} from '@/lib/ghost';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { settings } = await getSettings();
@@ -31,4 +31,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   return [...staticPages, ...blogPages];
-} 
+}

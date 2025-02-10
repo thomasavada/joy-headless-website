@@ -1,17 +1,15 @@
-import { getSettings, Settings } from '@/lib/ghost';
-import { Metadata } from 'next';
 import Hero from "@/components/layout/sections/hero";
-import { SponsorsSection } from "@/components/layout/sections/sponsors";
-import { LoyaltyPreview } from "@/components/layout/sections/loyalty-preview";
-import { FeaturesPreview } from "@/components/layout/sections/features-preview";
-import { WidgetsPreview } from "@/components/layout/sections/widgets-preview";
-import { LoyaltyFeatures } from "@/components/layout/sections/loyalty-features";
-import { ShopifyPOS } from "@/components/layout/sections/shopify-pos";
-import { StampedMigration } from "@/components/layout/sections/stamped-migration";
-import { CustomerStories } from "@/components/layout/sections/customer-stories";
-import { TestimonialSection } from "@/components/layout/sections/testimonial";
-import { Reveal } from '@/components/ui/reveal';
-import { StaggerContainer } from '@/components/ui/stagger-container';
+import {SponsorsSection} from "@/components/layout/sections/sponsors";
+import {LoyaltyPreview} from "@/components/layout/sections/loyalty-preview";
+import {FeaturesPreview} from "@/components/layout/sections/features-preview";
+import {WidgetsPreview} from "@/components/layout/sections/widgets-preview";
+import {LoyaltyFeatures} from "@/components/layout/sections/loyalty-features";
+import {ShopifyPOS} from "@/components/layout/sections/shopify-pos";
+import {StampedMigration} from "@/components/layout/sections/stamped-migration";
+import {CustomerStories} from "@/components/layout/sections/customer-stories";
+import {TestimonialSection} from "@/components/layout/sections/testimonial";
+import {Reveal} from '@/components/ui/reveal';
+import {StaggerContainer} from '@/components/ui/stagger-container';
 
 // Remove the metadata generation from the home page since we want to use the layout's metadata
 // The layout's metadata will be used as the default for the home page
@@ -51,4 +49,4 @@ export default function HomePage() {
       </StaggerContainer>
     </main>
   );
-} 
+}

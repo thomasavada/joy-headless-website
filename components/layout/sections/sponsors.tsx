@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Marquee } from "@devnomic/marquee";
+import {Marquee} from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
 
 interface SponsorProps {

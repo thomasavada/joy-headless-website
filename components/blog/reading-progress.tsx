@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
 export function ReadingProgress() {
   const [progress, setProgress] = useState(0);
@@ -15,7 +15,7 @@ export function ReadingProgress() {
 
     // Add scroll event listener
     window.addEventListener('scroll', updateProgress);
-    
+
     // Initial calculation
     updateProgress();
 
@@ -25,10 +25,10 @@ export function ReadingProgress() {
 
   return (
     <div className="fixed top-0 left-0 w-full h-1 bg-muted z-50">
-      <div 
+      <div
         className="h-full bg-primary transition-all duration-150 ease-out"
         style={{ width: `${progress * 100}%` }}
       />
     </div>
   );
-} 
+}

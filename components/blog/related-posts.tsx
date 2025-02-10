@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Post } from "@/lib/types";
+import {Post} from "@/lib/types";
 
 interface RelatedPostsProps {
   posts: Post[];
@@ -25,8 +25,8 @@ export function RelatedPosts({ posts, currentPostId }: RelatedPostsProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {relatedPosts.map((post) => (
-            <Link 
-              key={post.id} 
+            <Link
+              key={post.id}
               href={`/blog/${post.slug}`}
               className="group"
             >
@@ -57,4 +57,4 @@ export function RelatedPosts({ posts, currentPostId }: RelatedPostsProps) {
       </div>
     </div>
   );
-} 
+}

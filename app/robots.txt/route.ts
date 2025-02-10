@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import {NextResponse} from 'next/server';
 
 export async function GET() {
   const robotsTxt = `
@@ -16,4 +16,4 @@ export async function GET() {
       'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=59',
     },
   });
-} 
+}

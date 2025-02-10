@@ -1,12 +1,11 @@
 "use client";
 import Image from 'next/image';
-import { Post } from '@/lib/ghost';
-import { CalendarDays, Clock, Link2 } from "lucide-react";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { TableOfContents } from "@/components/ui/table-of-contents";
-import { useEffect, useState } from "react";
-import { ReadingProgress } from "@/components/blog/reading-progress";
-import { ScrollToTop } from "@/components/ui/scroll-to-top";
+import {Post} from '@/lib/ghost';
+import {Breadcrumb} from "@/components/ui/breadcrumb";
+import {TableOfContents} from "@/components/ui/table-of-contents";
+import {useEffect, useState} from "react";
+import {ReadingProgress} from "@/components/blog/reading-progress";
+import {ScrollToTop} from "@/components/ui/scroll-to-top";
 
 interface PostContentProps {
   post: Post;
@@ -37,7 +36,7 @@ export function PostContent({ post }: PostContentProps) {
           </svg>
         </span>
       `;
-      
+
       heading.classList.add('group');
       heading.appendChild(anchor);
     });
@@ -51,10 +50,10 @@ export function PostContent({ post }: PostContentProps) {
   ];
 
   const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
@@ -72,8 +71,8 @@ export function PostContent({ post }: PostContentProps) {
               <div>
                 {/* Breadcrumb - Refined colors for better sharpness */}
                 <div className="text-[10px] text-[#4B5563] dark:text-[#D1D5DB] mb-8">
-                  <Breadcrumb 
-                    items={breadcrumbItems} 
+                  <Breadcrumb
+                    items={breadcrumbItems}
                     className="tracking-wider uppercase"
                   />
                 </div>
@@ -82,7 +81,7 @@ export function PostContent({ post }: PostContentProps) {
                 {post.tags?.length > 0 && (
                   <div className="flex flex-wrap gap-2 mb-6">
                     {post.tags.map(tag => (
-                      <span 
+                      <span
                         key={tag.id}
                         className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
                       >
@@ -96,7 +95,7 @@ export function PostContent({ post }: PostContentProps) {
                 <h1 className="text-3xl font-bold mb-6 leading-tight">
                   {post.title}
                 </h1>
-                
+
                 {post.excerpt && (
                   <p className="text-[15px] text-muted-foreground mb-6 leading-relaxed max-w-[95%]">
                     {post.excerpt}
@@ -161,9 +160,9 @@ export function PostContent({ post }: PostContentProps) {
             <article className="max-w-3xl">
               {/* Schedule Demo Callout */}
               <div className="lg:hidden mb-12">
-                <a 
-                  href="https://cal.com/sales-avada/joy-demo-call" 
-                  target="_blank" 
+                <a
+                  href="https://cal.com/sales-avada/joy-demo-call"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="block bg-card rounded-lg border p-4 hover:bg-accent/50 transition-colors"
                 >
@@ -215,7 +214,7 @@ export function PostContent({ post }: PostContentProps) {
                 [&_.anchor-link:hover]:text-primary/70
                 prose-headings:scroll-mt-20"
               >
-                <div 
+                <div
                   dangerouslySetInnerHTML={{ __html: processedContent }}
                 />
               </div>
@@ -226,4 +225,4 @@ export function PostContent({ post }: PostContentProps) {
       <ScrollToTop />
     </>
   );
-} 
+}

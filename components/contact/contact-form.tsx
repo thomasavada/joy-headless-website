@@ -1,15 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
+import {useState} from "react";
+import {Button} from "@/components/ui/button";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
+import {Input} from "@/components/ui/input";
 
 const sources = [
   "Google Search",
@@ -25,9 +19,9 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Add your form submission logic here
-    
+
     setIsSubmitting(false);
   };
 
@@ -98,8 +92,8 @@ export function ContactForm() {
           </SelectTrigger>
           <SelectContent>
             {sources.map((source) => (
-              <SelectItem 
-                key={source} 
+              <SelectItem
+                key={source}
                 value={source}
                 className="hover:bg-[#00A6ED]/10"
               >
@@ -131,4 +125,4 @@ export function ContactForm() {
       </Button>
     </form>
   );
-} 
+}

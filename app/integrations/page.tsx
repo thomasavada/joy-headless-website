@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { fetchIntegrations } from '@/lib/strapi';
-import { Integration } from '@/types/integration';
+import {fetchIntegrations} from '@/lib/strapi';
+import {Integration} from '@/types/integration';
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -62,7 +62,7 @@ export default async function IntegrationsPage() {
                   <span className="text-muted-foreground text-xs">No logo</span>
                 </div>
               )}
-              
+
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                   {integration.name}
@@ -71,11 +71,11 @@ export default async function IntegrationsPage() {
                   {integration.availability}
                 </span>
               </div>
-              
+
               <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">
                 {integration.short_description}
               </p>
-              
+
               <div className="pt-4 border-t border-border">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-muted-foreground">Built by: {integration.built_by}</span>
@@ -90,4 +90,4 @@ export default async function IntegrationsPage() {
       </div>
     </div>
   );
-} 
+}

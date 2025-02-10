@@ -1,8 +1,8 @@
-import { Metadata } from "next";
+import {Metadata} from "next";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { SponsorsSection } from "@/components/layout/sections/sponsors";
-import { DollarSign, BarChart3, Gift, ArrowRight } from "lucide-react";
+import {Button} from "@/components/ui/button";
+import {SponsorsSection} from "@/components/layout/sections/sponsors";
+import {ArrowRight, BarChart3, DollarSign, Gift} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Migration - Joy",
@@ -191,11 +191,11 @@ export default function MigrationPage() {
               Follow our step-by-step migration guides to transfer your loyalty program smoothly and securely
             </p>
           </div>
-          
+
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
             {migrationGuides.map((guide) => (
               <div key={guide.name} className="flex flex-col items-center gap-2">
-                <a 
+                <a
                   href={guide.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -208,12 +208,12 @@ export default function MigrationPage() {
                     className="object-contain p-4"
                   />
                 </a>
-                <Button 
+                <Button
                   asChild
-                  variant="link" 
+                  variant="link"
                   className="text-sm text-white/70 hover:text-white h-auto p-0"
                 >
-                  <a 
+                  <a
                     href={guide.href}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -228,4 +228,4 @@ export default function MigrationPage() {
       </section>
     </main>
   );
-} 
+}

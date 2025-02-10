@@ -1,10 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { Integration } from '@/types/integration';
-import { useState } from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { cn } from '@/lib/utils';
+import {Integration} from '@/types/integration';
+import {useState} from 'react';
+import {Dialog, DialogContent} from '@/components/ui/dialog';
+import {cn} from '@/lib/utils';
 
 export function ImageCarousel({ images }: { images: Integration['images'] }) {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -57,4 +57,4 @@ export function ImageCarousel({ images }: { images: Integration['images'] }) {
       </Dialog>
     </>
   );
-} 
+}

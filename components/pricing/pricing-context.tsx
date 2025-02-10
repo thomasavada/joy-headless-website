@@ -1,8 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
-import { Slider } from "@/components/ui/slider";
-import { Input } from "@/components/ui/input";
+import React, {createContext, useContext, useState} from 'react';
+import {Slider} from "@/components/ui/slider";
+import {Input} from "@/components/ui/input";
 
 interface PricingContextType {
   orderVolume: number;
@@ -22,7 +22,7 @@ export function PricingProvider({ children }: { children: React.ReactNode }) {
   };
 
   const formatNumber = (num: number) => {
-    return num.toLocaleString('en-US', { 
+    return num.toLocaleString('en-US', {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     });
@@ -41,7 +41,7 @@ export function PricingProvider({ children }: { children: React.ReactNode }) {
               Adjust the slider or enter a value to see pricing based on your monthly order volume
             </p>
           </div>
-          
+
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <div className="flex-1">
@@ -91,4 +91,4 @@ export function usePricing() {
   //   throw new Error('usePricing must be used within a PricingProvider');
   // }
   return context;
-} 
+}

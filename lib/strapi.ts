@@ -1,4 +1,4 @@
-import { IntegrationsResponse } from "@/types/integration";
+import {IntegrationsResponse} from "@/types/integration";
 
 if (!process.env.NEXT_PUBLIC_STRAPI_URL) throw new Error('NEXT_PUBLIC_STRAPI_URL is not defined');
 if (!process.env.STRAPI_API_KEY) throw new Error('STRAPI_API_KEY is not defined');
@@ -39,4 +39,4 @@ export const fetchIntegrationBySlug = async (slug: string) => {
   );
   console.log("data integration one:", JSON.stringify(data, null, 2));
   return data;
-}; 
+};

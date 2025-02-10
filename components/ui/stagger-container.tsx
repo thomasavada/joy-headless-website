@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import {motion} from 'framer-motion';
+import {ReactNode} from 'react';
 
 interface StaggerContainerProps {
   children: ReactNode;
@@ -26,4 +26,4 @@ export const StaggerContainer = ({ children, className = "" }: StaggerContainerP
       {children}
     </motion.div>
   );
-}; 
+};

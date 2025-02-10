@@ -2,15 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, EffectCoverflow, Mousewheel, Keyboard } from "swiper/modules";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {EffectCoverflow, Keyboard, Mousewheel, Navigation, Pagination} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import "swiper/css/mousewheel";
 import "swiper/css/keyboard";
-import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import {ArrowUpRight, ChevronLeft, ChevronRight} from "lucide-react";
 
 const stories = [
   {
@@ -95,7 +95,7 @@ export const CustomerStories = () => {
                       className="w-full h-20 object-contain brightness-0 invert"
                     />
                   </Link>
-                  
+
                   <div className="grid grid-cols-1 gap-4">
                     {story.stats.map((stat, idx) => (
                       <div key={idx} className="flex items-center gap-3">
@@ -116,13 +116,13 @@ export const CustomerStories = () => {
             ))}
           </Swiper>
 
-          <button 
+          <button
             className="swiper-button-prev !hidden md:!flex absolute left-0 top-1/2 -translate-y-1/2 z-10 text-white hover:text-primary dark:hover:text-primary-dark transition-colors after:!content-none"
             aria-label="Previous slide"
           >
             <ChevronLeft className="w-8 h-8" />
           </button>
-          <button 
+          <button
             className="swiper-button-next !hidden md:!flex absolute right-0 top-1/2 -translate-y-1/2 z-10 text-white hover:text-primary dark:hover:text-primary-dark transition-colors after:!content-none"
             aria-label="Next slide"
           >
@@ -131,7 +131,7 @@ export const CustomerStories = () => {
         </div>
 
         <div className="text-center mt-10">
-          <Link 
+          <Link
             href="https://joy.so/case-study/"
             target="_blank"
             className="inline-flex items-center gap-2 text-primary dark:text-primary-dark hover:underline"
@@ -143,4 +143,4 @@ export const CustomerStories = () => {
       </div>
     </section>
   );
-}; 
+};

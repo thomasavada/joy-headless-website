@@ -1,8 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { ArrowUp } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import {useEffect, useState} from 'react';
+import {ArrowUp} from 'lucide-react';
+import {cn} from '@/lib/utils';
+import {Button} from '@/components/ui/button';
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -46,4 +46,4 @@ export function ScrollToTop() {
       <ArrowUp className="h-5 w-5" />
     </Button>
   );
-} 
+}

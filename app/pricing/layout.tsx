@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import {Metadata} from "next";
 
 export const metadata: Metadata = {
   title: "Pricing - Joy",
@@ -11,4 +11,4 @@ export default function PricingLayout({
   children: React.ReactNode;
 }) {
   return children;
-} 
+}

@@ -1,4 +1,3 @@
-import { log } from "console";
 
 // Define types for Ghost content
 export interface Post {
@@ -61,7 +60,7 @@ if (!ghostUrl || !ghostKey) {
 export async function getPosts() {
   try {
     const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&include=tags,authors&order=published_at%20DESC`;
-    const res = await fetch(url, { 
+    const res = await fetch(url, {
       next: { revalidate: 60 },
       headers: {
         'Accept-Version': 'v5.0',
@@ -85,7 +84,7 @@ export async function getPosts() {
 export async function getFeaturedPosts() {
   try {
     const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&filter=featured:true&include=tags,authors&limit=all&order=published_at%20DESC`;
-    const res = await fetch(url, { 
+    const res = await fetch(url, {
       next: { revalidate: 60 },
       headers: {
         'Accept-Version': 'v5.0',
@@ -110,7 +109,7 @@ export async function getFeaturedPosts() {
 export async function getRegularPosts() {
   try {
     const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&filter=featured:false&include=tags,authors&limit=all&order=published_at%20DESC`;
-    const res = await fetch(url, { 
+    const res = await fetch(url, {
       next: { revalidate: 60 },
       headers: {
         'Accept-Version': 'v5.0',
@@ -134,8 +133,8 @@ export async function getRegularPosts() {
 export async function getSinglePost(slug: string) {
   try {
     const url = `${ghostUrl}/ghost/api/content/posts/slug/${slug}/?key=${ghostKey}&include=tags,authors`;
-    
-    const res = await fetch(url, { 
+
+    const res = await fetch(url, {
       next: { revalidate: 60 },
       headers: {
         'Accept-Version': 'v5.0',
@@ -154,8 +153,8 @@ export async function getSinglePost(slug: string) {
 export async function getPostsByTag(tag: string) {
   try {
     const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&filter=tag:${tag}&include=tags,authors`;
-    
-    const res = await fetch(url, { 
+
+    const res = await fetch(url, {
       next: { revalidate: 60 },
       headers: {
         'Accept-Version': 'v5.0',
@@ -175,8 +174,8 @@ export async function getPostsByTag(tag: string) {
 export async function getSettings() {
   try {
     const url = `${ghostUrl}/ghost/api/content/settings/?key=${ghostKey}`;
-    
-    const res = await fetch(url, { 
+
+    const res = await fetch(url, {
       next: { revalidate: 3600 }, // Cache for 1 hour
       headers: {
         'Accept-Version': 'v5.0',
@@ -204,12 +203,13 @@ export async function getSettings() {
 export async function getRelatedPosts(post: Post) {
   try {
     // Get posts with the same primary tag
-    const primaryTag = post.primary_tag?.slug;
-    
+    // @ts-ignore
+    const primaryTag = post?.primary_tag?.slug;
+
     if (primaryTag) {
       const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&filter=tag:${primaryTag}&include=tags,authors&limit=4`;
-      
-      const res = await fetch(url, { 
+
+      const res = await fetch(url, {
         next: { revalidate: 60 },
         headers: {
           'Accept-Version': 'v5.0',
@@ -224,11 +224,11 @@ export async function getRelatedPosts(post: Post) {
       const data = await res.json();
       return data.posts;
     }
-    
+
     // Fallback: get latest posts if no primary tag
     const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&include=tags,authors&limit=4`;
-    
-    const res = await fetch(url, { 
+
+    const res = await fetch(url, {
       next: { revalidate: 60 },
       headers: {
         'Accept-Version': 'v5.0',

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import {ChevronRight} from "lucide-react";
+import {cn} from "@/lib/utils";
 
 interface BreadcrumbItem {
   label: string;
@@ -28,4 +28,4 @@ export function Breadcrumb({ items, className }: BreadcrumbProps) {
       ))}
     </nav>
   );
-} 
+}

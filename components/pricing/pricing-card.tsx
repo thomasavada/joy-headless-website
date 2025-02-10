@@ -1,20 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Check, Info, ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import { usePricing } from './pricing-context';
-import { Badge } from "@/components/ui/badge";
+import React, {useState} from 'react';
+import {Check, Info} from "lucide-react";
+import {cn} from "@/lib/utils";
+import {Button} from "@/components/ui/button";
+import {Switch} from "@/components/ui/switch";
+import {usePricing} from './pricing-context';
+import {Badge} from "@/components/ui/badge";
 
 interface PricingFeature {
   text: string;
@@ -84,7 +76,7 @@ export const PricingCard = ({
   const [enablePos, setEnablePos] = useState(false);
   const { orderVolume } = usePricing();
   const basePrice = parseFloat(price.replace('$', ''));
-  
+
   const getDisplayPrice = () => {
     if (price === 'Free' || price === 'Custom') return price;
 
@@ -99,7 +91,7 @@ export const PricingCard = ({
     const pricePerHundred = title === "Advanced" ? 10 : 15;
     const additionalCost = additionalHundreds * pricePerHundred;
     const totalPrice = basePrice + additionalCost;
-    
+
     return enablePos ? totalPrice + 15 : totalPrice;
   };
 
@@ -161,7 +153,7 @@ export const PricingCard = ({
             </p>
           )}
         </div>
-        
+
         {/* Pricing */}
         <div className="text-center space-y-2">
           <div className="flex items-baseline gap-2 justify-center">
@@ -205,10 +197,10 @@ export const PricingCard = ({
         )}
 
         {/* CTA Button */}
-        <Button 
+        <Button
           className={cn(
             "w-full h-12 rounded-full font-medium",
-            isPopular 
+            isPopular
               ? "bg-primary dark:bg-primary-dark hover:bg-primary/90 dark:hover:bg-primary-dark/90 dark:text-white"
               : "bg-white dark:bg-white hover:bg-white/90 dark:hover:bg-white/90 text-black border-0"
           )}
@@ -227,4 +219,4 @@ export const PricingCard = ({
       </div>
     </div>
   );
-}; 
+};

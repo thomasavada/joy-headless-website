@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Post, Tag } from "@/lib/types";
+import {Post, Tag} from "@/lib/types";
 
 interface PostGridProps {
   featuredPosts: Post[];
@@ -11,7 +11,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
   const renderTags = (tags: Tag[]) => (
     <div className="flex flex-wrap gap-2 mb-3">
       {tags.slice(0, 3).map(tag => (
-        <span 
+        <span
           key={tag.id}
           className="px-2.5 py-1 bg-primary/5 text-primary rounded-full text-xs font-medium"
         >
@@ -36,7 +36,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
           {featuredPosts.length === 1 ? (
             // Single featured post - Full width layout
             <div className="max-w-4xl">
-              <Link 
+              <Link
                 href={`/blog/${featuredPosts[0].slug}`}
                 className="group block"
               >
@@ -69,7 +69,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
             // Multiple featured posts - Left big, right small layout
             <div className="grid md:grid-cols-[1.5fr_1fr] gap-8">
               {/* Main featured post */}
-              <Link 
+              <Link
                 href={`/blog/${featuredPosts[0].slug}`}
                 className="group"
               >
@@ -101,7 +101,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
               {/* Secondary featured posts */}
               <div className="space-y-6">
                 {featuredPosts.slice(1).map((post) => (
-                  <Link 
+                  <Link
                     key={post.id}
                     href={`/blog/${post.slug}`}
                     className="group block"
@@ -142,7 +142,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
           <h2 className="text-lg font-medium text-muted-foreground">All Posts</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {regularPosts.map((post) => (
-              <Link 
+              <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}
                 className="group"
@@ -176,4 +176,4 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
       </section>
     </div>
   );
-} 
+}
