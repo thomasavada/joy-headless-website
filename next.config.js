@@ -46,6 +46,11 @@ const nextConfig = {
         protocol: "https",
         hostname: "storage.googleapis.com",
         pathname: '/**',
+      },
+      {
+        protocol: "https",
+        hostname: "cdn-web.joy.so",
+        pathname: '/**',
       }
     ],
   },
