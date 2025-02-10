@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove the static export configuration
-  // output: 'export',
   images: {
     remotePatterns: [
       {

@@ -1,0 +1,39 @@
+# Settings for Cloud Run
+runConfig:
+  minInstances: 1
+  maxInstances: 10
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+# Environment variables and secrets
+env:
+  # Build-time environment variables
+  - variable: NEXT_PUBLIC_BASE_PATH
+    value: ""
+    availability:
+      - BUILD
+
+  - variable: NEXT_PUBLIC_GHOST_URL
+    value: "https://ghost.joy.so"
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_GHOST_CONTENT_API_KEY
+    secret: GHOST_CONTENT_API_KEY
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_PUBLIC_STRAPI_URL
+    value: "https://strapi.joy.so"
+    availability:
+      - BUILD
+      - RUNTIME
+
+  - variable: NEXT_STRAPI_API_KEY
+    secret: STRAPI_API_KEY
+    availability:
+      - BUILD
+      - RUNTIME

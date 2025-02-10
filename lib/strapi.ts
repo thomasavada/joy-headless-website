@@ -1,7 +1,7 @@
 import {IntegrationsResponse} from "@/types/integration";
 
 if (!process.env.NEXT_PUBLIC_STRAPI_URL) throw new Error('NEXT_PUBLIC_STRAPI_URL is not defined');
-if (!process.env.STRAPI_API_KEY) throw new Error('STRAPI_API_KEY is not defined');
+if (!process.env.NEXT_STRAPI_API_KEY) throw new Error('STRAPI_API_KEY is not defined');
 
 // Common fetch function for Strapi
 const fetchFromStrapi = async <T>(endpoint: string): Promise<T> => {
@@ -9,7 +9,7 @@ const fetchFromStrapi = async <T>(endpoint: string): Promise<T> => {
     `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/${endpoint}`,
     {
       headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_STRAPI_API_KEY}`,
       },
       cache: 'no-store',
       next: { revalidate: 0 }
