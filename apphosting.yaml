@@ -8,12 +8,6 @@ runConfig:
 
 # Environment variables and secrets
 env:
-  # Build-time environment variables
-  - variable: NEXT_PUBLIC_BASE_PATH
-    value: ""
-    availability:
-      - BUILD
-
   - variable: NEXT_PUBLIC_GHOST_URL
     value: "https://ghost.joy.so"
     availability:
