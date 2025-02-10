@@ -1,9 +1,16 @@
 import {MetadataRoute} from 'next';
 import {getPosts, getSettings} from '@/lib/ghost';
 
+// Define the interface for Ghost post
+interface GhostPost {
+  slug: string;
+  updated_at: string;
+  published_at: string;
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { settings } = await getSettings();
-  const posts = await getPosts();
+  const posts = await getPosts() as GhostPost[];
   const baseUrl = 'https://joy.so';
 
   // Static pages
@@ -23,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Blog posts
-  const blogPages = posts.map((post) => ({
+  const blogPages = posts.map((post: GhostPost) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.updated_at || post.published_at),
     changeFrequency: 'weekly' as const,
