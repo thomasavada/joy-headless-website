@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build",
-    "deploy": "npm run build && firebase deploy"
+    "deploy": "next build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@devnomic/marquee": "^1.0.2",
