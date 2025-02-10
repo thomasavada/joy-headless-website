@@ -37,14 +37,3 @@ env:
     availability:
       - BUILD
       - RUNTIME
-
-  # Runtime-only environment variables
-  - variable: GHOST_URL
-    secret: ghost_url_secret
-    availability:
-      - RUNTIME
-
-  - variable: GHOST_KEY
-    secret: ghost_key_secret
-    availability:
-      - RUNTIME
