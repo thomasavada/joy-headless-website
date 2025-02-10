@@ -20,6 +20,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "ghost.joy.so",
+        pathname: '/**',
       },
       {
         protocol: 'https',
@@ -29,18 +30,22 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "i.pravatar.cc",
+        pathname: '/**',
       },
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+        pathname: '/**',
       },
       {
         protocol: "https",
         hostname: "github.com",
+        pathname: '/**',
       },
       {
         protocol: "https",
-        hostname: "github.com",
+        hostname: "storage.googleapis.com",
+        pathname: '/**',
       }
     ],
   },
@@ -56,4 +61,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig
