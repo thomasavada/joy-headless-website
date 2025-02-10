@@ -15,7 +15,7 @@ env:
       - RUNTIME
 
   - variable: NEXT_PUBLIC_GHOST_CONTENT_API_KEY
-    secret: ghostApiKey
+    secret: GHOST_CONTENT_API_KEY
     availability:
       - BUILD
       - RUNTIME
@@ -27,7 +27,7 @@ env:
       - RUNTIME
 
   - variable: NEXT_STRAPI_API_KEY
-    secret: strapiApiKey
+    secret: STRAPI_API_KEY
     availability:
       - BUILD
       - RUNTIME
