@@ -18,10 +18,30 @@ const nextConfig = {
         pathname: '/**',
       },
       {
+        protocol: "https",
+        hostname: "ghost.joy.so",
+      },
+      {
         protocol: 'https',
         hostname: 'cdn1.avada.io',
         pathname: '/**',
       },
+      {
+        protocol: "https",
+        hostname: "i.pravatar.cc",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "github.com",
+      },
+      {
+        protocol: "https",
+        hostname: "github.com",
+      }
     ],
   },
   eslint: {
