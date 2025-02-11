@@ -53,6 +53,9 @@ const nextConfig = {
         pathname: '/**',
       }
     ],
+    domains: ['storage.googleapis.com'],
+    loader: 'custom',
+    loaderFile: './image-loader.js',
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
