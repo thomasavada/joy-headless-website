@@ -1,8 +1,8 @@
-import { getPosts } from "@/lib/ghost";
-import { SuccessStoriesHero } from "@/components/success-stories/hero";
-import { MetricsSection } from "@/components/success-stories/metrics";
-import { SuccessStoriesGrid } from "@/components/success-stories/grid";
-import { Metadata } from "next";
+import {getPosts} from "@/lib/ghost";
+import {SuccessStoriesHero} from "@/components/success-stories/hero";
+import {MetricsSection} from "@/components/success-stories/metrics";
+import {SuccessStoriesGrid} from "@/components/success-stories/grid";
+import {Metadata} from "next";
 
 interface PageProps {
   params: { slug: string };
@@ -39,4 +39,4 @@ export default async function CaseStudyPage() {
       <SuccessStoriesGrid posts={posts} />
     </main>
   );
-} 
+}

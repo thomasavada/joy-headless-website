@@ -24,13 +24,15 @@ const Hero = () => {
       {/* CTA Buttons */}
       <div className="flex items-center justify-center gap-4 mt-10">
         <Link
-          href="/get-started"
+                target="_blank"
+          href="http://shopify.pxf.io/Vx4jma"
           className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-primary dark:bg-primary-dark rounded-full hover:bg-primary/90 dark:hover:bg-primary-dark/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-primary-dark"
         >
           Get Started
         </Link>
         <Link
-          href="/book-demo"
+          target="_blank"
+          href="https://cal.com/sales-avada/joy-demo-call"
           className="inline-flex items-center justify-center px-8 py-3 text-base font-medium bg-white rounded-full border border-transparent hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-primary-dark text-foreground dark:text-foreground"
         >
           Book Demo

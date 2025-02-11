@@ -18,48 +18,76 @@ import {ThemeToggle} from "@/components/theme-toggle";
 interface RouteProps {
   href: string;
   label: string;
+  description?: string;
+}
+
+interface MegaMenuCategory {
+  title: string;
+  items: RouteProps[];
 }
 
 const mainRoutes: RouteProps[] = [
-  {
-    href: "/about-us/",
-    label: "About us",
-  },
-  {
-    href: "/blog",
-    label: "Blog",
-  },
+
   {
     href: "/pricing/",
     label: "Pricing",
   },
-  {
-    href: "/contact/",
-    label: "Contact",
-  },
-  {
-    href: "/integrations",
-    label: "Integrations",
-  },
+
   {
     href: "/case-study/",
-    label: "Cases Study",
+    label: "Cases Studies",
   },
 ];
 
-const resourceRoutes: RouteProps[] = [
+const megaMenuCategories: MegaMenuCategory[] = [
   {
-    href: "https://joy.so/category/loyalty-program/",
-    label: "Blog",
+    title: "Resources",
+    items: [
+      {
+        href: "/blog",
+        label: "Blog",
+        description: "Latest updates and insights about loyalty programs",
+      },
+      {
+        href: "/migration",
+        label: "Migration",
+        description: "Seamlessly migrate from other loyalty platforms",
+      },
+      {
+        href: "https://help.joy.so/",
+        label: "Help Docs",
+        description: "Detailed guides and documentation",
+      },
+      {
+        href: "/integrations",
+        label: "Integrations",
+      },
+    ],
   },
   {
-    href: "/migration",
-    label: "Migration",
+    title: "Developers",
+    items: [
+      {
+        href: "https://devdocs.joy.so/",
+        label: "API Docs",
+        description: "Documentation for the Joy API",
+      },
+    ],
   },
   {
-    href: "https://help.joy.so/",
-    label: "Help Docs",
+    title: "Support",
+    items: [
+      {
+        href: "/about-us/",
+        label: "About us",
+      },
+      {
+        href: "/contact/",
+        label: "Contact",
+      }
+    ],
   },
+  
 ];
 
 export const Navbar = () => {
@@ -147,20 +175,52 @@ export const Navbar = () => {
                   Resources
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-48 p-2 bg-background dark:bg-background-dark">
-                    {resourceRoutes.map((route) => (
-                      <li key={route.href}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={route.href}
-                            className="block px-4 py-2 text-foreground dark:text-foreground-dark hover:bg-muted/10 rounded"
-                          >
-                            {route.label}
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="w-[900px] p-6 bg-background dark:bg-background-dark shadow-lg rounded-xl border border-border/50">
+                    <div className="grid grid-cols-3 gap-8">
+                      {megaMenuCategories.map((category) => (
+                        <div key={category.title} className="space-y-3">
+                          <h3 className="text-sm font-semibold tracking-wide text-primary/80 uppercase">
+                            {category.title}
+                          </h3>
+                          <ul className="space-y-1.5">
+                            {category.items.map((item) => (
+                              <li key={item.href}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    href={item.href}
+                                    className="group flex flex-col gap-1.5 rounded-lg px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary/10 transition-all duration-200"
+                                  >
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-sm font-medium text-foreground/90 dark:text-foreground-dark/90 group-hover:text-primary transition-colors duration-200">
+                                        {item.label}
+                                      </span>
+                                      <svg
+                                        className="w-3.5 h-3.5 text-foreground/30 group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-200 ease-out opacity-0 group-hover:opacity-100"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                      >
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
+                                          clipRule="evenodd"
+                                        />
+                                      </svg>
+                                    </div>
+                                    {item.description && (
+                                      <p className="text-sm text-muted-foreground/75 dark:text-muted-foreground-dark/75 group-hover:text-foreground/60 dark:group-hover:text-foreground-dark/60 transition-colors duration-200 line-clamp-2">
+                                        {item.description}
+                                      </p>
+                                    )}
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>

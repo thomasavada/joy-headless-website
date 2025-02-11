@@ -1,11 +1,10 @@
-import { getPosts, getRelatedPosts, getSettings, getSinglePost, Post, Settings } from '@/lib/ghost';
-import { getSuccessStoryInfo, SuccessStoryInfo } from '@/lib/strapi';
-import { notFound } from 'next/navigation';
-import { Metadata, ResolvingMetadata } from 'next';
-import { PostContent } from '@/components/blog/post-content';
-import { JsonLd } from '@/components/blog/json-ld';
-import { RelatedPosts } from "@/components/blog/related-posts";
-import { CaseStudyStats } from '@/components/case-study/stats';
+import {getPosts, getRelatedPosts, getSettings, getSinglePost, Post, Settings} from '@/lib/ghost';
+import {getSuccessStoryInfo} from '@/lib/strapi';
+import {notFound} from 'next/navigation';
+import {Metadata, ResolvingMetadata} from 'next';
+import {PostContent} from '@/components/blog/post-content';
+import {JsonLd} from '@/components/blog/json-ld';
+import {RelatedPosts} from "@/components/blog/related-posts";
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -123,4 +122,4 @@ export default async function CaseStudyPage({ params }: Props) {
       </div>
     </>
   );
-} 
+}
