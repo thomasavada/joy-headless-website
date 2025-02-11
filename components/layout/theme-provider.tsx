@@ -10,7 +10,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
 
   useEffect(() => {
     // Set theme based on path
-    if (pathname.startsWith('/blog') || pathname.startsWith('/integrations')) {
+    if (pathname.startsWith('/blog') || pathname.startsWith('/integrations') || pathname.startsWith('/case-study')) {
       document.documentElement.classList.remove('dark');
       document.documentElement.classList.add('light');
       localStorage.setItem('theme', 'light');

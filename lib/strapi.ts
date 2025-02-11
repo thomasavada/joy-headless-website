@@ -40,3 +40,34 @@ export const fetchIntegrationBySlug = async (slug: string) => {
   console.log("data integration one:", JSON.stringify(data, null, 2));
   return data;
 };
+
+export interface SuccessStoryInfo {
+  id: number;
+  ghost_post_id: string;
+  company_name: string;
+  industry: string | null;
+  location: string | null;
+  revenue: string | null;
+  use_case: string | null;
+  orders_per_month: string | null;
+  points_redemption_rate: string | null;
+  features: {
+    data: string[];
+  };
+  key_results: {
+    data: string[];
+  };
+}
+
+export async function getSuccessStoryInfo(ghostPostId: string) {
+  try {
+    const data = await fetchFromStrapi<{data: SuccessStoryInfo[]}>(
+      `success-stories-infos?filters[ghost_post_id][$eq]=${ghostPostId}&populate=*`
+    );
+    
+    return data.data[0];
+  } catch (error) {
+    console.error('Error fetching success story info:', error);
+    return null;
+  }
+}

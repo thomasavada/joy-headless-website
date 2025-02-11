@@ -57,9 +57,18 @@ if (!ghostUrl || !ghostKey) {
 }
 
 // API Functions
-export async function getPosts() {
+export const getPosts = async ({
+  filter = '',
+  include = ['tags', 'authors'],
+  limit = 'all'
+}: {
+  filter?: string;
+  include?: string[];
+  limit?: string | number;
+} = {}) => {
   try {
-    const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&include=tags,authors&order=published_at%20DESC`;
+    const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&include=${include.join(',')}&limit=${limit}${filter ? `&filter=${filter}` : ''}&order=published_at%20DESC`;
+    
     const res = await fetch(url, {
       next: { revalidate: 60 },
       headers: {
@@ -79,7 +88,7 @@ export async function getPosts() {
     console.error('Error fetching posts:', err);
     return [];
   }
-}
+};
 
 export async function getFeaturedPosts() {
   try {
