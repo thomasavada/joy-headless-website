@@ -3,7 +3,7 @@ import {Bai_Jamjuree, Inter, Poppins} from "next/font/google";
 import "./globals.css";
 import {cn} from "@/lib/utils";
 import {Navbar} from "@/components/layout/navbar";
-import {ThemeProvider} from "next-themes";
+import {ThemeProvider} from "@/components/layout/theme-provider";
 import {FooterSection} from "@/components/layout/sections/footer";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -49,12 +49,7 @@ export default function RootLayout({
         baiJamjuree.variable,
         "font-sans"
       )}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider>
           <Navbar />
           {children}
           <FooterSection />

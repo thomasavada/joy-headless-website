@@ -21,8 +21,6 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
     </div>
   );
 
-  console.log('Featured posts count:', featuredPosts.length);
-  console.log('Featured posts:', featuredPosts);
 
   return (
     <div className="space-y-24">

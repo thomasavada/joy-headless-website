@@ -98,7 +98,6 @@ export async function getFeaturedPosts() {
     }
 
     const data = await res.json();
-    console.log('Featured posts:', data.posts);
     return data.posts;
   } catch (err) {
     console.error('Error fetching featured posts:', err);

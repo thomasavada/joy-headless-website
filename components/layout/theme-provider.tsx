@@ -24,7 +24,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme={pathname.startsWith('/blog') ? 'light' : 'dark'}
+      defaultTheme={'light'}
       enableSystem={false}
       // forcedTheme={pathname.startsWith('/blog') ? 'light' : 'dark'} // Force theme based on path
       {...props}
