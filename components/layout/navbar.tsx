@@ -53,7 +53,7 @@ const resourceRoutes: RouteProps[] = [
     label: "Blog",
   },
   {
-    href: "https://joy.so/migrate/",
+    href: "/migration",
     label: "Migration",
   },
   {
@@ -68,7 +68,7 @@ export const Navbar = () => {
     <header className="sticky top-0 z-50 w-full border-b border-border dark:border-border-dark bg-background dark:bg-background-dark">
       <nav className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link href="https://joy.so/" className="block">
+        <Link href="/" className="block">
           <Image
             src="https://joy.so/wp-content/uploads/2024/12/Joy-white.png"
             alt="Joy retention | Loyalty for Shopify"
@@ -89,7 +89,7 @@ export const Navbar = () => {
               <div>
                 <SheetHeader className="mb-4">
                   <SheetTitle>
-                    <Link href="https://joy.so/">
+                    <Link href="/">
                       <Image
                         src="https://joy.so/wp-content/uploads/2024/12/Joy-white.png"
                         alt="Joy retention | Loyalty for Shopify"
