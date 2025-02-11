@@ -21,15 +21,15 @@ const baiJamjuree = Bai_Jamjuree({
 });
 
 export const metadata: Metadata = {
-  title: 'Joy',
-  description: 'Joy Application',
+  title: 'Joy | Rewards & Loyalty Program for Shopify Business',
+  description: 'Drive high conversion rates with Joy - an all-in-one solution for effortless loyalty program.',
   icons: {
-    icon: '/images/favicon.ico',
-    shortcut: '/images/favicon.ico',
-    apple: '/images/favicon.ico',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
     other: {
       rel: 'apple-touch-icon-precomposed',
-      url: '/images/favicon.ico',
+      url: '/favicon.ico',
     },
   },
 };
