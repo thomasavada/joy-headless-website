@@ -158,19 +158,9 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
           </div>
         </div>
 
+        {/* Main Content Area */}
         <div className="container mx-auto px-4 py-12 max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-12">
-            {/* Sidebar */}
-            <div className="hidden lg:block">
-              <div className="sticky top-24 space-y-6">
-                {/* Stats Section */}
-                {successStoryInfo && <StatsCard info={successStoryInfo} />}
-
-                {/* Table of Contents */}
-                <TableOfContents content={post.html} />
-              </div>
-            </div>
-
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-12">
             {/* Main Content Column */}
             <div>
               {/* Metrics Section */}
@@ -184,6 +174,17 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
                 />
               </article>
             </div>
+
+            {/* Sidebar */}
+            <aside className="order-first lg:order-last">
+              <div className="sticky top-24 space-y-6">
+                {/* Stats Section */}
+                {successStoryInfo && <StatsCard info={successStoryInfo} />}
+
+                {/* Table of Contents */}
+                <TableOfContents content={post.html} />
+              </div>
+            </aside>
           </div>
         </div>
       </main>
