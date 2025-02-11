@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BlogPage() {
-  // Fetch featured and regular posts in parallel
+  // Fetch featured and regular posts in parallel (case studies already excluded)
   const [featuredPosts, regularPosts] = await Promise.all([
     getFeaturedPosts() as Promise<Post[]>,
     getRegularPosts() as Promise<Post[]>

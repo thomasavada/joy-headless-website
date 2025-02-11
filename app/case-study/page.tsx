@@ -34,14 +34,6 @@ export default async function CaseStudyPage() {
 
   return (
     <main className="flex min-h-screen flex-col bg-white">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-foreground">
-          Case Study
-        </h1>
-        <p className="text-base text-muted-foreground leading-relaxed mt-2">
-          Explore real-world case studies showcasing how our loyalty platform drives engagement and growth. See measurable results from successful implementations across retail, fashion, and F&B sectors.
-        </p>
-      </div>
       <SuccessStoriesHero />
       <MetricsSection />
       <SuccessStoriesGrid posts={posts} />

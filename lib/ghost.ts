@@ -1,4 +1,3 @@
-
 // Define types for Ghost content
 export interface Post {
   id: string;
@@ -56,6 +55,25 @@ if (!ghostUrl || !ghostKey) {
   console.error('Ghost API configuration missing:', { ghostUrl, ghostKey });
 }
 
+// URL Builder helper
+const buildGhostUrl = (endpoint: string, params: Record<string, any>) => {
+  const searchParams = new URLSearchParams();
+  
+  // Add API key
+  searchParams.append('key', ghostKey || '');
+  
+  // Add all other params
+  Object.entries(params).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      searchParams.append(key, value.join(','));
+    } else if (value !== undefined && value !== null && value !== '') {
+      searchParams.append(key, String(value));
+    }
+  });
+
+  return `${ghostUrl}/ghost/api/${endpoint}?${searchParams.toString()}`;
+};
+
 // API Functions
 export const getPosts = async ({
   filter = '',
@@ -67,7 +85,12 @@ export const getPosts = async ({
   limit?: string | number;
 } = {}) => {
   try {
-    const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&include=${include.join(',')}&limit=${limit}${filter ? `&filter=${filter}` : ''}&order=published_at%20DESC`;
+    const url = buildGhostUrl('content/posts/', {
+      filter,
+      include,
+      limit,
+      order: 'published_at DESC'
+    });
     
     const res = await fetch(url, {
       next: { revalidate: 60 },
@@ -90,9 +113,16 @@ export const getPosts = async ({
   }
 };
 
+// Get featured posts (excluding success stories)
 export async function getFeaturedPosts() {
   try {
-    const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&filter=featured:true&include=tags,authors&limit=all&order=published_at%20DESC`;
+    const url = buildGhostUrl('content/posts/', {
+      filter: 'featured:true+tag:-success-stories',
+      include: ['tags', 'authors'],
+      limit: 'all',
+      order: 'published_at DESC'
+    });
+
     const res = await fetch(url, {
       next: { revalidate: 60 },
       headers: {
@@ -114,9 +144,16 @@ export async function getFeaturedPosts() {
   }
 }
 
+// Get regular posts (excluding success stories)
 export async function getRegularPosts() {
   try {
-    const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&filter=featured:false&include=tags,authors&limit=all&order=published_at%20DESC`;
+    const url = buildGhostUrl('content/posts/', {
+      filter: 'featured:false+tag:-success-stories',
+      include: ['tags', 'authors'],
+      limit: 'all',
+      order: 'published_at DESC'
+    });
+
     const res = await fetch(url, {
       next: { revalidate: 60 },
       headers: {
@@ -138,9 +175,12 @@ export async function getRegularPosts() {
   }
 }
 
+// Update getSinglePost to use URL builder
 export async function getSinglePost(slug: string) {
   try {
-    const url = `${ghostUrl}/ghost/api/content/posts/slug/${slug}/?key=${ghostKey}&include=tags,authors`;
+    const url = buildGhostUrl(`content/posts/slug/${slug}/`, {
+      include: ['tags', 'authors']
+    });
 
     const res = await fetch(url, {
       next: { revalidate: 60 },
@@ -158,9 +198,13 @@ export async function getSinglePost(slug: string) {
   }
 }
 
+// Update getPostsByTag to use URL builder
 export async function getPostsByTag(tag: string) {
   try {
-    const url = `${ghostUrl}/ghost/api/content/posts/?key=${ghostKey}&filter=tag:${tag}&include=tags,authors`;
+    const url = buildGhostUrl('content/posts/', {
+      filter: `tag:${tag}`,
+      include: ['tags', 'authors']
+    });
 
     const res = await fetch(url, {
       next: { revalidate: 60 },
