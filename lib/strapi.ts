@@ -10,6 +10,7 @@ const fetchFromStrapi = async <T>(endpoint: string): Promise<T> => {
     {
       headers: {
         Authorization: `Bearer ${process.env.NEXT_STRAPI_API_KEY}`,
+        'Cache-Control': 'no-store',
       },
       cache: 'no-store',
       next: { revalidate: 0 }
@@ -26,6 +27,7 @@ const fetchFromStrapi = async <T>(endpoint: string): Promise<T> => {
 export const fetchIntegrations = async () => {
   try {
     const data = await fetchFromStrapi<IntegrationsResponse>('integrations?populate=*');
+    console.log("data integrations:", JSON.stringify(data, null, 2));
     return data;
   } catch (error) {
     console.error('Error fetching integrations:', error);

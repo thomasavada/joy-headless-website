@@ -2,8 +2,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {fetchIntegrations} from '@/lib/strapi';
 import {Integration} from '@/types/integration';
+import { Metadata } from 'next';
 
 export const revalidate = 3600; // Revalidate every hour
+
+// Add metadata for the integrations listing page
+export const metadata: Metadata = {
+  title: "Joy loyalty | Integrations",
+  description: "Over 20+ carefully curated integrations to help you streamline your workflow, enhance your store&apos;s performance, and create seamless customer experiences.",
+};
 
 export default async function IntegrationsPage() {
   const { data: integrations } = await fetchIntegrations();
@@ -16,7 +23,7 @@ export default async function IntegrationsPage() {
           Joy integrates with your most-loved tools
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Connect Joy with 15+ carefully curated integrations to streamline your workflow and enhance your store's performance
+          Connect Joy with 20+ carefully curated integrations to streamline your workflow and enhance your store's performance
         </p>
         <div className="flex items-center justify-center gap-4 pt-4">
           <a
@@ -48,13 +55,13 @@ export default async function IntegrationsPage() {
           >
             <div className="space-y-4">
               {integration.logo?.url ? (
-                <div className="relative h-12 w-12 mx-auto bg-white dark:bg-gray-800 rounded-lg p-2">
+                <div className="relative h-20 w-20 bg-white dark:bg-gray-800 rounded-lg p-2">
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${integration.logo.url}`}
+                    src={integration.logo.url}
                     alt={integration.name}
                     fill
                     className="object-contain"
-                    sizes="48px"
+                    sizes="200px"
                   />
                 </div>
               ) : (

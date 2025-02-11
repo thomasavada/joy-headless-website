@@ -27,7 +27,7 @@ export function ImageCarousel({ images }: { images: Integration['images'] }) {
               )}
             >
               <Image
-                src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${image.url}`}
+                src={image.url}
                 alt={image.alternativeText || "Integration screenshot"}
                 fill
                 className="object-cover"
@@ -44,7 +44,7 @@ export function ImageCarousel({ images }: { images: Integration['images'] }) {
           {selectedImage !== null && images[selectedImage] && (
             <div className="relative w-full aspect-[16/9]">
               <Image
-                src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${images[selectedImage].url}`}
+                src={images[selectedImage].url}
                 alt={images[selectedImage].alternativeText || "Integration screenshot"}
                 fill
                 className="object-contain"

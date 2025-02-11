@@ -4,11 +4,32 @@ import {Markdown} from '@/components/ui/markdown';
 import {Integration} from '@/types/integration';
 import Link from 'next/link';
 import {ImageCarousel} from '@/components/ui/image-carousel';
-
+import { Metadata, ResolvingMetadata } from 'next';
 
 interface IntegrationPageProps {
   params: {
     slug: string;
+  };
+}
+
+// Generate metadata for the page
+export async function generateMetadata(
+  { params }: IntegrationPageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { data: integrations } = await fetchIntegrationBySlug(params.slug);
+  const integration = integrations[0];
+
+  if (!integration) {
+    return {
+      title: 'Integration Not Found | Joy loyalty',
+      description: 'The requested integration could not be found.'
+    };
+  }
+
+  return {
+    title: `Joy loyalty | ${integration.name} Integration`,
+    description: `Enhance your store with Joy&apos;s ${integration.name} integration. ${integration.short_description}`
   };
 }
 
@@ -50,7 +71,7 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
             {integration.logo?.url ? (
               <div className="relative h-16 w-16 bg-white dark:bg-gray-800 rounded-lg p-3">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${integration.logo.url}`}
+                  src={integration.logo.url}
                   alt={integration.name}
                   fill
                   className="object-contain"
@@ -195,7 +216,7 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
                   {related.logo?.url ? (
                     <div className="relative h-12 w-12 mx-auto bg-white dark:bg-gray-800 rounded-lg p-2">
                       <Image
-                        src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${related.logo.url}`}
+                        src={related.logo.url}
                         alt={related.name}
                         fill
                         className="object-contain"

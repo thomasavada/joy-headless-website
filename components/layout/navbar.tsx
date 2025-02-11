@@ -38,6 +38,10 @@ const mainRoutes: RouteProps[] = [
     label: "Contact",
   },
   {
+    href: "/integrations",
+    label: "Integrations",
+  },
+  {
     href: "/case-study/",
     label: "Cases Study",
   },
