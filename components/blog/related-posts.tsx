@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {Post} from "@/lib/types";
+import {Post} from "@/lib/ghost";
 
 interface RelatedPostsProps {
   posts: Post[];
@@ -8,6 +8,15 @@ interface RelatedPostsProps {
 }
 
 export function RelatedPosts({ posts, currentPostId }: RelatedPostsProps) {
+  // Transform the URL to case-study format if it's a success story
+  const getPostUrl = (post: Post) => {
+    if (post.tags?.some(tag => tag.slug === 'success-stories')) {
+      // Transform from /blog/slug to /case-study/slug
+      return `/case-study/${post.slug}`;
+    }
+    return `/blog/${post.slug}`;
+  };
+
   // Filter out current post and get 3 related posts
   const relatedPosts = posts
     .filter(post => post.id !== currentPostId)
@@ -27,7 +36,7 @@ export function RelatedPosts({ posts, currentPostId }: RelatedPostsProps) {
           {relatedPosts.map((post) => (
             <Link
               key={post.id}
-              href={`/blog/${post.slug}`}
+              href={getPostUrl(post)}
               className="group"
             >
               <article className="space-y-4">
