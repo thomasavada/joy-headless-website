@@ -10,7 +10,7 @@ export const SuccessStoriesHero = () => {
           </span>
         </div>
         
-        <h1 className="text-5xl md:text-6xl font-bold text-center mb-6">
+        <h1 className="text-5xl md:text-6xl font-bold text-center mb-6 text-white">
           Customer success stories
         </h1>
         
@@ -18,7 +18,7 @@ export const SuccessStoriesHero = () => {
           Working with top global brands across industries has helped us create a powerful, flexible loyalty platform and gain the expertise to deliver exceptional services to our retail, fashion, and F&B clients.
         </p>
         
-        <div className="mt-12">
+        <div className="mt-40">
           <SponsorsSection />
         </div>
       </div>
