@@ -13,7 +13,7 @@ import {
 import {Button} from "../ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import {ThemeToggle} from "@/components/theme-toggle";
+// import {ThemeToggle} from "@/components/theme-toggle";
 
 interface RouteProps {
   href: string;
@@ -240,7 +240,7 @@ export const Navbar = () => {
             </NavigationMenuList>
           </NavigationMenu>
 
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
 
           <Button
             asChild
