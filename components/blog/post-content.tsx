@@ -44,6 +44,49 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
       heading.appendChild(anchor);
     });
 
+    // Process images
+    const images = doc.querySelectorAll('img');
+    images.forEach((img) => {
+      const src = img.getAttribute('src');
+      if (src) {
+        // Transform the base URL first
+        let transformedSrc = src;
+        if (src.includes('storage.googleapis.com/joy-ghost-cms.firebasestorage.app')) {
+          const pathMatch = src.match(/firebasestorage\.app\/(.*)/);
+          if (pathMatch && pathMatch[1]) {
+            transformedSrc = `https://cdn-web.joy.so/cdn/image/${pathMatch[1]}`;
+          }
+        }
+
+        // Create responsive srcset with transformed URL
+        const widths = [400, 600, 800, 1200, 1600];
+        const srcset = widths
+          .map(width => `${transformedSrc}?width=${width} ${width}w`)
+          .join(', ');
+        
+        // Set sizes attribute based on container context
+        let sizes = '(max-width: 768px) 100vw, ';
+        if (img.parentElement?.classList.contains('full-width')) {
+          sizes += '1200px';
+        } else if (img.parentElement?.classList.contains('medium')) {
+          sizes += '600px';
+        } else if (img.parentElement?.classList.contains('small')) {
+          sizes += '400px';
+        } else {
+          sizes += '800px';
+        }
+        
+        // Set attributes
+        img.setAttribute('srcset', srcset);
+        img.setAttribute('sizes', sizes);
+        img.setAttribute('loading', 'lazy');
+        img.className = 'w-full h-auto rounded-lg';
+        
+        // Set default src with transformed URL
+        img.setAttribute('src', `${transformedSrc}?width=800`);
+      }
+    });
+
     setProcessedContent(doc.body.innerHTML);
   }, [post.html]);
 
