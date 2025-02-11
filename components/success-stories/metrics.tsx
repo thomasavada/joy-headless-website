@@ -30,7 +30,7 @@ export const MetricsSection = () => {
           <span className="inline-block px-4 py-1 rounded-full text-sm bg-blue-500/10 text-blue-500 mb-6">
             Case study
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900 dark:text-gray-900">
             How Our Solutions Made<br />
             a Real Impact
           </h2>

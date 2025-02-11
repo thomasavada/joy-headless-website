@@ -19,6 +19,7 @@ interface RouteProps {
   href: string;
   label: string;
   description?: string;
+  external?: boolean;
 }
 
 interface MegaMenuCategory {
@@ -57,6 +58,7 @@ const megaMenuCategories: MegaMenuCategory[] = [
         href: "https://help.joy.so/",
         label: "Help Docs",
         description: "Detailed guides and documentation",
+        external: true,
       },
       {
         href: "/integrations",
@@ -72,6 +74,7 @@ const megaMenuCategories: MegaMenuCategory[] = [
         href: "https://devdocs.joy.so/",
         label: "API Docs",
         description: "Documentation for the Joy API",
+        external: true
       },
     ],
   },
@@ -147,7 +150,13 @@ export const Navbar = () => {
 
               <SheetFooter>
                 <Button asChild className="w-full">
-                  <Link href="http://shopify.pxf.io/Vx4jma">Start for free</Link>
+                  <Link 
+                    href="http://shopify.pxf.io/Vx4jma"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Start for free
+                  </Link>
                 </Button>
               </SheetFooter>
             </SheetContent>
@@ -189,6 +198,10 @@ export const Navbar = () => {
                                 <NavigationMenuLink asChild>
                                   <Link
                                     href={item.href}
+                                    {...(item.external ? {
+                                      target: "_blank",
+                                      rel: "noopener noreferrer"
+                                    } : {})}
                                     className="group flex flex-col gap-1.5 rounded-lg px-4 py-3 hover:bg-muted/50 transition-all duration-200"
                                   >
                                     <div className="flex items-center gap-2">
@@ -233,7 +246,11 @@ export const Navbar = () => {
             asChild
             className="bg-primary hover:bg-primary/90 text-white"
           >
-            <Link href="http://shopify.pxf.io/Vx4jma">
+            <Link 
+              href="http://shopify.pxf.io/Vx4jma"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Start for free
             </Link>
           </Button>
