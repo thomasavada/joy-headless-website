@@ -61,6 +61,7 @@ const megaMenuCategories: MegaMenuCategory[] = [
       {
         href: "/integrations",
         label: "Integrations",
+        description: "Connect Joy with your favorite tools",
       },
     ],
   },
@@ -156,13 +157,13 @@ export const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-4">
           <NavigationMenu>
-            <NavigationMenuList className="gap-2">
+            <NavigationMenuList className="gap-6">
               {mainRoutes.map((route) => (
                 <NavigationMenuItem key={route.href}>
                   <NavigationMenuLink asChild>
                     <Link
                       href={route.href}
-                      className="px-4 py-2 text-foreground dark:text-foreground-dark hover:text-primary"
+                      className="text-sm font-medium text-foreground/90 dark:text-white/90 hover:text-primary dark:hover:text-primary-dark transition-colors"
                     >
                       {route.label}
                     </Link>
@@ -171,15 +172,15 @@ export const Navbar = () => {
               ))}
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-foreground dark:text-foreground-dark">
+                <NavigationMenuTrigger className="text-sm font-medium text-foreground/90 dark:text-white/90 hover:text-primary transition-colors bg-transparent hover:bg-transparent">
                   Resources
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="w-[900px] p-6 bg-background dark:bg-background-dark shadow-lg rounded-xl border border-border/50">
+                  <div className="w-[900px] p-6 bg-background dark:bg-background-dark shadow-lg rounded-xl border border-border/10">
                     <div className="grid grid-cols-3 gap-8">
                       {megaMenuCategories.map((category) => (
                         <div key={category.title} className="space-y-3">
-                          <h3 className="text-sm font-semibold tracking-wide text-primary/80 uppercase">
+                          <h3 className="text-sm font-semibold tracking-wide text-primary dark:text-primary-dark uppercase">
                             {category.title}
                           </h3>
                           <ul className="space-y-1.5">
@@ -188,14 +189,14 @@ export const Navbar = () => {
                                 <NavigationMenuLink asChild>
                                   <Link
                                     href={item.href}
-                                    className="group flex flex-col gap-1.5 rounded-lg px-4 py-3 hover:bg-primary/5 dark:hover:bg-primary/10 transition-all duration-200"
+                                    className="group flex flex-col gap-1.5 rounded-lg px-4 py-3 hover:bg-muted/50 transition-all duration-200"
                                   >
                                     <div className="flex items-center gap-2">
-                                      <span className="text-sm font-medium text-foreground/90 dark:text-foreground-dark/90 group-hover:text-primary transition-colors duration-200">
+                                      <span className="text-sm font-medium text-foreground/90 dark:text-white/90 group-hover:text-primary dark:group-hover:text-primary-dark transition-colors duration-200">
                                         {item.label}
                                       </span>
                                       <svg
-                                        className="w-3.5 h-3.5 text-foreground/30 group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-200 ease-out opacity-0 group-hover:opacity-100"
+                                        className="w-3.5 h-3.5 text-muted-foreground/50 hover:text-primary group-hover:text-primary dark:group-hover:text-primary-dark group-hover:translate-x-0.5 transition-all duration-200 ease-out opacity-0 group-hover:opacity-100"
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
@@ -208,7 +209,7 @@ export const Navbar = () => {
                                       </svg>
                                     </div>
                                     {item.description && (
-                                      <p className="text-sm text-muted-foreground/75 dark:text-muted-foreground-dark/75 group-hover:text-foreground/60 dark:group-hover:text-foreground-dark/60 transition-colors duration-200 line-clamp-2">
+                                      <p className="text-sm text-muted-foreground group-hover:text-foreground/70 dark:text-white/50 dark:group-hover:text-white/70 transition-colors duration-200 line-clamp-2">
                                         {item.description}
                                       </p>
                                     )}
