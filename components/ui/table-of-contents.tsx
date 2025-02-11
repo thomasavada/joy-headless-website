@@ -16,12 +16,16 @@ export function TableOfContents({ content }: TableOfContentsProps) {
 
   useEffect(() => {
     const doc = new DOMParser().parseFromString(content, 'text/html');
-    const elements = Array.from(doc.querySelectorAll('h2, h3'));
-    const items: HeadingItem[] = elements.map((element) => ({
-      id: element.id,
-      text: element.textContent || '',
-      level: Number(element.tagName.charAt(1))
-    }));
+    const elements = Array.from(doc.querySelectorAll('h2'));
+    const items: HeadingItem[] = elements.map((element) => {
+      const text = element.textContent || '';
+      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      return {
+        id,
+        text,
+        level: 2
+      };
+    });
     setHeadings(items);
   }, [content]);
 
@@ -30,17 +34,24 @@ export function TableOfContents({ content }: TableOfContentsProps) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
+            const id = entry.target.id;
+            setActiveId(id);
           }
         });
       },
-      { rootMargin: '0% 0% -80% 0%' }
+      { 
+        rootMargin: '-80px 0px -80% 0px',
+        threshold: 0.1
+      }
     );
 
-    const headingElements = document.querySelectorAll('h2, h3');
-    headingElements.forEach((element) => observer.observe(element));
+    setTimeout(() => {
+      const headingElements = document.querySelectorAll('h2[id]');
+      headingElements.forEach((element) => observer.observe(element));
+    }, 100);
 
     return () => {
+      const headingElements = document.querySelectorAll('h2[id]');
       headingElements.forEach((element) => observer.unobserve(element));
     };
   }, []);
@@ -75,20 +86,15 @@ export function TableOfContents({ content }: TableOfContentsProps) {
             key={heading.id}
             href={`#${heading.id}`}
             className={`block text-sm py-1 px-4 rounded-md transition-colors
-              ${heading.level === 2 ? 'pl-4' : 'pl-6'} 
               ${
                 activeId === heading.id
                   ? 'text-primary bg-primary/5 font-medium'
                   : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
               }
             `}
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector(`#${heading.id}`)?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-                inline: 'nearest',
-              });
+            onClick={() => {
+              // Just update the active ID
+              setActiveId(heading.id);
             }}
           >
             {heading.text}
