@@ -1,61 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: ['cdn-web.joy.so', 'storage.googleapis.com'],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'joy.so',
-        pathname: '/**',
+        hostname: 'cdn-web.joy.so',
+        pathname: '/cdn/image/**',
       },
       {
         protocol: 'https',
-        hostname: 'cdnapps.avada.io',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.shopify.com',
-        pathname: '/**',
-      },
-      {
-        protocol: "https",
-        hostname: "ghost.joy.so",
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn1.avada.io',
-        pathname: '/**',
-      },
-      {
-        protocol: "https",
-        hostname: "i.pravatar.cc",
-        pathname: '/**',
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        pathname: '/**',
-      },
-      {
-        protocol: "https",
-        hostname: "github.com",
-        pathname: '/**',
-      },
-      {
-        protocol: "https",
-        hostname: "storage.googleapis.com",
-        pathname: '/**',
-      },
-      {
-        protocol: "https",
-        hostname: "cdn-web.joy.so",
-        pathname: '/**',
+        hostname: 'storage.googleapis.com',
+        pathname: '/joy-ghost-cms.firebasestorage.app/**',
       }
     ],
-    domains: ['storage.googleapis.com'],
     loader: 'custom',
-    loaderFile: './image-loader.js',
+    loaderFile: './image-loaders.js',
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
