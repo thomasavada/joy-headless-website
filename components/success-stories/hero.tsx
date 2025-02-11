@@ -1,4 +1,4 @@
-import { SponsorsSection } from "@/components/layout/sections/sponsors";
+import {SponsorsSection} from "@/components/layout/sections/sponsors";
 
 export const SuccessStoriesHero = () => {
   return (
@@ -9,19 +9,19 @@ export const SuccessStoriesHero = () => {
             Case studies
           </span>
         </div>
-        
+
         <h1 className="text-5xl md:text-6xl font-bold text-center mb-6 text-white">
           Customer success stories
         </h1>
-        
+
         <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto text-center">
           Working with top global brands across industries has helped us create a powerful, flexible loyalty platform and gain the expertise to deliver exceptional services to our retail, fashion, and F&B clients.
         </p>
-        
+
         <div className="mt-40">
           <SponsorsSection />
         </div>
       </div>
     </section>
   );
-} 
+}

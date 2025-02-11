@@ -1,4 +1,4 @@
-import { SuccessStoryInfo } from '@/lib/strapi';
+import {SuccessStoryInfo} from '@/lib/strapi';
 
 interface StatsCardProps {
   info: SuccessStoryInfo;
@@ -6,7 +6,7 @@ interface StatsCardProps {
 
 export const StatsCard = ({ info }: StatsCardProps) => {
   // Check if any stats exist
-  const hasStats = info.industry || info.use_case || info.location || 
+  const hasStats = info.industry || info.use_case || info.location ||
                   info.orders_per_month || info.revenue;
 
   return (
@@ -15,7 +15,7 @@ export const StatsCard = ({ info }: StatsCardProps) => {
       {hasStats && (
         <div className="bg-gray-50 rounded-lg p-4 mb-3">
           <h2 className="text-[13px] font-bold text-gray-900 uppercase tracking-wide mb-2">{info.company_name} STATS</h2>
-          
+
           {info.industry && (
             <div className="mb-2">
               <p className="text-[12px] text-gray-500 tracking-wider">Industry</p>
@@ -59,7 +59,7 @@ export const StatsCard = ({ info }: StatsCardProps) => {
           <h2 className="text-[13px] font-bold text-gray-900 uppercase tracking-wide mb-2">FEATURES</h2>
           <div className="flex flex-wrap gap-1">
             {info.features.data.map((feature, index) => (
-              <div 
+              <div
                 key={index}
                 className="inline-flex px-2 py-0.5 bg-white border border-gray-200 rounded-full text-[12px] font-medium text-gray-600 hover:border-gray-300 transition-colors"
               >
@@ -71,4 +71,4 @@ export const StatsCard = ({ info }: StatsCardProps) => {
       )}
     </>
   );
-}; 
+};

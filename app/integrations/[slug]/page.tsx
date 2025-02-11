@@ -4,7 +4,7 @@ import {Markdown} from '@/components/ui/markdown';
 import {Integration} from '@/types/integration';
 import Link from 'next/link';
 import {ImageCarousel} from '@/components/ui/image-carousel';
-import { Metadata, ResolvingMetadata } from 'next';
+import {Metadata, ResolvingMetadata} from 'next';
 
 interface IntegrationPageProps {
   params: {

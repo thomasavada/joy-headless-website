@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {fetchIntegrations} from '@/lib/strapi';
 import {Integration} from '@/types/integration';
-import { Metadata } from 'next';
+import {Metadata} from 'next';
 
 export const revalidate = 3600; // Revalidate every hour
 

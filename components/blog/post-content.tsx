@@ -1,14 +1,13 @@
 "use client";
 import Image from 'next/image';
 import {Post} from '@/lib/ghost';
-import {Breadcrumb} from "@/components/ui/breadcrumb";
 import {TableOfContents} from "@/components/ui/table-of-contents";
 import {useEffect, useState} from "react";
 import {ReadingProgress} from "@/components/blog/reading-progress";
 import {ScrollToTop} from "@/components/ui/scroll-to-top";
-import { SuccessStoryInfo } from '@/lib/strapi';
-import { StatsCard } from '@/components/case-study/stats-card';
-import { MetricsSection } from '@/components/case-study/metrics-section';
+import {SuccessStoryInfo} from '@/lib/strapi';
+import {StatsCard} from '@/components/case-study/stats-card';
+import {MetricsSection} from '@/components/case-study/metrics-section';
 
 interface PostContentProps {
   post: Post;
@@ -136,7 +135,7 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
 
               {/* Article Content */}
               <article className="prose prose-sm max-w-none">
-                <div 
+                <div
                   dangerouslySetInnerHTML={{ __html: processedContent }}
                   className="prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-primary"
                 />

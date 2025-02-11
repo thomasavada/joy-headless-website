@@ -1,4 +1,4 @@
-import { SuccessStoryInfo } from '@/lib/strapi';
+import {SuccessStoryInfo} from '@/lib/strapi';
 
 interface MetricsSectionProps {
   info: SuccessStoryInfo;
@@ -49,7 +49,7 @@ export const MetricsSection = ({ info }: MetricsSectionProps) => {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
       {info.key_results.data.map((result, index) => {
         const { number, unit, text } = parseMetric(result);
-        
+
         // If no number was parsed, just display the text
         if (!number) {
           return (
@@ -72,4 +72,4 @@ export const MetricsSection = ({ info }: MetricsSectionProps) => {
       })}
     </div>
   );
-}; 
+};
