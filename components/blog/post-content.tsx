@@ -28,76 +28,33 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
   };
 
   useEffect(() => {
-    // Process the content to add anchor links to headings
-    const doc = new DOMParser().parseFromString(post.html, 'text/html');
-    const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    if (post.html) {
+      const doc = new DOMParser().parseFromString(post.html, 'text/html');
 
-    headings.forEach((heading) => {
-      const text = heading.textContent || '';
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-      heading.id = id;
-
-      // Create anchor link
-      const anchor = document.createElement('a');
-      anchor.href = `#${id}`;
-      anchor.className = 'anchor-link';
-      anchor.innerHTML = `
-        <span class="invisible ml-2 hover:visible group-hover:visible">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline">
-            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-          </svg>
-        </span>
-      `;
-
-      heading.classList.add('group');
-      heading.appendChild(anchor);
-    });
-
-    // Process images
-    const images = doc.querySelectorAll('img');
-    images.forEach((img) => {
-      const src = img.getAttribute('src');
-      if (src) {
-        // Transform the base URL first
-        let transformedSrc = src;
-        if (src.includes('storage.googleapis.com/joy-ghost-cms.firebasestorage.app')) {
-          const pathMatch = src.match(/firebasestorage\.app\/(.*)/);
-          if (pathMatch && pathMatch[1]) {
-            transformedSrc = `https://cdn-web.joy.so/cdn/image/${pathMatch[1]}`;
-          }
+      // Process YouTube embeds
+      const embedCards = doc.querySelectorAll('.kg-embed-card');
+      embedCards.forEach((card) => {
+        card.className = 'kg-card kg-embed-card my-8';
+        const iframe = card.querySelector('iframe');
+        if (iframe) {
+          iframe.className = 'w-full aspect-video rounded-lg';
+          iframe.removeAttribute('width');
+          iframe.removeAttribute('height');
         }
+      });
 
-        // Create responsive srcset with transformed URL
-        const widths = [400, 600, 800, 1200, 1600];
-        const srcset = widths
-          .map(width => `${transformedSrc}?width=${width} ${width}w`)
-          .join(', ');
-        
-        // Set sizes attribute based on container context
-        let sizes = '(max-width: 768px) 100vw, ';
-        if (img.parentElement?.classList.contains('full-width')) {
-          sizes += '1200px';
-        } else if (img.parentElement?.classList.contains('medium')) {
-          sizes += '600px';
-        } else if (img.parentElement?.classList.contains('small')) {
-          sizes += '400px';
-        } else {
-          sizes += '800px';
+      // Process button cards
+      const buttonCards = doc.querySelectorAll('.kg-button-card');
+      buttonCards.forEach((card) => {
+        card.className = 'kg-card kg-button-card kg-align-center my-8';
+        const button = card.querySelector('.kg-btn');
+        if (button) {
+          button.className = 'kg-btn kg-btn-accent inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-[#0E0C3D] hover:bg-[#0E0C3D]/90 rounded-full transition-colors no-underline';
         }
-        
-        // Set attributes
-        img.setAttribute('srcset', srcset);
-        img.setAttribute('sizes', sizes);
-        img.setAttribute('loading', 'lazy');
-        img.className = 'w-full h-auto rounded-lg';
-        
-        // Set default src with transformed URL
-        img.setAttribute('src', `${transformedSrc}?width=800`);
-      }
-    });
+      });
 
-    setProcessedContent(doc.body.innerHTML);
+      setProcessedContent(doc.body.innerHTML);
+    }
   }, [post.html]);
 
   const breadcrumbItems = [
@@ -195,7 +152,14 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
               <article className="prose prose-sm max-w-none">
                 <div
                   dangerouslySetInnerHTML={{ __html: processedContent }}
-                  className="prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-primary"
+                  className="prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-primary
+                    [&_.kg-embed-card]:my-8
+                    [&_.kg-embed-card_iframe]:w-full [&_.kg-embed-card_iframe]:aspect-video [&_.kg-embed-card_iframe]:rounded-lg
+                    [&_.kg-button-card]:my-8 [&_.kg-button-card]:text-center
+                    [&_.kg-btn]:inline-flex [&_.kg-btn]:items-center [&_.kg-btn]:justify-center 
+                    [&_.kg-btn]:px-6 [&_.kg-btn]:py-2.5 [&_.kg-btn]:text-sm [&_.kg-btn]:font-medium 
+                    [&_.kg-btn]:text-white [&_.kg-btn]:bg-[#0E0C3D] [&_.kg-btn]:hover:bg-[#0E0C3D]/90 
+                    [&_.kg-btn]:rounded-full [&_.kg-btn]:transition-colors [&_.kg-btn]:no-underline"
                 />
               </article>
             </div>
