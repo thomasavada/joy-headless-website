@@ -1,6 +1,6 @@
 "use client";
 import {Menu} from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger,} from "../ui/sheet";
 import {
   NavigationMenu,
@@ -12,9 +12,6 @@ import {
 } from "../ui/navigation-menu";
 import {Button} from "../ui/button";
 import Link from "next/link";
-import Image from "next/image";
-import { useTheme } from "next-themes";
-import { usePathname } from 'next/navigation';
 // import {ThemeToggle} from "@/components/theme-toggle";
 
 interface RouteProps {
@@ -98,30 +95,16 @@ const megaMenuCategories: MegaMenuCategory[] = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const { theme } = useTheme();
-  const pathname = usePathname();
-  const [logoSrc, setLogoSrc] = useState('./joy-logo-dark.svg');
-
-  useEffect(() => {
-    // Update logo based on both theme and path
-    const updateLogo = () => {
-      setLogoSrc(theme === 'dark' 
-        ? `./joy-logo-light.svg` 
-        : `./joy-logo-dark.svg`
-      );
-    }
-    updateLogo();
-  }, [theme, pathname]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border dark:border-border-dark bg-background dark:bg-background-dark">
       <nav className="container flex h-16 items-center justify-between">
-        {/* Logo */}
+        {/* Logo - Updated with CSS filter approach */}
         <Link href="/" className="block">
           <img
-            src={logoSrc}
+            src="./joy-logo-dark.svg"
             alt="Joy retention | Loyalty for Shopify"
-            className="w-auto h-16"
+            className="w-auto h-16 dark:invert dark:brightness-200 transition-all duration-200"
           />
         </Link>
 
@@ -138,9 +121,9 @@ export const Navbar = () => {
                   <SheetTitle>
                     <Link href="/">
                       <img
-                        src={logoSrc}
+                        src="./joy-logo-dark.svg"
                         alt="Joy retention | Loyalty for Shopify"
-                        className="w-auto h-8"
+                        className="w-auto h-8 dark:invert dark:brightness-200 transition-all duration-200"
                       />
                     </Link>
                   </SheetTitle>
