@@ -102,7 +102,7 @@ export const Navbar = () => {
         {/* Logo - Updated with CSS filter approach */}
         <Link href="/" className="block">
           <img
-            src="./joy-logo-dark.svg"
+            src="/joy-logo-dark.svg"
             alt="Joy retention | Loyalty for Shopify"
             className="w-auto h-16 dark:invert dark:brightness-200 transition-all duration-200"
           />
@@ -121,7 +121,7 @@ export const Navbar = () => {
                   <SheetTitle>
                     <Link href="/">
                       <img
-                        src="./joy-logo-dark.svg"
+                        src="/joy-logo-dark.svg"
                         alt="Joy retention | Loyalty for Shopify"
                         className="w-auto h-8 dark:invert dark:brightness-200 transition-all duration-200"
                       />
