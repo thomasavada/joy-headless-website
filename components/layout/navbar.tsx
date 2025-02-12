@@ -1,6 +1,6 @@
 "use client";
 import {Menu} from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger,} from "../ui/sheet";
 import {
   NavigationMenu,
@@ -13,6 +13,8 @@ import {
 import {Button} from "../ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "next-themes";
+import { usePathname } from 'next/navigation';
 // import {ThemeToggle} from "@/components/theme-toggle";
 
 interface RouteProps {
@@ -96,17 +98,30 @@ const megaMenuCategories: MegaMenuCategory[] = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { theme } = useTheme();
+  const pathname = usePathname();
+  const [logoSrc, setLogoSrc] = useState('./joy-logo-dark.svg');
+
+  useEffect(() => {
+    // Update logo based on both theme and path
+    const updateLogo = () => {
+      setLogoSrc(theme === 'dark' 
+        ? `./joy-logo-light.svg` 
+        : `./joy-logo-dark.svg`
+      );
+    }
+    updateLogo();
+  }, [theme, pathname]);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border dark:border-border-dark bg-background dark:bg-background-dark">
       <nav className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link href="/" className="block">
-          <Image
-            src="https://joy.so/wp-content/uploads/2024/12/Joy-white.png"
+          <img
+            src={logoSrc}
             alt="Joy retention | Loyalty for Shopify"
-            width={100}
-            height={40}
-            className="w-auto h-5"
+            className="w-auto h-16"
           />
         </Link>
 
@@ -122,11 +137,9 @@ export const Navbar = () => {
                 <SheetHeader className="mb-4">
                   <SheetTitle>
                     <Link href="/">
-                      <Image
-                        src="https://joy.so/wp-content/uploads/2024/12/Joy-white.png"
+                      <img
+                        src={logoSrc}
                         alt="Joy retention | Loyalty for Shopify"
-                        width={100}
-                        height={40}
                         className="w-auto h-8"
                       />
                     </Link>

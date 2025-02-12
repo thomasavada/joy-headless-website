@@ -9,16 +9,22 @@ function transformGoogleStorageUrl(src) {
 }
 
 module.exports = function loader({ src, width, quality }) {
-  // Transform URL if it's from Google Storage
-  const transformedSrc = transformGoogleStorageUrl(src);
+    try {
+          // Transform URL if it's from Google Storage
+        const transformedSrc = transformGoogleStorageUrl(src);
   
-  // Add width parameter
-  const url = new URL(transformedSrc);
-  url.searchParams.set('width', width);
+        // Add width parameter
+        const url = new URL(transformedSrc);
+        url.searchParams.set('width', width);
+        
+        if (quality) {
+          url.searchParams.set('quality', quality);
+        }
+        
+        return url.toString();
+    } catch (error) {
+        return src;
+    }
+
   
-  if (quality) {
-    url.searchParams.set('quality', quality);
-  }
-  
-  return url.toString();
 } 

@@ -10,7 +10,7 @@ export const FooterSection = () => {
         <div className="space-y-6">
           <Link href="/" className="block">
             <Image
-              src="https://joy.so/wp-content/uploads/2024/12/Joy-white.png"
+ src="./joy-logo-light.svg"
               alt="Joy.so"
               width={200}
               height={100}
