@@ -153,6 +153,161 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
         card.setAttribute('data-toggle', 'true');
       });
 
+      // Process product cards
+      const productCards = doc.querySelectorAll('.kg-product-card');
+      productCards.forEach((card) => {
+        card.className = 'kg-card kg-product-card my-8 max-w-sm mx-auto';
+        
+        const container = card.querySelector('.kg-product-card-container');
+        if (container) {
+          container.className = 'kg-product-card-container bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col w-full';
+        }
+
+        const image = card.querySelector('.kg-product-card-image');
+        if (image) {
+          image.className = 'kg-product-card-image w-full h-64 object-cover';
+        }
+
+        const titleContainer = card.querySelector('.kg-product-card-title-container');
+        if (titleContainer) {
+          titleContainer.className = 'kg-product-card-title-container p-4 border-b border-gray-200';
+        }
+
+        const title = card.querySelector('.kg-product-card-title');
+        if (title) {
+          title.className = 'kg-product-card-title text-lg font-semibold text-gray-900';
+        }
+
+        // Add rating styling
+        const rating = card.querySelector('.kg-product-card-rating');
+        if (rating) {
+          rating.className = 'kg-product-card-rating flex items-center gap-1 px-4 pt-4';
+          
+          // Style rating stars
+          const stars = rating.querySelectorAll('.kg-product-card-rating-star');
+          stars.forEach(star => {
+            star.className = 'kg-product-card-rating-star w-5 h-5';
+            
+            // Style active stars
+            if (star.classList.contains('kg-product-card-rating-active')) {
+              const svg = star.querySelector('svg');
+              if (svg) {
+                svg.setAttribute('class', 'w-full h-full text-yellow-400 fill-current');
+              }
+            }
+          });
+        }
+
+        const description = card.querySelector('.kg-product-card-description');
+        if (description) {
+          description.className = 'kg-product-card-description p-4 text-gray-600';
+        }
+
+        // Style the button
+        const button = card.querySelector('.kg-product-card-button');
+        if (button) {
+          button.className = 'kg-product-card-button mx-4 mb-4 inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-[#0E0C3D] hover:bg-[#0E0C3D]/90 rounded-full transition-colors no-underline';
+        }
+      });
+
+      // Process bookmark cards
+      const bookmarkCards = doc.querySelectorAll('.kg-bookmark-card');
+      bookmarkCards.forEach((card) => {
+        card.className = 'kg-card kg-bookmark-card my-8';
+        
+        const container = card.querySelector('.kg-bookmark-container');
+        if (container) {
+          container.className = 'kg-bookmark-container flex border border-gray-200 rounded-lg overflow-hidden hover:border-gray-300 transition-colors no-underline';
+        }
+
+        const content = card.querySelector('.kg-bookmark-content');
+        if (content) {
+          content.className = 'kg-bookmark-content flex-grow p-5 flex flex-col gap-2';
+        }
+
+        const title = card.querySelector('.kg-bookmark-title');
+        if (title) {
+          title.className = 'kg-bookmark-title text-lg font-semibold text-gray-900 line-clamp-2';
+        }
+
+        const description = card.querySelector('.kg-bookmark-description');
+        if (description) {
+          description.className = 'kg-bookmark-description text-sm text-gray-600 line-clamp-2';
+        }
+
+        const metadata = card.querySelector('.kg-bookmark-metadata');
+        if (metadata) {
+          metadata.className = 'kg-bookmark-metadata flex items-center gap-3 text-xs text-gray-500';
+        }
+
+        const icon = card.querySelector('.kg-bookmark-icon');
+        if (icon) {
+          icon.className = 'kg-bookmark-icon w-4 h-4 object-contain';
+        }
+
+        const thumbnail = card.querySelector('.kg-bookmark-thumbnail');
+        if (thumbnail) {
+          thumbnail.className = 'kg-bookmark-thumbnail relative w-1/3 min-w-[200px] hidden md:block bg-gray-100';
+          
+          const img = thumbnail.querySelector('img');
+          if (img) {
+            img.className = 'absolute inset-0 w-full h-full object-cover';
+          }
+        }
+      });
+
+      // Process header cards
+      const headerCards = doc.querySelectorAll('.kg-header-card');
+      headerCards.forEach((card) => {
+        // Base classes for the header card
+        card.className = 'kg-card kg-header-card relative w-full py-20 my-8';
+        
+        // Get background color from data attribute or style
+        const bgColor = card.getAttribute('data-background-color') || 
+                       card.style.backgroundColor || 
+                       '#000000';
+        card.style.backgroundColor = bgColor;
+
+        const content = card.querySelector('.kg-header-card-content');
+        if (content) {
+          content.className = 'kg-header-card-content container mx-auto px-4 max-w-6xl';
+        }
+
+        const text = card.querySelector('.kg-header-card-text');
+        if (text) {
+          let textClasses = 'kg-header-card-text space-y-4';
+          
+          // Add alignment classes
+          if (text.classList.contains('kg-align-center')) {
+            textClasses += ' text-center';
+          } else if (text.classList.contains('kg-align-right')) {
+            textClasses += ' text-right';
+          }
+          
+          text.className = textClasses;
+        }
+
+        const heading = card.querySelector('.kg-header-card-heading');
+        if (heading) {
+          heading.className = 'kg-header-card-heading text-4xl md:text-5xl lg:text-6xl font-bold';
+          // Preserve the text color from data attribute or style
+          const textColor = heading.getAttribute('data-text-color') || 
+                          heading.style.color || 
+                          '#FFFFFF';
+          heading.style.color = textColor;
+        }
+
+        const subheading = card.querySelector('.kg-header-card-subheading');
+        if (subheading) {
+          subheading.className = 'kg-header-card-subheading text-xl md:text-2xl font-medium opacity-90';
+          // Preserve the text color from data attribute or style
+          const textColor = subheading.getAttribute('data-text-color') || 
+                          subheading.style.color || 
+                          '#FFFFFF';
+          subheading.style.color = textColor;
+        }
+      });
+
       setProcessedContent(doc.body.innerHTML);
     }
   }, [post.html]);
@@ -326,7 +481,48 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
                     [&_.kg-toggle-heading-text]:flex-grow [&_.kg-toggle-heading-text]:pr-4
                     [&_.kg-toggle-card-icon]:w-5 [&_.kg-toggle-card-icon]:h-5 [&_.kg-toggle-card-icon]:text-gray-500 
                     [&_.kg-toggle-card-icon]:transform [&_.kg-toggle-card-icon]:transition-transform [&_.kg-toggle-card-icon]:duration-200
-                    [&_.kg-toggle-content]:p-4 [&_.kg-toggle-content]:text-gray-700"
+                    [&_.kg-toggle-content]:p-4 [&_.kg-toggle-content]:text-gray-700
+                    [&_.kg-product-card]:my-8 [&_.kg-product-card]:max-w-sm [&_.kg-product-card]:mx-auto
+                    [&_.kg-product-card-container]:bg-white [&_.kg-product-card-container]:border [&_.kg-product-card-container]:border-gray-200 
+                    [&_.kg-product-card-container]:rounded-lg [&_.kg-product-card-container]:overflow-hidden [&_.kg-product-card-container]:flex 
+                    [&_.kg-product-card-container]:flex-col [&_.kg-product-card-container]:w-full
+                    [&_.kg-product-card-image]:w-full [&_.kg-product-card-image]:h-64 [&_.kg-product-card-image]:object-cover
+                    [&_.kg-product-card-title-container]:p-4 [&_.kg-product-card-title-container]:border-b [&_.kg-product-card-title-container]:border-gray-200
+                    [&_.kg-product-card-title]:text-lg [&_.kg-product-card-title]:font-semibold [&_.kg-product-card-title]:text-gray-900
+                    [&_.kg-product-card-rating]:flex [&_.kg-product-card-rating]:items-center [&_.kg-product-card-rating]:gap-1 [&_.kg-product-card-rating]:px-4 [&_.kg-product-card-rating]:pt-4
+                    [&_.kg-product-card-rating-star]:w-5 [&_.kg-product-card-rating-star]:h-5
+                    [&_.kg-product-card-rating-active_svg]:w-full [&_.kg-product-card-rating-active_svg]:h-full [&_.kg-product-card-rating-active_svg]:text-yellow-400 [&_.kg-product-card-rating-active_svg]:fill-current
+                    [&_.kg-product-card-description]:p-4 [&_.kg-product-card-description]:text-gray-600
+                    [&_.kg-product-card-button]:mx-4 [&_.kg-product-card-button]:mb-4 [&_.kg-product-card-button]:inline-flex 
+                    [&_.kg-product-card-button]:items-center [&_.kg-product-card-button]:justify-center [&_.kg-product-card-button]:px-6 
+                    [&_.kg-product-card-button]:py-2.5 [&_.kg-product-card-button]:text-sm [&_.kg-product-card-button]:font-medium 
+                    [&_.kg-product-card-button]:text-white [&_.kg-product-card-button]:bg-[#0E0C3D] 
+                    [&_.kg-product-card-button]:hover:bg-[#0E0C3D]/90 [&_.kg-product-card-button]:rounded-full 
+                    [&_.kg-product-card-button]:transition-colors [&_.kg-product-card-button]:no-underline
+                    [&_.kg-bookmark-card]:my-8
+                    [&_.kg-bookmark-container]:flex [&_.kg-bookmark-container]:border [&_.kg-bookmark-container]:border-gray-200 
+                    [&_.kg-bookmark-container]:rounded-lg [&_.kg-bookmark-container]:overflow-hidden 
+                    [&_.kg-bookmark-container]:hover:border-gray-300 [&_.kg-bookmark-container]:transition-colors 
+                    [&_.kg-bookmark-container]:no-underline
+                    [&_.kg-bookmark-content]:flex-grow [&_.kg-bookmark-content]:p-5 [&_.kg-bookmark-content]:flex 
+                    [&_.kg-bookmark-content]:flex-col [&_.kg-bookmark-content]:gap-2
+                    [&_.kg-bookmark-title]:text-lg [&_.kg-bookmark-title]:font-semibold [&_.kg-bookmark-title]:text-gray-900 
+                    [&_.kg-bookmark-title]:line-clamp-2
+                    [&_.kg-bookmark-description]:text-sm [&_.kg-bookmark-description]:text-gray-600 [&_.kg-bookmark-description]:line-clamp-2
+                    [&_.kg-bookmark-metadata]:flex [&_.kg-bookmark-metadata]:items-center [&_.kg-bookmark-metadata]:gap-3 
+                    [&_.kg-bookmark-metadata]:text-xs [&_.kg-bookmark-metadata]:text-gray-500
+                    [&_.kg-bookmark-icon]:w-4 [&_.kg-bookmark-icon]:h-4 [&_.kg-bookmark-icon]:object-contain
+                    [&_.kg-bookmark-thumbnail]:relative [&_.kg-bookmark-thumbnail]:w-1/3 [&_.kg-bookmark-thumbnail]:min-w-[200px] 
+                    [&_.kg-bookmark-thumbnail]:hidden [&_.kg-bookmark-thumbnail]:md:block [&_.kg-bookmark-thumbnail]:bg-gray-100
+                    [&_.kg-bookmark-thumbnail_img]:absolute [&_.kg-bookmark-thumbnail_img]:inset-0 
+                    [&_.kg-bookmark-thumbnail_img]:w-full [&_.kg-bookmark-thumbnail_img]:h-full [&_.kg-bookmark-thumbnail_img]:object-cover
+                    [&_.kg-header-card]:relative [&_.kg-header-card]:w-full [&_.kg-header-card]:py-20 [&_.kg-header-card]:my-8
+                    [&_.kg-header-card-content]:container [&_.kg-header-card-content]:mx-auto [&_.kg-header-card-content]:px-4 [&_.kg-header-card-content]:max-w-6xl
+                    [&_.kg-header-card-text]:space-y-4
+                    [&_.kg-header-card-text.kg-align-center]:text-center
+                    [&_.kg-header-card-text.kg-align-right]:text-right
+                    [&_.kg-header-card-heading]:text-4xl [&_.kg-header-card-heading]:md:text-5xl [&_.kg-header-card-heading]:lg:text-6xl [&_.kg-header-card-heading]:font-bold
+                    [&_.kg-header-card-subheading]:text-xl [&_.kg-header-card-subheading]:md:text-2xl [&_.kg-header-card-subheading]:font-medium [&_.kg-header-card-subheading]:opacity-90"
                 />
               </article>
             </div>
