@@ -403,13 +403,13 @@ export function PlanComparison() {
 
   const renderValue = (feature: ComparisonSection['features'][0], planIndex: number) => {
     if (feature.feature === "Free order per month" && planIndex === 1) {
-      return <span className="text-gray-900">
+      return <span className="text-white">
         {isPosEnabled ? "Up to 1000" : "Up to 500"}
       </span>;
     }
 
     if (feature.value && feature.value[planIndex]) {
-      return <span className="text-gray-900">{feature.value[planIndex]}</span>;
+      return <span className="text-white">{feature.value[planIndex]}</span>;
     }
 
     const isIncluded = planIndex === 0 ? feature.starter
@@ -425,10 +425,10 @@ export function PlanComparison() {
   return (
     <div className="w-full max-w-5xl mx-auto">
       <div className="text-center mb-8">
-      <span className="text-[#00A6ED] text-sm font-medium">
-                Plan features
-              </span>
-        <h2 className="text-3xl font-bold text-gray-900">
+        <span className="text-[#00A6ED] text-sm font-medium">
+          Plan features
+        </span>
+        <h2 className="text-3xl font-bold text-white">
           Compare our plans
         </h2>
       </div>
@@ -438,37 +438,37 @@ export function PlanComparison() {
           <AccordionItem
             key={section.title}
             value={section.title}
-            className="bg-white rounded-lg border border-gray-200 shadow-sm"
+            className="bg-[#0B1121] rounded-lg border border-[#1D2939]"
           >
-            <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-gray-50">
-              <span className="text-md font-semibold text-gray-900 dark:text-primary-dark">{section.title}</span>
+            <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-[#1D2939]/10">
+              <span className="text-md font-semibold text-white">{section.title}</span>
             </AccordionTrigger>
             <AccordionContent className="px-6 pb-4">
               <div className="grid grid-cols-5 gap-6">
-                <div className="col-span-1 font-medium text-gray-700">Feature name</div>
-                <div className="col-span-1 text-center font-medium text-gray-700">Starter</div>
-                <div className="col-span-1 text-center font-medium text-gray-700">Professional</div>
-                <div className="col-span-1 text-center font-medium text-gray-700">Advanced</div>
-                <div className="col-span-1 text-center font-medium text-gray-700">Enterprise</div>
+                <div className="col-span-1 font-medium text-gray-400">Feature name</div>
+                <div className="col-span-1 text-center font-medium text-gray-400">Starter</div>
+                <div className="col-span-1 text-center font-medium text-gray-400">Professional</div>
+                <div className="col-span-1 text-center font-medium text-gray-400">Advanced</div>
+                <div className="col-span-1 text-center font-medium text-gray-400">Enterprise</div>
 
                 {section.features.map((feature, index) => (
                   <React.Fragment key={index}>
                     <div className="col-span-1">
-                      <div className="font-semibold dark:text-primary-dark text-gray-900">{feature.feature}</div>
+                      <div className="font-semibold text-white">{feature.feature}</div>
                       {feature.subtitle && (
-                        <div className="text-xs text-gray-500 mt-1">{feature.subtitle}</div>
+                        <div className="text-xs text-gray-400 mt-1">{feature.subtitle}</div>
                       )}
                     </div>
-                    <div className="col-span-1 text-center text-gray-900">
+                    <div className="col-span-1 text-center text-white">
                       {renderValue(feature, 0)}
                     </div>
-                    <div className="col-span-1 text-center text-gray-900">
+                    <div className="col-span-1 text-center text-white">
                       {renderValue(feature, 1)}
                     </div>
-                    <div className="col-span-1 text-center text-gray-900">
+                    <div className="col-span-1 text-center text-white">
                       {renderValue(feature, 2)}
                     </div>
-                    <div className="col-span-1 text-center text-gray-900">
+                    <div className="col-span-1 text-center text-white">
                       {renderValue(feature, 3)}
                     </div>
                   </React.Fragment>
