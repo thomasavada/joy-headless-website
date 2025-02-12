@@ -4,14 +4,52 @@ import Link from "next/link";
 import {useEffect, useState} from "react";
 
 const LOYALTY_PROGRAMS = [
-  "Stamped",
+  "Smile",
+  "Rivo",
   "Yotpo",
+  "Stamped",
   "Bon Loyalty",
   "Appstle",
-  "Loyalty Lion",
-  "Smile",
-  "Rivo"
+  "LoyaltyLion"
 ];
+
+export const TypewriterText = () => {
+  const [currentProgram, setCurrentProgram] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const targetProgram = LOYALTY_PROGRAMS[currentIndex % LOYALTY_PROGRAMS.length];
+    const typeSpeed = isDeleting ? 50 : 100;
+
+    const timeout = setTimeout(() => {
+      if (!isDeleting && currentProgram === targetProgram) {
+        setTimeout(() => setIsDeleting(true), 1500);
+        return;
+      }
+
+      if (isDeleting) {
+        if (currentProgram === "") {
+          setIsDeleting(false);
+          setCurrentIndex(prev => (prev + 1) % LOYALTY_PROGRAMS.length);
+          return;
+        }
+        setCurrentProgram(prev => prev.slice(0, -1));
+      } else {
+        setCurrentProgram(targetProgram.slice(0, currentProgram.length + 1));
+      }
+    }, typeSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [currentProgram, currentIndex, isDeleting]);
+
+  return (
+    <span className="inline-block min-h-[1.2em] relative text-primary-dark">
+      {currentProgram}
+      <span className="absolute ml-1 -mt-1 animate-blink text-white">|</span>
+    </span>
+  );
+};
 
 export const StampedMigration = () => {
   const [currentProgram, setCurrentProgram] = useState("");
@@ -54,13 +92,10 @@ export const StampedMigration = () => {
           </span>
 
           {/* Heading with Typing Effect */}
-          <h2 className="text-4xl md:text-5xl font-bold">
-            We can help you move from<br />
-            <span className="inline-block min-h-[1.2em] relative">
-              {currentProgram}
-              <span className="absolute ml-1 -mt-1 animate-blink">|</span>
-            </span>
-          </h2>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white">
+            Easily migrate from<br />
+            <TypewriterText />
+          </h1>
 
           {/* CTA Button */}
           <Link

@@ -3,6 +3,7 @@ import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import {SponsorsSection} from "@/components/layout/sections/sponsors";
 import {ArrowRight, BarChart3, DollarSign, Gift} from "lucide-react";
+import { TypewriterText } from "@/components/layout/sections/stamped-migration";
 
 export const metadata: Metadata = {
   title: "Migration - Joy",
@@ -86,7 +87,8 @@ export default function MigrationPage() {
               Built for Shopify
             </span>
             <h1 className="text-4xl sm:text-5xl font-bold text-white">
-              Easily migrate from your<br />existing platform
+              Easily migrate from<br />
+              <TypewriterText />
             </h1>
             <p className="text-gray-400 text-lg max-w-2xl">
               Transfer your customer data and loyalty settings with our powerful, user-friendly platform – no hassle, just results
@@ -166,8 +168,8 @@ export default function MigrationPage() {
             {migrationFeatures.map((feature) => (
               <div key={feature.title} className="flex flex-col items-start gap-4 p-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <feature.icon className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 rounded-lg bg-primary-dark/10 flex items-center justify-center">
+                    <feature.icon className="w-6 h-6 text-primary-dark" />
                   </div>
                   <h3 className="text-xl font-semibold">{feature.title}</h3>
                 </div>
