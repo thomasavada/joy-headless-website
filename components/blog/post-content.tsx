@@ -8,6 +8,8 @@ import {ScrollToTop} from "@/components/ui/scroll-to-top";
 import {SuccessStoryInfo} from '@/lib/strapi';
 import {StatsCard} from '@/components/case-study/stats-card';
 import {MetricsSection} from '@/components/case-study/metrics-section';
+import { formatDate } from '@/lib/utils';
+import { Clock, Calendar, User } from 'lucide-react';
 
 interface PostContentProps {
   post: Post;
@@ -16,6 +18,14 @@ interface PostContentProps {
 
 export function PostContent({ post, successStoryInfo }: PostContentProps) {
   const [processedContent, setProcessedContent] = useState(post.html);
+
+  // Calculate reading time
+  const getReadingTime = (content: string) => {
+    const wordsPerMinute = 200;
+    const wordCount = content.trim().split(/\s+/).length;
+    const readingTime = Math.ceil(wordCount / wordsPerMinute);
+    return readingTime;
+  };
 
   useEffect(() => {
     // Process the content to add anchor links to headings
@@ -95,15 +105,6 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
     { label: "Blog", href: "/blog" },
   ];
 
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
-    return new Date(dateString).toLocaleDateString('en-US', options);
-  };
-
   return (
     <>
       <ReadingProgress />
@@ -114,14 +115,14 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
             {/* Title and Meta */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               {/* Left Column - Title and Meta */}
-              <div>
+              <div className="space-y-4">
                 {/* Tags */}
                 {post.tags?.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-2">
                     {post.tags.map(tag => (
                       <span
                         key={tag.id}
-                        className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
+                        className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-xs font-medium"
                       >
                         {tag.name}
                       </span>
@@ -129,21 +130,45 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
                   </div>
                 )}
 
-                {/* Title and Excerpt */}
-                <h1 className="text-3xl font-bold mb-6 text-gray-900">
+                {/* Title */}
+                <h1 className="text-3xl font-bold text-gray-900">
                   {post.title}
                 </h1>
 
+                {/* Excerpt */}
                 {post.excerpt && (
-                  <p className="text-base text-gray-600 mb-6 leading-relaxed">
+                  <p className="text-sm text-gray-600 leading-relaxed">
                     {post.excerpt}
                   </p>
                 )}
+
+                {/* Meta Information */}
+                <div className="flex flex-wrap gap-3 text-xs text-gray-500">
+                  {/* Author */}
+                  <div className="flex items-center gap-1.5">
+                    <User className="w-3.5 h-3.5" />
+                    <span>{post.primary_author.name}</span>
+                  </div>
+
+                  {/* Publication Date */}
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5" />
+                    <time dateTime={post.published_at}>
+                      {formatDate(post.published_at)}
+                    </time>
+                  </div>
+
+                  {/* Reading Time */}
+                  <div className="flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5" />
+                    <span>{getReadingTime(post.html)} min read</span>
+                  </div>
+                </div>
               </div>
 
               {/* Right Column - Featured Image */}
               {post.feature_image && (
-                <div className="hidden lg:block">
+                <div className="lg:block">
                   <Image
                     src={post.feature_image}
                     alt={post.title}

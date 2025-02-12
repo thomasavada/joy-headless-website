@@ -11,16 +11,17 @@ export const FeaturesPreview = () => {
 
   useEffect(() => {
     if (inView) {
+      const number = 100;
       const duration = 2000; // 2 seconds
       const steps = 50;
-      const increment = 10 / steps;
+      const increment = number / steps;
       const stepDuration = duration / steps;
 
       let current = 0;
       const timer = setInterval(() => {
         current += increment;
-        if (current >= 10) {
-          setCount(10);
+        if (current >= number) {
+          setCount(number);
           clearInterval(timer);
         } else {
           setCount(current);
@@ -48,9 +49,9 @@ export const FeaturesPreview = () => {
 
             {/* Stats with Counter */}
             <div ref={ref} className="flex items-center gap-2 text-2xl font-bold">
-              <span>+{count.toFixed(1)}B</span>
+              <span>+{count.toFixed(1)}M</span>
               <span className="text-sm font-normal text-muted-foreground bg-muted/20 px-2 py-1 rounded">
-                Assisted Orders
+                Assisted Revenue
               </span>
             </div>
           </div>
