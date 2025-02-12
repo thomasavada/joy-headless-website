@@ -49,26 +49,24 @@ export const PricingCard = ({
   description,
   badge,
 }: PricingCardProps) => {
-  const [enablePos, setEnablePos] = useState(false);
-  const { orderVolume } = usePricing();
-  const basePrice = parseFloat(price.replace('$', ''));
+  const { orderVolume, isPosEnabled, setIsPosEnabled, calculatePrice } = usePricing();
 
   const getDisplayPrice = () => {
     if (price === 'Free' || price === 'Custom') return price;
 
-    // Calculate additional cost based on order volume
-    const baseOrderLimit = title === "Advanced" ? 2000 : 1000;
-    if (orderVolume <= baseOrderLimit) {
-      return enablePos ? basePrice + 15 : basePrice;
+    // Use the calculatePrice function from context
+    switch (title) {
+      case "Starter":
+        return calculatePrice('starter');
+      case "Professional":
+        return calculatePrice('professional');
+      case "Advanced":
+        return calculatePrice('advanced');
+      case "Enterprise":
+        return calculatePrice('enterprise');
+      default:
+        return 0;
     }
-
-    // Calculate additional cost for orders over limit
-    const additionalHundreds = Math.ceil((orderVolume - baseOrderLimit) / 100);
-    const pricePerHundred = title === "Advanced" ? 10 : 15;
-    const additionalCost = additionalHundreds * pricePerHundred;
-    const totalPrice = basePrice + additionalCost;
-
-    return enablePos ? totalPrice + 15 : totalPrice;
   };
 
   const formatPrice = (value: number | string) => {
@@ -91,6 +89,14 @@ export const PricingCard = ({
     }
   };
 
+  // Function to get the correct feature text based on POS state
+  const getFeatureText = (text: string) => {
+    if (title === "Professional" && text.includes("monthly free orders")) {
+      return `Up to ${isPosEnabled ? "1000" : "500"} monthly free orders`;
+    }
+    return text;
+  };
+
   return (
     <div className={cn(
       "relative rounded-xl p-6 bg-background dark:bg-background-dark border transition-all duration-300",
@@ -108,8 +114,8 @@ export const PricingCard = ({
             {hasEnablePos && (
               <div className="flex items-center gap-2">
                 <Switch
-                  checked={enablePos}
-                  onCheckedChange={setEnablePos}
+                  checked={isPosEnabled}
+                  onCheckedChange={setIsPosEnabled}
                 />
                 <span className="text-sm text-gray-600 dark:text-white/70">
                   Enable POS
@@ -153,7 +159,7 @@ export const PricingCard = ({
             <li key={index} className="flex items-start gap-3">
               <Check className="h-5 w-5 text-primary dark:text-primary-dark flex-shrink-0 mt-0.5" />
               <span className="text-gray-600 dark:text-white/70 text-sm text-left">
-                {feature.text}
+                {getFeatureText(feature.text)}
               </span>
             </li>
           ))}
