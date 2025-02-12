@@ -12,7 +12,7 @@ const pricingPlans = [
   {
     title: "Starter",
     price: "Free",
-    description: "Ideal for businesses in their early stages, seeking to improve customer retention.",
+    description: "Ideal for small businesses just starting with basic loyalty features and up to 150 free monthly orders.",
     period: "",
     features: [
       { text: "Up to 150 monthly free orders", included: true },
@@ -21,14 +21,14 @@ const pricingPlans = [
       { text: "Redeem program", included: true },
       { text: "Basic integrations", included: true },
     ],
-    idealFor: "Ideal for growing businesses",
+    idealFor: "Ideal for startups",
     ctaText: "Get started",
     ctaVariant: "outline" as const,
   },
   {
     title: "Professional",
     price: "24.99",
-    description: "Ideal for growing businesses with advanced loyalty programs and customer engagement.",
+    description: "Perfect for growing businesses with advanced loyalty programs and up to 1,000 free monthly orders.",
     hasEnablePos: true,
     features: [
       { text: "Up to 1000 monthly free orders", included: true },
@@ -45,7 +45,7 @@ const pricingPlans = [
   {
     title: "Advanced",
     price: "99",
-    description: "For established businesses looking for a fully featured program.",
+    description: "Best for businesses looking for a fully featured program with a cost-effective fee for additional orders in the long run.",
     features: [
       { text: "Up to 2,000 monthly free orders", included: true },
       { text: "All features in Pro plan", included: true },
@@ -53,14 +53,14 @@ const pricingPlans = [
       { text: "Advanced Rule Engine", included: true },
       { text: "Member privileges", included: true },
     ],
-    idealFor: "Ideal for advanced deployments",
+    idealFor: "Ideal for scaling businesses",
     ctaText: "Get started",
     ctaVariant: "outline" as const,
   },
   {
     title: "Enterprise",
     price: "Custom",
-    description: "For large enterprises needing custom solutions and dedicated support.",
+    description: "Tailored for large enterprises needing custom solutions, APIs, and dedicated support for high-order volume and scalability.",
     additionalInfo: "From $499/month",
     features: [
       { text: "Unlimited integration, APIs & Webhooks", included: true },
@@ -87,7 +87,7 @@ export default function PricingPage() {
                 Pricing
               </span>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
-                A customized pricing plan for every business size
+                A customized pricing plan for <span className="dark:text-primary-dark">every business size</span>
               </h1>
               <p className="text-lg sm:text-xl text-white leading-relaxed">
                 Our pricing plans are tailored to meet the unique needs of businesses of all
@@ -95,6 +95,12 @@ export default function PricingPage() {
               </p>
             </div>
           </Reveal>
+        </div>
+      </section>
+      {/* Sponsors Section */}
+      <section className="w-full py-12">
+        <div className="container">
+          <SponsorsSection />
         </div>
       </section>
 
@@ -116,12 +122,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Sponsors Section */}
-      <section className="w-full py-12 border-t border-[#1D2939]">
-        <div className="container">
-          <SponsorsSection />
-        </div>
-      </section>
+
 
       {/* Plan Comparison Section */}
       <section className="w-full py-12 sm:py-24">

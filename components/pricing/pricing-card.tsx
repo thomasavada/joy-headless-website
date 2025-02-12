@@ -34,30 +34,6 @@ interface VolumeRange {
   price: number;
 }
 
-const professionalRanges: VolumeRange[] = [
-  { range: "100-1000", price: 24.99 },
-  { range: "1001-2000", price: 69.99 },
-  { range: "2001-3000", price: 114.99 },
-  { range: "3001-4000", price: 159.99 },
-  { range: "4001-5000", price: 204.99 },
-  { range: "5001-6000", price: 249.99 },
-  { range: "6001-7000", price: 294.99 },
-  { range: "7001-8000", price: 339.99 },
-  { range: "8001-9000", price: 384.99 },
-  { range: "9001-10000", price: 429.99 },
-];
-
-const advancedRanges: VolumeRange[] = [
-  { range: "2000-3000", price: 99.00 },
-  { range: "3001-4000", price: 129.00 },
-  { range: "4001-5000", price: 159.00 },
-  { range: "5001-6000", price: 189.00 },
-  { range: "6001-7000", price: 219.00 },
-  { range: "7001-8000", price: 249.00 },
-  { range: "8001-9000", price: 279.00 },
-  { range: "9001-10000", price: 309.00 },
-];
-
 export const PricingCard = ({
   title,
   price,
@@ -95,8 +71,6 @@ export const PricingCard = ({
     return enablePos ? totalPrice + 15 : totalPrice;
   };
 
-  const displayPrice = getDisplayPrice();
-
   const formatPrice = (value: number | string) => {
     if (value === 'Free') return 'Free';
     if (value === 'Custom') return 'Custom';
@@ -117,13 +91,9 @@ export const PricingCard = ({
     }
   };
 
-  const formatVolumeRange = (range: string) => {
-    return `${range} orders`;
-  };
-
   return (
     <div className={cn(
-      "relative rounded-xl p-8 bg-background dark:bg-background-dark border transition-all duration-300",
+      "relative rounded-xl p-6 bg-background dark:bg-background-dark border transition-all duration-300",
       isPopular && "border-primary dark:border-primary-dark",
       !isPopular && "border-border dark:border-border-dark",
       className
@@ -169,8 +139,16 @@ export const PricingCard = ({
           )}
         </div>
 
+         {/* Additional Orders Info */}
+         {getAdditionalOrdersPrice() && (
+          <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-white/70 text-left">
+            <Info className="h-4 w-4 flex-shrink-0 mt-0.5" />
+            <p>{getAdditionalOrdersPrice()} per additional 100 orders.</p>
+          </div>
+        )}
+
         {/* Features */}
-        <ul className="space-y-4 mb-6">
+        <ul className="space-y-1 mb-4">
           {features.map((feature, index) => (
             <li key={index} className="flex items-start gap-3">
               <Check className="h-5 w-5 text-primary dark:text-primary-dark flex-shrink-0 mt-0.5" />
@@ -181,13 +159,7 @@ export const PricingCard = ({
           ))}
         </ul>
 
-        {/* Additional Orders Info */}
-        {getAdditionalOrdersPrice() && (
-          <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-white/70 text-left">
-            <Info className="h-4 w-4 flex-shrink-0 mt-0.5" />
-            <p>{getAdditionalOrdersPrice()} per additional 100 orders.</p>
-          </div>
-        )}
+       
 
         {/* Ideal For */}
         {idealFor && (
