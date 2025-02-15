@@ -10,35 +10,13 @@ import {StatsCard} from '@/components/case-study/stats-card';
 import {MetricsSection} from '@/components/case-study/metrics-section';
 import { formatDate } from '@/lib/utils';
 import { Clock, Calendar, User } from 'lucide-react';
+import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 
 interface PostContentProps {
   post: Post;
   successStoryInfo?: SuccessStoryInfo;
   processedHtml: string;
-}
-
-interface ImageSize {
-  width: number;
-  height: number;
-}
-
-interface ResponsiveImageSizes {
-  mobile: ImageSize;
-  tablet?: ImageSize;
-  desktop: ImageSize;
-}
-
-const transformJoyUrl = (url: string): string => {
-  // First handle the domain replacement
-  if (url.startsWith('https://joy.so/wp-content/uploads/')) {
-    url = url.replace(
-      'https://joy.so/wp-content/uploads/',
-      'https://cdn-web.joy.so/cdn/image/'
-    )
-  }
-  
-  // Remove size suffix if present
-  return url.replace(/-\d+x\d+\.webp$/, '.webp')
 }
 
 export function PostContent({ post, successStoryInfo, processedHtml }: PostContentProps) {
@@ -66,6 +44,25 @@ export function PostContent({ post, successStoryInfo, processedHtml }: PostConte
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               {/* Left Column - Title and Meta */}
               <div className="space-y-4">
+                {/* Breadcrumbs */}
+                <nav>
+                  <ol className="flex items-center space-x-1 text-xs text-gray-400">
+                    {breadcrumbItems.map((item, index) => (
+                      <li key={item.href} className="flex items-center">
+                        <Link 
+                          href={item.href}
+                          className="hover:text-primary transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                        {index < breadcrumbItems.length - 1 && (
+                          <ChevronRight className="w-3 h-3 mx-1" />
+                        )}
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+
                 {/* Tags */}
                 {post.tags?.length > 0 && (
                   <div className="flex flex-wrap gap-2">
@@ -120,7 +117,7 @@ export function PostContent({ post, successStoryInfo, processedHtml }: PostConte
               {post.feature_image && (
                 <div className="lg:block">
                   <Image
-                    src={transformJoyUrl(post.feature_image)}
+                    src={post.feature_image}
                     alt={post.title}
                     width={1200}
                     height={800}
