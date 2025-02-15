@@ -14,6 +14,18 @@ import { Clock, Calendar, User } from 'lucide-react';
 interface PostContentProps {
   post: Post;
   successStoryInfo?: SuccessStoryInfo;
+  processedHtml: string;
+}
+
+interface ImageSize {
+  width: number;
+  height: number;
+}
+
+interface ResponsiveImageSizes {
+  mobile: ImageSize;
+  tablet?: ImageSize;
+  desktop: ImageSize;
 }
 
 const transformJoyUrl = (url: string): string => {
@@ -25,13 +37,11 @@ const transformJoyUrl = (url: string): string => {
     )
   }
   
-  // Then handle size suffix removal
+  // Remove size suffix if present
   return url.replace(/-\d+x\d+\.webp$/, '.webp')
 }
 
-export function PostContent({ post, successStoryInfo }: PostContentProps) {
-  const [processedContent, setProcessedContent] = useState(post.html);
-
+export function PostContent({ post, successStoryInfo, processedHtml }: PostContentProps) {
   // Calculate reading time
   const getReadingTime = (content: string) => {
     const wordsPerMinute = 200;
@@ -40,367 +50,10 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
     return readingTime;
   };
 
-  useEffect(() => {
-    if (post.html) {
-      const doc = new DOMParser().parseFromString(post.html, 'text/html');
-
-      // Transform image URLs in the content
-      const images = doc.querySelectorAll('img');
-      images.forEach((img) => {
-        const src = img.getAttribute('src');
-        if (src) {
-          img.setAttribute('src', transformJoyUrl(src));
-        }
-      });
-
-      // Process YouTube and Arcade embeds
-      const embedCards = doc.querySelectorAll('.kg-embed-card');
-      embedCards.forEach((card) => {
-        // Update figure styling
-        card.className = 'kg-card kg-embed-card my-8';
-        (card as HTMLElement).style.position = 'relative';
-        (card as HTMLElement).style.width = '100%';
-        (card as HTMLElement).style.display = 'block';
-        (card as HTMLElement).style.aspectRatio = '16/9';
-
-        const iframe = card.querySelector('iframe');
-        if (iframe) {
-          // Update iframe styling
-          iframe.className = 'w-full h-full rounded-lg';
-          iframe.style.position = 'absolute';
-          iframe.style.top = '0';
-          iframe.style.left = '0';
-          iframe.style.width = '100%';
-          iframe.style.height = '100%';
-          iframe.style.border = 'none';
-          
-          // Remove any inline dimensions
-          iframe.removeAttribute('width');
-          iframe.removeAttribute('height');
-        }
-      });
-
-      // Process button cards
-      const buttonCards = doc.querySelectorAll('.kg-button-card');
-      buttonCards.forEach((card) => {
-        card.className = 'kg-card kg-button-card kg-align-center my-8';
-        const button = card.querySelector('.kg-btn');
-        if (button) {
-          button.className = 'kg-btn kg-btn-accent inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-[#0E0C3D] hover:bg-[#0E0C3D]/90 rounded-full transition-colors no-underline';
-        }
-      });
-
-      // Process gallery cards
-      const galleryCards = doc.querySelectorAll('.kg-gallery-card');
-      galleryCards.forEach((card) => {
-        card.className = 'kg-card kg-gallery-card my-8';
-        
-        const container = card.querySelector('.kg-gallery-container');
-        if (container) {
-          container.className = 'kg-gallery-container flex flex-col gap-4';
-        }
-
-        const rows = card.querySelectorAll('.kg-gallery-row');
-        rows.forEach((row) => {
-          row.className = 'kg-gallery-row grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4';
-        });
-
-        const images = card.querySelectorAll('.kg-gallery-image');
-        images.forEach((imageDiv) => {
-          imageDiv.className = 'kg-gallery-image relative aspect-[3/2] overflow-hidden rounded-lg';
-          
-          const img = imageDiv.querySelector('img');
-          if (img) {
-            img.className = 'absolute inset-0 w-full h-full object-cover';
-          }
-        });
-      });
-
-      // Process callout cards
-      const calloutCards = doc.querySelectorAll('.kg-callout-card');
-      calloutCards.forEach((card) => {
-        // Base classes for all callout cards
-        let cardClasses = 'kg-card kg-callout-card flex gap-4 p-6 rounded-lg my-8';
-        
-        // Add color-specific background
-        if (card.classList.contains('kg-callout-card-blue')) {
-          cardClasses += ' bg-blue-50';
-        } else if (card.classList.contains('kg-callout-card-green')) {
-          cardClasses += ' bg-green-50';
-        } else if (card.classList.contains('kg-callout-card-yellow')) {
-          cardClasses += ' bg-yellow-50';
-        } else if (card.classList.contains('kg-callout-card-red')) {
-          cardClasses += ' bg-red-50';
-        } else {
-          cardClasses += ' bg-gray-50';
-        }
-        
-        card.className = cardClasses;
-
-        // Style the emoji container
-        const emojiDiv = card.querySelector('.kg-callout-emoji');
-        if (emojiDiv) {
-          emojiDiv.className = 'kg-callout-emoji text-2xl flex-shrink-0';
-        }
-
-        // Style the text container
-        const textDiv = card.querySelector('.kg-callout-text');
-        if (textDiv) {
-          textDiv.className = 'kg-callout-text text-gray-700 flex-grow';
-        }
-      });
-
-      // Process toggle cards
-      const toggleCards = doc.querySelectorAll('.kg-toggle-card');
-      toggleCards.forEach((card) => {
-        card.className = 'kg-card kg-toggle-card border border-gray-200 rounded-lg my-8';
-        
-        const heading = card.querySelector('.kg-toggle-heading');
-        if (heading) {
-          heading.className = 'kg-toggle-heading flex items-center justify-between p-4 cursor-pointer bg-gray-50 hover:bg-gray-100 rounded-t-lg transition-colors';
-        }
-
-        const headingText = card.querySelector('.kg-toggle-heading-text');
-        if (headingText) {
-          headingText.className = 'kg-toggle-heading-text text-base font-medium text-gray-900 flex-grow pr-4';
-        }
-
-        const button = card.querySelector('.kg-toggle-card-icon');
-        if (button) {
-          button.className = 'kg-toggle-card-icon w-5 h-5 text-gray-500 transform transition-transform duration-200';
-          // Update SVG styling
-          const svg = button.querySelector('svg');
-          if (svg) {
-            svg.setAttribute('class', 'w-5 h-5');
-          }
-          const path = button.querySelector('path');
-          if (path) {
-            path.setAttribute('stroke', 'currentColor');
-            path.setAttribute('stroke-width', '2');
-            path.setAttribute('fill', 'none');
-          }
-        }
-
-        const content = card.querySelector('.kg-toggle-content');
-        if (content) {
-          content.className = 'kg-toggle-content hidden p-4 text-gray-700';
-        }
-
-        // Add click handler via data attribute
-        card.setAttribute('data-toggle', 'true');
-      });
-
-      // Process product cards
-      const productCards = doc.querySelectorAll('.kg-product-card');
-      productCards.forEach((card) => {
-        card.className = 'kg-card kg-product-card my-8 max-w-sm mx-auto';
-        
-        const container = card.querySelector('.kg-product-card-container');
-        if (container) {
-          container.className = 'kg-product-card-container bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col w-full';
-        }
-
-        const image = card.querySelector('.kg-product-card-image');
-        if (image) {
-          image.className = 'kg-product-card-image w-full h-64 object-cover';
-        }
-
-        const titleContainer = card.querySelector('.kg-product-card-title-container');
-        if (titleContainer) {
-          titleContainer.className = 'kg-product-card-title-container p-4 border-b border-gray-200';
-        }
-
-        const title = card.querySelector('.kg-product-card-title');
-        if (title) {
-          title.className = 'kg-product-card-title text-lg font-semibold text-gray-900';
-        }
-
-        // Add rating styling
-        const rating = card.querySelector('.kg-product-card-rating');
-        if (rating) {
-          rating.className = 'kg-product-card-rating flex items-center gap-1 px-4 pt-4';
-          
-          // Style rating stars
-          const stars = rating.querySelectorAll('.kg-product-card-rating-star');
-          stars.forEach(star => {
-            star.className = 'kg-product-card-rating-star w-5 h-5';
-            
-            // Style active stars
-            if (star.classList.contains('kg-product-card-rating-active')) {
-              const svg = star.querySelector('svg');
-              if (svg) {
-                svg.setAttribute('class', 'w-full h-full text-yellow-400 fill-current');
-              }
-            }
-          });
-        }
-
-        const description = card.querySelector('.kg-product-card-description');
-        if (description) {
-          description.className = 'kg-product-card-description p-4 text-gray-600';
-        }
-
-        // Style the button
-        const button = card.querySelector('.kg-product-card-button');
-        if (button) {
-          button.className = 'kg-product-card-button mx-4 mb-4 inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-[#0E0C3D] hover:bg-[#0E0C3D]/90 rounded-full transition-colors no-underline';
-        }
-      });
-
-      // Process bookmark cards
-      const bookmarkCards = doc.querySelectorAll('.kg-bookmark-card');
-      bookmarkCards.forEach((card) => {
-        card.className = 'kg-card kg-bookmark-card my-8';
-        
-        const container = card.querySelector('.kg-bookmark-container');
-        if (container) {
-          container.className = 'kg-bookmark-container flex border border-gray-200 rounded-lg overflow-hidden hover:border-gray-300 transition-colors no-underline';
-        }
-
-        const content = card.querySelector('.kg-bookmark-content');
-        if (content) {
-          content.className = 'kg-bookmark-content flex-grow p-5 flex flex-col gap-2';
-        }
-
-        const title = card.querySelector('.kg-bookmark-title');
-        if (title) {
-          title.className = 'kg-bookmark-title text-lg font-semibold text-gray-900 line-clamp-2';
-        }
-
-        const description = card.querySelector('.kg-bookmark-description');
-        if (description) {
-          description.className = 'kg-bookmark-description text-sm text-gray-600 line-clamp-2';
-        }
-
-        const metadata = card.querySelector('.kg-bookmark-metadata');
-        if (metadata) {
-          metadata.className = 'kg-bookmark-metadata flex items-center gap-3 text-xs text-gray-500';
-        }
-
-        const icon = card.querySelector('.kg-bookmark-icon');
-        if (icon) {
-          icon.className = 'kg-bookmark-icon w-4 h-4 object-contain';
-        }
-
-        const thumbnail = card.querySelector('.kg-bookmark-thumbnail');
-        if (thumbnail) {
-          thumbnail.className = 'kg-bookmark-thumbnail relative w-1/3 min-w-[200px] hidden md:block bg-gray-100';
-          
-          const img = thumbnail.querySelector('img');
-          if (img) {
-            img.className = 'absolute inset-0 w-full h-full object-cover';
-          }
-        }
-      });
-
-      // Process header cards
-      const headerCards = doc.querySelectorAll('.kg-header-card');
-      headerCards.forEach((card) => {
-        card.className = 'kg-card kg-header-card relative w-full py-20 my-8';
-        
-        // Get background color from data attribute or style
-        const bgColor = card.getAttribute('data-background-color') || 
-                       (card as HTMLElement).style.backgroundColor || 
-                       '#000000';
-        (card as HTMLElement).style.backgroundColor = bgColor;
-
-        const content = card.querySelector('.kg-header-card-content');
-        if (content) {
-          content.className = 'kg-header-card-content container mx-auto px-4 max-w-6xl';
-        }
-
-        const text = card.querySelector('.kg-header-card-text');
-        if (text) {
-          let textClasses = 'kg-header-card-text space-y-4';
-          
-          // Add alignment classes
-          if (text.classList.contains('kg-align-center')) {
-            textClasses += ' text-center';
-          } else if (text.classList.contains('kg-align-right')) {
-            textClasses += ' text-right';
-          }
-          
-          text.className = textClasses;
-        }
-
-        const heading = card.querySelector('.kg-header-card-heading');
-        if (heading) {
-          heading.className = 'kg-header-card-heading text-4xl md:text-5xl lg:text-6xl font-bold';
-          // Preserve the text color from data attribute or style
-          const textColor = heading.getAttribute('data-text-color') || 
-                          (heading as HTMLElement).style.color || 
-                          '#FFFFFF';
-          (heading as HTMLElement).style.color = textColor;
-        }
-
-        const subheading = card.querySelector('.kg-header-card-subheading');
-        if (subheading) {
-          subheading.className = 'kg-header-card-subheading text-xl md:text-2xl font-medium opacity-90';
-          // Preserve the text color from data attribute or style
-          const textColor = subheading.getAttribute('data-text-color') || 
-                          (subheading as HTMLElement).style.color || 
-                          '#FFFFFF';
-          (subheading as HTMLElement).style.color = textColor;
-        }
-      });
-
-      setProcessedContent(doc.body.innerHTML);
-    }
-  }, [post.html]);
-
-  // Add useEffect for toggle functionality
-  useEffect(() => {
-    const handleToggleClick = (e: Event) => {
-      const target = e.target as HTMLElement;
-      const toggleCard = target.closest('.kg-toggle-card');
-      
-      if (toggleCard) {
-        const content = toggleCard.querySelector('.kg-toggle-content');
-        const icon = toggleCard.querySelector('.kg-toggle-card-icon');
-        
-        if (content && icon) {
-          const isHidden = content.classList.contains('hidden');
-          
-          // Toggle content visibility
-          content.classList.toggle('hidden');
-          
-          // Rotate icon
-          if (isHidden) {
-            icon.classList.add('rotate-180');
-          } else {
-            icon.classList.remove('rotate-180');
-          }
-        }
-      }
-    };
-
-    // Add click listeners to all toggle cards
-    const toggleCards = document.querySelectorAll('[data-toggle="true"]');
-    toggleCards.forEach(card => {
-      const heading = card.querySelector('.kg-toggle-heading');
-      if (heading) {
-        heading.addEventListener('click', handleToggleClick);
-      }
-    });
-
-    // Cleanup
-    return () => {
-      toggleCards.forEach(card => {
-        const heading = card.querySelector('.kg-toggle-heading');
-        if (heading) {
-          heading.removeEventListener('click', handleToggleClick);
-        }
-      });
-    };
-  }, [processedContent]);
-
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Blog", href: "/blog" },
   ];
-
-  // Update the feature image URL if needed
-  const featureImageUrl = post.feature_image ? transformJoyUrl(post.feature_image) : null;
 
   return (
     <>
@@ -458,19 +111,20 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
                   {/* Reading Time */}
                   <div className="flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5" />
-                    <span>{getReadingTime(post.html)} min read</span>
+                    <span>{getReadingTime(processedHtml)} min read</span>
                   </div>
                 </div>
               </div>
 
               {/* Right Column - Featured Image */}
-              {featureImageUrl && (
+              {post.feature_image && (
                 <div className="lg:block">
                   <Image
-                    src={featureImageUrl}
+                    src={transformJoyUrl(post.feature_image)}
                     alt={post.title}
-                    width={600}
-                    height={400}
+                    width={1200}
+                    height={800}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                     className="w-full h-auto object-cover rounded-lg"
                     priority
                   />
@@ -491,7 +145,7 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
               {/* Article Content */}
               <article className="prose prose-sm max-w-none">
                 <div
-                  dangerouslySetInnerHTML={{ __html: processedContent }}
+                  dangerouslySetInnerHTML={{ __html: processedHtml }}
                   className="prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-primary
                     [&_.kg-embed-card]:my-8
                     [&_.kg-embed-card_iframe]:w-full [&_.kg-embed-card_iframe]:aspect-video [&_.kg-embed-card_iframe]:rounded-lg
@@ -573,7 +227,7 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
                 {successStoryInfo && <StatsCard info={successStoryInfo} />}
 
                 {/* Table of Contents */}
-                <TableOfContents content={post.html} />
+                <TableOfContents content={processedHtml} />
               </div>
             </aside>
           </div>

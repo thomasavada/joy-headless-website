@@ -22,6 +22,19 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
+const transformImageUrl = (url) => {
+  // First handle the domain replacement
+  if (url.startsWith('https://joy.so/wp-content/uploads/')) {
+    url = url.replace(
+      'https://joy.so/wp-content/uploads/',
+      'https://cdn-web.joy.so/cdn/image/'
+    )
+  }
+  
+  // Remove size suffix if present
+  return url.replace(/-\d+x\d+\.webp$/, '.webp')
+}
+
 async function generateExcerpt(title, content) {
   try {
     const response = await openai.chat.completions.create({
@@ -51,22 +64,44 @@ async function updatePost(post, excerpt) {
   try {
     // Get the latest version of the post
     const latestPost = await adminApi.posts.read({ id: post.id });
+    
+    // Transform image URLs in HTML content
+    const doc = new DOMParser().parseFromString(latestPost.html, 'text/html');
+    const images = doc.querySelectorAll('img');
+    
+    images.forEach((img) => {
+      const src = img.getAttribute('src');
+      if (src) {
+        const transformedSrc = transformImageUrl(src);
+        img.setAttribute('src', transformedSrc);
+        
+        // Add responsive attributes
+        img.setAttribute('loading', 'lazy');
+        img.setAttribute('sizes', '(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 800px');
+        img.classList.add('w-full', 'h-auto', 'object-cover', 'rounded-lg');
+      }
+    });
 
-    // Update with latest data
+    // Transform feature image if exists
+    const featureImage = latestPost.feature_image ? 
+      transformImageUrl(latestPost.feature_image) : null;
+
+    // Update post with transformed content
     await adminApi.posts.edit({
       id: post.id,
       custom_excerpt: excerpt,
-      updated_at: latestPost.updated_at // Use the server's latest updated_at
+      html: doc.body.innerHTML,
+      feature_image: featureImage,
+      updated_at: latestPost.updated_at
     });
-
-    console.log(`✅ Updated post "${post.title}" with new excerpt`);
+    
+    console.log(`✅ Updated post "${post.title}" with new excerpt and transformed images`);
     return true;
   } catch (error) {
     if (error.type === 'UpdateCollisionError') {
       console.log(`⚠️ Retrying update for "${post.title}" after collision...`);
-      // Wait a moment and try again
       await new Promise(resolve => setTimeout(resolve, 2000));
-      return updatePost(post, excerpt); // Recursive retry
+      return updatePost(post, excerpt);
     }
     console.error(`❌ Error updating post "${post.title}":`, error);
     return false;
