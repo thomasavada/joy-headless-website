@@ -33,7 +33,7 @@ export async function generateMetadata(
     title: post.meta_title || `${post.title} | ${settings.title}`,
     description: post.meta_description || post.excerpt,
     alternates: {
-      canonical: post.canonical_url || post.url || `https://joy.so/blog/${post.slug}`,
+      canonical: post.canonical_url || post.url || `https://webv2.joy.so/blog/${post.slug}`,
     },
     openGraph: {
       title: post.og_title || post.title,
@@ -43,7 +43,7 @@ export async function generateMetadata(
       authors: post.primary_author.name,
       publishedTime: post.published_at,
       modifiedTime: post.updated_at,
-      url: post.canonical_url || post.url || `https://joy.so/blog/${post.slug}`,
+      url: post.canonical_url || post.url || `https://webv2.joy.so/blog/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -78,10 +78,10 @@ export default async function PostPage({ params }: Props) {
     "publisher": {
       "@type": "Organization",
       "name": "Joy Loyalty",
-      "url": "https://ghost.joy.so/",
+      "url": "https://webv2.joy.so/",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://ghost.joy.so/favicon.ico",
+        "url": "https://webv2.joy.so/favicon.ico",
         "width": 48,
         "height": 48
       }
@@ -89,11 +89,11 @@ export default async function PostPage({ params }: Props) {
     "author": {
       "@type": "Person",
       "name": post.primary_author.name,
-      "url": `https://ghost.joy.so/author/${post.primary_author.slug}/`,
+      "url": `https://webv2.joy.so/author/${post.primary_author.slug}/`,
       "sameAs": []
     },
     "headline": post.title,
-    "url": `https://ghost.joy.so/${post.slug}/`,
+    "url": `https://webv2.joy.so/${post.slug}/`,
     "datePublished": post.published_at,
     "dateModified": post.updated_at,
     "image": {
@@ -103,7 +103,7 @@ export default async function PostPage({ params }: Props) {
       "height": 800
     },
     "description": post.excerpt,
-    "mainEntityOfPage": `https://ghost.joy.so/${post.slug}/`
+    "mainEntityOfPage": `https://webv2.joy.so/${post.slug}/`
   };
 
   return (

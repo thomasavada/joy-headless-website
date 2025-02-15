@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/'],
     },
-    sitemap: 'https://joy.so/sitemap.xml',
+    sitemap: 'https://webv2.joy.so/sitemap.xml',
   };
 }

@@ -11,7 +11,7 @@ interface GhostPost {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { settings } = await getSettings();
   const posts = await getPosts() as GhostPost[];
-  const baseUrl = 'https://joy.so';
+  const baseUrl = 'https://webv2.joy.so';
 
   // Static pages
   const staticPages = [
