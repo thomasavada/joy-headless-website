@@ -147,19 +147,30 @@ export async function getFeaturedPosts() {
 // Get regular posts (excluding success stories)
 export async function getRegularPosts({ 
   page = 1, 
-  limit = 9 
+  limit = 9,
+  search = ''
 }: { 
   page?: number; 
-  limit?: number; 
+  limit?: number;
+  search?: string;
 } = {}) {
   try {
+    // Build the filter string based on search term
+    let filter = 'tag:-case-study';
+    if (search) {
+      // Use proper Ghost Content API search syntax
+      // ~' operator performs a case-insensitive contains search
+      filter = `${filter}+title:~'${search}'`;
+    }
+
     const url = buildGhostUrl('content/posts/', {
-      filter: 'tag:-case-study',
+      filter,
       include: ['tags', 'authors'],
       limit: limit,
       page: page,
       order: 'published_at DESC'
     });
+  
 
     const res = await fetch(url, {
       next: { revalidate: 60 },

@@ -3,6 +3,7 @@ import {PostGrid} from '@/components/blog/post-grid';
 import {FooterSection} from "@/components/layout/sections/footer";
 import {Metadata} from 'next';
 import { Pagination } from '@/components/ui/pagination';
+import { SearchInput } from '@/components/ui/search-input';
 
 // Number of posts per page
 const POSTS_PER_PAGE = 9;
@@ -25,10 +26,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: { page?: string };
+  searchParams: { page?: string; search?: string };
 }) {
-  // Get current page from search params, default to 1
   const currentPage = Number(searchParams.page) || 1;
+  const searchTerm = searchParams.search || '';
 
   // Fetch featured posts and paginated regular posts in parallel
   const [featuredPosts, { posts: regularPosts, totalPosts }] = await Promise.all([
@@ -36,6 +37,7 @@ export default async function BlogPage({
     getRegularPosts({
       page: currentPage,
       limit: POSTS_PER_PAGE,
+      search: searchTerm,
     }) as Promise<{ posts: Post[]; totalPosts: number }>,
   ]);
 
@@ -51,29 +53,41 @@ export default async function BlogPage({
             <h1 className="text-4xl font-heading font-medium mb-4">
               Blog
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground mb-8">
               Insights, updates, and stories about loyalty programs, customer retention,
               and building lasting relationships with your customers.
             </p>
+            <SearchInput className="max-w-md" />
           </div>
         </div>
       </section>
 
       {/* Blog Content */}
       <section className="container mx-auto px-4 py-16 max-w-6xl">
-        <PostGrid
-          featuredPosts={currentPage === 1 ? featuredPosts : []}
-          regularPosts={regularPosts}
-        />
-        
-        {totalPages > 1 && (
-          <div className="mt-12 flex justify-center">
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              baseUrl="/blog"
-            />
+        {totalPosts === 0 ? (
+          <div className="text-center py-12">
+            <h2 className="text-lg font-medium mb-2">No results found</h2>
+            <p className="text-muted-foreground">
+              Try adjusting your search terms or browse all articles
+            </p>
           </div>
+        ) : (
+          <>
+            <PostGrid
+              featuredPosts={!searchTerm && currentPage === 1 ? featuredPosts : []}
+              regularPosts={regularPosts}
+            />
+            
+            {totalPages > 1 && (
+              <div className="mt-12 flex justify-center">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  baseUrl={`/blog${searchTerm ? `?search=${searchTerm}` : ''}`}
+                />
+              </div>
+            )}
+          </>
         )}
       </section>
 
