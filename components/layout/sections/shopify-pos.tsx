@@ -115,7 +115,7 @@ export const ShopifyPOS = () => {
 
         {/* Main Image */}
         <Image
-          src="https://cdn-web.joy.so/cdn/image/2024/12/Frame-2085653566.jpg"
+          src="https://cdn-web.joy.so/cdn/image/2024/12/Frame-2085653566.png"
           alt="loyalty program Shopify POS"
           width={1024}
           height={549}
@@ -136,7 +136,7 @@ export const ShopifyPOS = () => {
         <div className="w-full max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {shownIntegrations.map((integration, index) => (
-              <div 
+              <div
                 key={index}
                 className="p-4 bg-card rounded-lg border border-border/50 hover:border-border transition-colors"
               >
@@ -160,7 +160,7 @@ export const ShopifyPOS = () => {
               </div>
             ))}
           </div>
-          
+
           {/* Explore All Integrations Button */}
           <div className="mt-12 text-center">
             <a
@@ -176,4 +176,4 @@ export const ShopifyPOS = () => {
       </div>
     </section>
   );
-}; 
+};
