@@ -1,5 +1,5 @@
 "use client";
-import {Menu} from "lucide-react";
+import {ChevronDown, Menu} from "lucide-react";
 import React from "react";
 import {Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger,} from "../ui/sheet";
 import {
@@ -13,6 +13,7 @@ import {
 import {Button} from "../ui/button";
 import Link from "next/link";
 // import {ThemeToggle} from "@/components/theme-toggle";
+import { cn } from "@/lib/utils";
 
 interface RouteProps {
   href: string;
@@ -95,6 +96,15 @@ const megaMenuCategories: MegaMenuCategory[] = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [expandedCategories, setExpandedCategories] = React.useState<string[]>([]);
+
+  const toggleCategory = (category: string) => {
+    setExpandedCategories(prev => 
+      prev.includes(category) 
+        ? prev.filter(c => c !== category)
+        : [...prev, category]
+    );
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border dark:border-border-dark bg-background dark:bg-background-dark">
@@ -115,10 +125,10 @@ export const Navbar = () => {
               <Menu className="cursor-pointer lg:hidden" />
             </SheetTrigger>
 
-            <SheetContent side="left" className="flex flex-col justify-between">
-              <div>
-                <SheetHeader className="mb-4">
-                  <SheetTitle>
+            <SheetContent side="left" className="flex flex-col justify-between p-0 bg-background dark:bg-background">
+              <div className="overflow-y-auto flex-1">
+                <SheetHeader className="p-4 mb-4">
+                  <SheetTitle className="flex items-start">
                     <Link href="/">
                       <img
                         src="/joy-logo-dark.svg"
@@ -129,22 +139,77 @@ export const Navbar = () => {
                   </SheetTitle>
                 </SheetHeader>
 
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col">
+                  {/* Main Routes */}
                   {mainRoutes.map((route) => (
                     <Button
                       key={route.href}
                       onClick={() => setIsOpen(false)}
                       asChild
-                      variant="ghost"
-                      className="justify-start text-base"
+                      variant="menu"
+                      className="justify-start items-start text-base rounded-none h-auto py-3 px-6 hover:bg-transparent text-left"
                     >
                       <Link href={route.href}>{route.label}</Link>
                     </Button>
                   ))}
+
+                  {/* Mega Menu Categories */}
+                  <div className="mt-2">
+                    {megaMenuCategories.map((category) => (
+                      <div key={category.title}>
+                        <button
+                          onClick={() => toggleCategory(category.title)}
+                          className={cn(
+                            "flex items-start justify-between w-full px-6 py-3 text-base",
+                            "text-dark",
+                            expandedCategories.includes(category.title) && "text-primary dark:text-primary-dark"
+                          )}
+                        >
+                          {category.title}
+                          <ChevronDown 
+                            className={cn(
+                              "w-4 h-4 transition-transform duration-200",
+                              expandedCategories.includes(category.title) && "rotate-180 dark:text-primary-dark text-primary"
+                            )} 
+                          />
+                        </button>
+                        
+                        {expandedCategories.includes(category.title) && (
+                          <div>
+                            {category.items.map((item) => (
+                              <Button
+                                key={item.href}
+                                onClick={() => setIsOpen(false)}
+                                asChild
+                                variant="menu"
+                                className="w-full justify-start items-start text-sm rounded-none h-auto py-3 px-8 hover:bg-transparent text-left"
+                              >
+                                <Link
+                                  href={item.href}
+                                  {...(item.external ? {
+                                    target: "_blank",
+                                    rel: "noopener noreferrer"
+                                  } : {})}
+                                  className="flex flex-col items-start gap-1"
+                                >
+                                  <span className="text-xs font-normal">{item.label}</span>
+                                  {item.description && (
+                                    <span className="text-xs font-normal">
+                                      {item.description}
+                                    </span>
+                                  )}
+                                </Link>
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <SheetFooter>
+              <SheetFooter className="p-4">
                 <Button asChild className="w-full">
                   <Link 
                     href="http://shopify.pxf.io/Vx4jma"
