@@ -3,6 +3,7 @@ import {getSuccessStoryInfo} from '@/lib/strapi';
 import {notFound} from 'next/navigation';
 import {Metadata, ResolvingMetadata} from 'next';
 import {CaseStudyContentServer} from '@/components/case-study/case-study-content-server';
+import {frontEndDomain} from "@/lib/frontend";
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -33,7 +34,7 @@ export async function generateMetadata(
     title: post.meta_title || `${post.title} | ${settings.title}`,
     description: post.meta_description || post.excerpt,
     alternates: {
-      canonical: post.canonical_url || post.url || `https://webv2.joy.so/case-study/${post.slug}`,
+      canonical: post.canonical_url || post.url || `https://${frontEndDomain}/case-study/${post.slug}`,
     },
     openGraph: {
       title: post.og_title || post.title,
@@ -43,7 +44,7 @@ export async function generateMetadata(
       authors: post.primary_author.name,
       publishedTime: post.published_at,
       modifiedTime: post.updated_at,
-      url: post.canonical_url || post.url || `https://webv2.joy.so/case-study/${post.slug}`,
+      url: post.canonical_url || post.url || `https://${frontEndDomain}/case-study/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -82,10 +83,10 @@ export default async function CaseStudyPage({ params }: Props) {
     "publisher": {
       "@type": "Organization",
       "name": "Joy Loyalty",
-      "url": "https://webv2.joy.so/",
+      "url": `https://${frontEndDomain}/`,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://webv2.joy.so/favicon.ico",
+        "url": `https://${frontEndDomain}/favicon.ico`,
         "width": 48,
         "height": 48
       }
@@ -93,11 +94,11 @@ export default async function CaseStudyPage({ params }: Props) {
     "author": {
       "@type": "Person",
       "name": post.primary_author.name,
-      "url": `https://webv2.joy.so/author/${post.primary_author.slug}/`,
+      "url": `https://${frontEndDomain}/author/${post.primary_author.slug}/`,
       "sameAs": []
     },
     "headline": post.title,
-    "url": `https://webv2.joy.so/${post.slug}/`,
+    "url": `https://${frontEndDomain}/${post.slug}/`,
     "datePublished": post.published_at,
     "dateModified": post.updated_at,
     "image": {
@@ -107,7 +108,7 @@ export default async function CaseStudyPage({ params }: Props) {
       "height": 800
     },
     "description": post.excerpt,
-    "mainEntityOfPage": `https://webv2.joy.so/${post.slug}/`
+    "mainEntityOfPage": `https://${frontEndDomain}/${post.slug}/`
   };
 
   return (

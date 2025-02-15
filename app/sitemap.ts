@@ -1,5 +1,6 @@
 import {MetadataRoute} from 'next';
 import {getPosts, getSettings} from '@/lib/ghost';
+import {frontEndDomain} from "@/lib/frontend";
 
 // Define the interface for Ghost post
 interface GhostPost {
@@ -11,7 +12,7 @@ interface GhostPost {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { settings } = await getSettings();
   const posts = await getPosts() as GhostPost[];
-  const baseUrl = 'https://webv2.joy.so';
+  const baseUrl = `https://${frontEndDomain}`;
 
   // Static pages
   const staticPages = [

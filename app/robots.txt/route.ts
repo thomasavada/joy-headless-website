@@ -7,7 +7,7 @@ export async function GET() {
     Disallow: /api/
     Disallow: /admin/
 
-    Sitemap: https://webv2.joy.so/sitemap.xml
+    Sitemap: https://${frontEndDomain}/sitemap.xml
   `.trim();
 
   return new NextResponse(robotsTxt, {

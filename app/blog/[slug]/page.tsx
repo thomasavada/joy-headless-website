@@ -5,6 +5,7 @@ import {PostContent} from '@/components/blog/post-content';
 import {JsonLd} from '@/components/blog/json-ld';
 import {RelatedPosts} from "@/components/blog/related-posts";
 import { processPostContent } from '@/components/blog/post-content-server';
+import {frontEndDomain} from "@/lib/frontend";
 
 interface Props {
   params: {
@@ -33,7 +34,7 @@ export async function generateMetadata(
     title: post.meta_title || `${post.title} | ${settings.title}`,
     description: post.meta_description || post.excerpt,
     alternates: {
-      canonical: post.canonical_url || post.url || `https://webv2.joy.so/blog/${post.slug}`,
+      canonical: post.canonical_url || post.url || `https://${frontEndDomain}/blog/${post.slug}`,
     },
     openGraph: {
       title: post.og_title || post.title,
@@ -43,7 +44,7 @@ export async function generateMetadata(
       authors: post.primary_author.name,
       publishedTime: post.published_at,
       modifiedTime: post.updated_at,
-      url: post.canonical_url || post.url || `https://webv2.joy.so/blog/${post.slug}`,
+      url: post.canonical_url || post.url || `https://${frontEndDomain}/blog/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -78,10 +79,10 @@ export default async function PostPage({ params }: Props) {
     "publisher": {
       "@type": "Organization",
       "name": "Joy Loyalty",
-      "url": "https://webv2.joy.so/",
+      "url": `https://${frontEndDomain}/`,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://webv2.joy.so/favicon.ico",
+        "url": `https://${frontEndDomain}/favicon.ico`,
         "width": 48,
         "height": 48
       }
@@ -89,11 +90,11 @@ export default async function PostPage({ params }: Props) {
     "author": {
       "@type": "Person",
       "name": post.primary_author.name,
-      "url": `https://webv2.joy.so/author/${post.primary_author.slug}/`,
+      "url": `https://${frontEndDomain}/author/${post.primary_author.slug}/`,
       "sameAs": []
     },
     "headline": post.title,
-    "url": `https://webv2.joy.so/${post.slug}/`,
+    "url": `https://${frontEndDomain}/${post.slug}/`,
     "datePublished": post.published_at,
     "dateModified": post.updated_at,
     "image": {
@@ -103,16 +104,16 @@ export default async function PostPage({ params }: Props) {
       "height": 800
     },
     "description": post.excerpt,
-    "mainEntityOfPage": `https://webv2.joy.so/${post.slug}/`
+    "mainEntityOfPage": `https://${frontEndDomain}/${post.slug}/`
   };
 
   return (
     <>
       <JsonLd data={jsonLd} />
-      <PostContent 
-        post={post} 
+      <PostContent
+        post={post}
         processedHtml={processedHtml}
-        successStoryInfo={post.successStoryInfo} 
+        successStoryInfo={post.successStoryInfo}
       />
       <div className="container mx-auto px-4 max-w-6xl">
         <RelatedPosts posts={relatedPosts} currentPostId={post.id} />

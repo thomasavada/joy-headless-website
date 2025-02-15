@@ -1,4 +1,5 @@
 import {MetadataRoute} from 'next';
+import {frontEndDomain} from "@/lib/frontend";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/'],
     },
-    sitemap: 'https://webv2.joy.so/sitemap.xml',
+    sitemap: `https://${frontEndDomain}/sitemap.xml`,
   };
 }
