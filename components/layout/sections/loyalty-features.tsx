@@ -84,7 +84,7 @@ export const LoyaltyFeatures = () => {
           {/* Right Content - Image */}
           <div className="relative">
             <Image
-              src="https://joy.so/wp-content/uploads/2024/12/image-3.png"
+              src="https://cdn-web.joy.so/cdn/image/2024/12/image-3.png"
               alt="Do more with your loyalty program"
               width={1003}
               height={830}

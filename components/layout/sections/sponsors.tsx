@@ -13,37 +13,37 @@ interface SponsorProps {
 
 const sponsors: SponsorProps[] = [
   {
-    imageUrl: "https://joy.so/wp-content/uploads/2024/12/C_S_logo-_1_-removebg-preview-1.png",
+    imageUrl: "https://cdn-web.joy.so/cdn/image/2024/12/C_S_logo-_1_-removebg-preview-1.png",
     name: "Cool & Simple",
     width: 215,
     height: 37
   },
   {
-    imageUrl: "https://joy.so/wp-content/uploads/2024/12/image-1-2.png",
+    imageUrl: "https://cdn-web.joy.so/cdn/image/2024/12/image-1-2.png",
     name: "Allbirds",
     width: 97,
     height: 37
   },
   {
-    imageUrl: "https://joy.so/wp-content/uploads/2024/12/vinamilk-logo_brandlogos.net_quayf-1.png",
+    imageUrl: "https://cdn-web.joy.so/cdn/image/2024/12/vinamilk-logo_brandlogos.net_quayf-1.png",
     name: "Vinamilk",
     width: 129,
     height: 37
   },
   {
-    imageUrl: "https://joy.so/wp-content/uploads/2024/12/image-5.png",
+    imageUrl: "https://cdn-web.joy.so/cdn/image/2024/12/image-5.png",
     name: "HyperWork",
     width: 200,
     height: 37
   },
   {
-    imageUrl: "https://joy.so/wp-content/uploads/2024/12/image-6.png",
+    imageUrl: "https://cdn-web.joy.so/cdn/image/2024/12/image-6.png",
     name: "Glamour US",
     width: 182,
     height: 37
   },
   {
-    imageUrl: "https://joy.so/wp-content/uploads/2024/12/image-2-1.png",
+    imageUrl: "https://cdn-web.joy.so/cdn/image/2024/12/image-2-1.png",
     name: "Korean Skincare",
     width: 126,
     height: 37

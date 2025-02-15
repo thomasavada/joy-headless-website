@@ -11,7 +11,7 @@ export const WidgetsPreview = () => {
           <div className="md:w-1/2 flex flex-col gap-4 items-center">
             <div className="w-full max-w-[400px]">
               <Image
-                src="https://joy.so/wp-content/uploads/2024/12/tren.png"
+                src="https://cdn-web.joy.so/cdn/image/2024/12/tren.png"
                 alt="Loyalty program top interface"
                 width={500}
                 height={300}
@@ -20,7 +20,7 @@ export const WidgetsPreview = () => {
             </div>
             <div className="w-full max-w-[400px]">
               <Image
-                src="https://joy.so/wp-content/uploads/2024/12/duoi.png"
+                src="https://cdn-web.joy.so/cdn/image/2024/12/duoi.png"
                 alt="Loyalty program bottom interface"
                 width={500}
                 height={300}

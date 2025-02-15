@@ -14,7 +14,7 @@ import {ArrowUpRight, ChevronLeft, ChevronRight} from "lucide-react";
 
 const stories = [
   {
-    logo: "https://joy.so/wp-content/uploads/2025/01/vinamilk-logo.avif",
+    logo: "https://cdn-web.joy.so/cdn/image/2025/01/vinamilk-logo.avif",
     link: "https://joy.so/case-study-vinamilk/",
     stats: [
       { value: "315K", label: "Members enrolled" },
@@ -23,7 +23,7 @@ const stories = [
     ]
   },
   {
-    logo: "https://joy.so/wp-content/uploads/2025/01/BIRD_BIG.D-cea8736a.avif",
+    logo: "https://cdn-web.joy.so/cdn/image/2025/01/BIRD_BIG.D-cea8736a.avif",
     link: "https://joy.so/case-study-allbirds/",
     stats: [
       { value: "21.5K", label: "Members enrolled" },
@@ -32,7 +32,7 @@ const stories = [
     ]
   },
   {
-    logo: "https://joy.so/wp-content/uploads/2025/01/korean-skincare-logo.avif",
+    logo: "https://cdn-web.joy.so/cdn/image/2025/01/korean-skincare-logo.avif",
     link: "https://joy.so/case-study-koreanskincare/",
     stats: [
       { value: "21K", label: "Members enrolled" },

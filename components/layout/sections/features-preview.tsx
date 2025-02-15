@@ -60,7 +60,7 @@ export const FeaturesPreview = () => {
           <div
             className="md:w-1/2 h-[400px] relative"
             style={{
-              backgroundImage: 'url(https://joy.so/wp-content/uploads/2024/12/image-1-1.png)',
+              backgroundImage: 'url(https://cdn-web.joy.so/cdn/image/2024/12/image-1-1.png)',
               backgroundPosition: 'bottom right',
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'contain'

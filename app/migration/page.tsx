@@ -46,32 +46,32 @@ const migrationFeatures = [
 const migrationGuides = [
   {
     name: "Yotpo",
-    logo: "https://joy.so/wp-content/uploads/2025/01/Yopto.avif",
+    logo: "https://cdn-web.joy.so/cdn/image/2025/01/Yopto.avif",
     href: "https://help.joy.so/migration/migrations-from-apps/migration-from-yotpo-loyalty-to-joy-loyalty"
   },
   {
     name: "Stamped",
-    logo: "https://joy.so/wp-content/uploads/2025/01/stamped.avif",
+    logo: "https://cdn-web.joy.so/cdn/image/2025/01/stamped.avif",
     href: "https://help.joy.so/migration/migrations-from-apps/migration-from-stamped-to-joy-loyalty"
   },
   {
     name: "Smile",
-    logo: "https://joy.so/wp-content/uploads/2025/01/smile.avif",
+    logo: "https://cdn-web.joy.so/cdn/image/2025/01/smile.avif",
     href: "https://help.joy.so/migration/migrations-from-apps/migration-from-smile-to-joy-loyalty"
   },
   {
     name: "Appstle",
-    logo: "https://joy.so/wp-content/uploads/2025/01/Appstle-e1735805634907.avif",
+    logo: "https://cdn-web.joy.so/cdn/image/2025/01/Appstle-e1735805634907.avif",
     href: "https://help.joy.so/migration/migrations-from-apps/migration-from-appstle-sm-loyalty-and-rewards-to-joy-loyalty"
   },
   {
     name: "Rivo",
-    logo: "https://joy.so/wp-content/uploads/2025/01/rivo.avif",
+    logo: "https://cdn-web.joy.so/cdn/image/2025/01/rivo.avif",
     href: "https://help.joy.so/migration/migrations-from-apps/migration-from-rivo-to-joy-loyalty"
   },
   {
     name: "Bon",
-    logo: "https://joy.so/wp-content/uploads/2025/01/bon.avif",
+    logo: "https://cdn-web.joy.so/cdn/image/2025/01/bon.avif",
     href: "https://help.joy.so/migration/migrations-from-apps/migration-from-bon-loyalty-to-joy-loyalty"
   }
 ];
@@ -156,7 +156,7 @@ export default function MigrationPage() {
 
             <div className="relative aspect-square">
               <Image
-                src="https://joy.so/wp-content/uploads/2024/12/image-3.png"
+                src="https://cdn-web.joy.so/cdn/image/2024/12/image-3.png"
                 alt="Migration Data Types"
                 fill
                 className="object-contain"

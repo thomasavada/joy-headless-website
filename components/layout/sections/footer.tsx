@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {Facebook, Github, Instagram, Linkedin, Twitter} from "lucide-react";
 
+
 export const FooterSection = () => {
   return (
     <footer className="w-full bg-[#0A0C10] py-16">

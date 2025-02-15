@@ -14,35 +14,35 @@ interface ReviewProps {
 
 const reviewList: ReviewProps[] = [
   {
-    image: "https://joy.so/wp-content/uploads/2024/12/Fresh-Brew-Cafe-feedback.avif",
+    image: "https://cdn-web.joy.so/cdn/image/2024/12/Fresh-Brew-Cafe-feedback.avif",
     name: "Fresh Brew Cafe",
     userName: "Verified Customer",
     comment: "Enjoyed the functionality and depth of the features. I was able to set up my coffee club membership tiers and add start up points, bonus points and discounts for each tier. I totally loved the loyalty page that you can set up on the website, looks amazing.",
     rating: 5.0,
   },
   {
-    image: "https://joy.so/wp-content/uploads/2024/12/DEINELOCKEN-feedback.avif",
+    image: "https://cdn-web.joy.so/cdn/image/2024/12/DEINELOCKEN-feedback.avif",
     name: "DEINELOCKEN",
     userName: "Verified Customer",
     comment: "Been working with Joy multiple months now. We have been very satisfied with how things work here, including the seamless POS experience. Support team was quick to respond and walk us through the process. Great experience!",
     rating: 5.0,
   },
   {
-    image: "https://joy.so/wp-content/uploads/2024/12/Fallopian-Tube-Formula-feedback.avif",
+    image: "https://cdn-web.joy.so/cdn/image/2024/12/Fallopian-Tube-Formula-feedback.avif",
     name: "Fallopian Tube Formula",
     userName: "Verified Customer",
     comment: "This is a great app! My customers love it and it has brought me in quite a bit of sales so it's a win win! I love when I can make my customers happy and Joy does that. 10 stars for Joy!",
     rating: 5.0,
   },
   {
-    image: "https://joy.so/wp-content/uploads/2024/12/Hobby-Corner-Egypt-freeback.avif",
+    image: "https://cdn-web.joy.so/cdn/image/2024/12/Hobby-Corner-Egypt-freeback.avif",
     name: "Hobby Corner Egypt",
     userName: "Verified Customer",
     comment: "I've been using the Joy app for loyalty points and rewards, and it has exceeded my expectations in every way! Setting up the program was a breeze, and the customization options are fantastic – I was able to easily align it with my store's branding.",
     rating: 5.0,
   },
   {
-    image: "https://joy.so/wp-content/uploads/2024/12/Shayna-Gibbons-Keeley-Boutique-feedback.avif",
+    image: "https://cdn-web.joy.so/cdn/image/2024/12/Shayna-Gibbons-Keeley-Boutique-feedback.avif",
     name: "Shayna Gibbons Keeley Boutique",
     userName: "Verified Customer",
     comment: "I have found this application to be highly effective for my clients, and it is user-friendly. Whenever I have inquiries, the support team is extremely helpful and responds promptly.",

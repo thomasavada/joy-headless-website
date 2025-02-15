@@ -14,7 +14,7 @@ export const LoyaltyPreview = () => {
         
         <div className="w-full rounded-2xl border border-border/50 overflow-hidden bg-card">
           <Image
-            src="https://joy.so/wp-content/uploads/2025/01/Mask-group-1.png"
+            src="https://cdn-web.joy.so/cdn/image/2025/01/Mask-group-1.png"
             alt="Joy Loyalty Dashboard Preview"
             width={1200}
             height={800}

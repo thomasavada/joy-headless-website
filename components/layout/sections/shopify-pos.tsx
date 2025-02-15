@@ -115,7 +115,7 @@ export const ShopifyPOS = () => {
 
         {/* Main Image */}
         <Image
-          src="https://joy.so/wp-content/uploads/2024/12/Frame-2085653566-1024x549.png"
+          src="https://cdn-web.joy.so/cdn/image/2024/12/Frame-2085653566.jpg"
           alt="loyalty program Shopify POS"
           width={1024}
           height={549}
