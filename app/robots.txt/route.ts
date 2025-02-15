@@ -1,3 +1,4 @@
+import { frontEndDomain } from '@/lib/frontend';
 import {NextResponse} from 'next/server';
 
 export async function GET() {
