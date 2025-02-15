@@ -58,7 +58,14 @@ const processPostContent = (html: string) => {
     const images = doc.querySelectorAll('img');
     images.forEach((img) => {
       const src = img.getAttribute('src');
+      const alt = img.getAttribute('alt') || '';
+      const figureParent = img.closest('.kg-image-card');
+      const existingCaption = figureParent?.querySelector('figcaption')?.innerHTML;
+      
       if (src && img.parentNode) {
+        const figure = doc.createElement('figure');
+        figure.className = 'kg-card kg-image-card kg-card-hascaption';
+        
         const imgWrapper = doc.createElement('div');
         imgWrapper.className = 'relative aspect-video';
         
@@ -81,18 +88,31 @@ const processPostContent = (html: string) => {
             src="${transformJoyUrl(src, imageSizes[0].width, imageSizes[0].height)}"
             srcset="${srcset}"
             sizes="${sizes}"
-            alt="${img.getAttribute('alt') || ''}"
+            alt="${alt}"
             width="${imageSizes[2].width}"
             height="${imageSizes[2].height}"
-            class="w-full h-full object-cover rounded-lg"
+            class="w-full h-full object-contain object-center rounded-lg"
             loading="lazy"
             decoding="async"
             fetchpriority="auto"
-            style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
           />
         `;
         
-        img.parentNode.replaceChild(imgWrapper, img);
+        figure.appendChild(imgWrapper);
+        
+        // Add caption if it exists in the original markup
+        if (existingCaption) {
+          const figcaption = doc.createElement('figcaption');
+          figcaption.innerHTML = existingCaption;
+          figure.appendChild(figcaption);
+        }
+        
+        // Replace the entire kg-image-card if it exists, otherwise just replace the img
+        if (figureParent) {
+          figureParent.parentNode?.replaceChild(figure, figureParent);
+        } else {
+          img.parentNode.replaceChild(figure, img);
+        }
       }
     });
 
