@@ -145,12 +145,19 @@ export async function getFeaturedPosts() {
 }
 
 // Get regular posts (excluding success stories)
-export async function getRegularPosts() {
+export async function getRegularPosts({ 
+  page = 1, 
+  limit = 9 
+}: { 
+  page?: number; 
+  limit?: number; 
+} = {}) {
   try {
     const url = buildGhostUrl('content/posts/', {
-      filter: 'featured:false+tag:-success-stories',
+      filter: 'tag:-case-study',
       include: ['tags', 'authors'],
-      limit: 'all',
+      limit: limit,
+      page: page,
       order: 'published_at DESC'
     });
 
@@ -164,14 +171,23 @@ export async function getRegularPosts() {
 
     if (!res.ok) {
       console.error('Failed to fetch regular posts:', await res.text());
-      return [];
+      return {
+        posts: [],
+        totalPosts: 0
+      };
     }
 
     const data = await res.json();
-    return data.posts;
+    return {
+      posts: data.posts,
+      totalPosts: data.meta.pagination.total
+    };
   } catch (err) {
     console.error('Error fetching regular posts:', err);
-    return [];
+    return {
+      posts: [],
+      totalPosts: 0
+    };
   }
 }
 

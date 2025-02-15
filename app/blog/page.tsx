@@ -2,6 +2,10 @@ import {getFeaturedPosts, getRegularPosts, getSettings, Post, Settings} from '@/
 import {PostGrid} from '@/components/blog/post-grid';
 import {FooterSection} from "@/components/layout/sections/footer";
 import {Metadata} from 'next';
+import { Pagination } from '@/components/ui/pagination';
+
+// Number of posts per page
+const POSTS_PER_PAGE = 9;
 
 export async function generateMetadata(): Promise<Metadata> {
   const { settings } = await getSettings() as Settings;
@@ -18,12 +22,25 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function BlogPage() {
-  // Fetch featured and regular posts in parallel (case studies already excluded)
-  const [featuredPosts, regularPosts] = await Promise.all([
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: { page?: string };
+}) {
+  // Get current page from search params, default to 1
+  const currentPage = Number(searchParams.page) || 1;
+
+  // Fetch featured posts and paginated regular posts in parallel
+  const [featuredPosts, { posts: regularPosts, totalPosts }] = await Promise.all([
     getFeaturedPosts() as Promise<Post[]>,
-    getRegularPosts() as Promise<Post[]>
+    getRegularPosts({
+      page: currentPage,
+      limit: POSTS_PER_PAGE,
+    }) as Promise<{ posts: Post[]; totalPosts: number }>,
   ]);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -45,9 +62,19 @@ export default async function BlogPage() {
       {/* Blog Content */}
       <section className="container mx-auto px-4 py-16 max-w-6xl">
         <PostGrid
-          featuredPosts={featuredPosts}
+          featuredPosts={currentPage === 1 ? featuredPosts : []}
           regularPosts={regularPosts}
         />
+        
+        {totalPages > 1 && (
+          <div className="mt-12 flex justify-center">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              baseUrl="/blog"
+            />
+          </div>
+        )}
       </section>
 
       <FooterSection />
