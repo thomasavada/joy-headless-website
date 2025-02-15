@@ -30,6 +30,7 @@ const transformJoyUrl = (url: string, width?: number, height?: number): string =
     const params = new URLSearchParams();
     if (width) params.append('w', width.toString());
     if (height) params.append('h', height.toString());
+    params.append('q', '90'); // Add quality parameter
     url += (url.includes('?') ? '&' : '?') + params.toString();
   }
   

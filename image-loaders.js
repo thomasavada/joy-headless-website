@@ -11,7 +11,7 @@ function transformImageUrl(url) {
   return url.replace(/-\d+x\d+\.webp$/, '.webp')
 }
 
-module.exports = function loader({ src, width, quality }) {
+module.exports = function loader({ src, width, quality = 90 }) {
   try {
     // Transform the URL
     const transformedSrc = transformImageUrl(src);
@@ -20,9 +20,8 @@ module.exports = function loader({ src, width, quality }) {
     const url = new URL(transformedSrc);
     url.searchParams.set('width', width);
     
-    if (quality) {
-      url.searchParams.set('quality', quality);
-    }
+    // Always set quality parameter with default of 90
+    url.searchParams.set('q', quality.toString());
     
     return url.toString();
   } catch (error) {
