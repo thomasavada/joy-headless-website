@@ -16,6 +16,16 @@ interface PostContentProps {
   successStoryInfo?: SuccessStoryInfo;
 }
 
+const transformJoyUrl = (url: string): string => {
+  if (url.startsWith('https://joy.so/wp-content/uploads/')) {
+    return url.replace(
+      'https://joy.so/wp-content/uploads/',
+      'https://cdn-web.joy.so/cdn/image/'
+    )
+  }
+  return url
+}
+
 export function PostContent({ post, successStoryInfo }: PostContentProps) {
   const [processedContent, setProcessedContent] = useState(post.html);
 
@@ -30,6 +40,15 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
   useEffect(() => {
     if (post.html) {
       const doc = new DOMParser().parseFromString(post.html, 'text/html');
+
+      // Transform image URLs in the content
+      const images = doc.querySelectorAll('img');
+      images.forEach((img) => {
+        const src = img.getAttribute('src');
+        if (src) {
+          img.setAttribute('src', transformJoyUrl(src));
+        }
+      });
 
       // Process YouTube embeds
       const embedCards = doc.querySelectorAll('.kg-embed-card');
@@ -259,14 +278,13 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
       // Process header cards
       const headerCards = doc.querySelectorAll('.kg-header-card');
       headerCards.forEach((card) => {
-        // Base classes for the header card
         card.className = 'kg-card kg-header-card relative w-full py-20 my-8';
         
         // Get background color from data attribute or style
         const bgColor = card.getAttribute('data-background-color') || 
-                       card.style.backgroundColor || 
+                       (card as HTMLElement).style.backgroundColor || 
                        '#000000';
-        card.style.backgroundColor = bgColor;
+        (card as HTMLElement).style.backgroundColor = bgColor;
 
         const content = card.querySelector('.kg-header-card-content');
         if (content) {
@@ -292,9 +310,9 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
           heading.className = 'kg-header-card-heading text-4xl md:text-5xl lg:text-6xl font-bold';
           // Preserve the text color from data attribute or style
           const textColor = heading.getAttribute('data-text-color') || 
-                          heading.style.color || 
+                          (heading as HTMLElement).style.color || 
                           '#FFFFFF';
-          heading.style.color = textColor;
+          (heading as HTMLElement).style.color = textColor;
         }
 
         const subheading = card.querySelector('.kg-header-card-subheading');
@@ -302,9 +320,9 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
           subheading.className = 'kg-header-card-subheading text-xl md:text-2xl font-medium opacity-90';
           // Preserve the text color from data attribute or style
           const textColor = subheading.getAttribute('data-text-color') || 
-                          subheading.style.color || 
+                          (subheading as HTMLElement).style.color || 
                           '#FFFFFF';
-          subheading.style.color = textColor;
+          (subheading as HTMLElement).style.color = textColor;
         }
       });
 
@@ -362,6 +380,9 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
     { label: "Home", href: "/" },
     { label: "Blog", href: "/blog" },
   ];
+
+  // Update the feature image URL if needed
+  const featureImageUrl = post.feature_image ? transformJoyUrl(post.feature_image) : null;
 
   return (
     <>
@@ -425,10 +446,10 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
               </div>
 
               {/* Right Column - Featured Image */}
-              {post.feature_image && (
+              {featureImageUrl && (
                 <div className="lg:block">
                   <Image
-                    src={post.feature_image}
+                    src={featureImageUrl}
                     alt={post.title}
                     width={600}
                     height={400}

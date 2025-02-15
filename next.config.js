@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['cdn-web.joy.so', 'storage.googleapis.com'],
+    domains: ['cdn-web.joy.so', 'storage.googleapis.com', 'joy.so'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -12,6 +12,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'storage.googleapis.com',
         pathname: '/joy-ghost-cms.firebasestorage.app/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'joy.so',
+        pathname: '/wp-content/uploads/**',
       }
     ],
     loader: 'custom',
