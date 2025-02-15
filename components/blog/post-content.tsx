@@ -50,13 +50,28 @@ export function PostContent({ post, successStoryInfo }: PostContentProps) {
         }
       });
 
-      // Process YouTube embeds
+      // Process YouTube and Arcade embeds
       const embedCards = doc.querySelectorAll('.kg-embed-card');
       embedCards.forEach((card) => {
+        // Update figure styling
         card.className = 'kg-card kg-embed-card my-8';
+        (card as HTMLElement).style.position = 'relative';
+        (card as HTMLElement).style.width = '100%';
+        (card as HTMLElement).style.display = 'block';
+        (card as HTMLElement).style.aspectRatio = '16/9';
+
         const iframe = card.querySelector('iframe');
         if (iframe) {
-          iframe.className = 'w-full aspect-video rounded-lg';
+          // Update iframe styling
+          iframe.className = 'w-full h-full rounded-lg';
+          iframe.style.position = 'absolute';
+          iframe.style.top = '0';
+          iframe.style.left = '0';
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          iframe.style.border = 'none';
+          
+          // Remove any inline dimensions
           iframe.removeAttribute('width');
           iframe.removeAttribute('height');
         }
