@@ -17,13 +17,16 @@ interface PostContentProps {
 }
 
 const transformJoyUrl = (url: string): string => {
+  // First handle the domain replacement
   if (url.startsWith('https://joy.so/wp-content/uploads/')) {
-    return url.replace(
+    url = url.replace(
       'https://joy.so/wp-content/uploads/',
       'https://cdn-web.joy.so/cdn/image/'
     )
   }
-  return url
+  
+  // Then handle size suffix removal
+  return url.replace(/-\d+x\d+\.webp$/, '.webp')
 }
 
 export function PostContent({ post, successStoryInfo }: PostContentProps) {
