@@ -22,6 +22,7 @@ interface PostContentProps {
 export function PostContent({ post, successStoryInfo, processedHtml }: PostContentProps) {
   // Calculate reading time
   const getReadingTime = (content: string) => {
+    if (!content) return 0;
     const wordsPerMinute = 200;
     const wordCount = content.trim().split(/\s+/).length;
     const readingTime = Math.ceil(wordCount / wordsPerMinute);

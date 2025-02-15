@@ -2,9 +2,7 @@ import {getPosts, getRelatedPosts, getSettings, getSinglePost, Post, Settings} f
 import {getSuccessStoryInfo} from '@/lib/strapi';
 import {notFound} from 'next/navigation';
 import {Metadata, ResolvingMetadata} from 'next';
-import {PostContent} from '@/components/blog/post-content';
-import {JsonLd} from '@/components/blog/json-ld';
-import {RelatedPosts} from "@/components/blog/related-posts";
+import {CaseStudyContentServer} from '@/components/case-study/case-study-content-server';
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -76,7 +74,6 @@ export default async function CaseStudyPage({ params }: Props) {
 
   // Fetch additional info from Strapi
   const successStoryInfo = await getSuccessStoryInfo(post.id);
-  console.log("successStoryInfo", successStoryInfo);
 
   // Create JSON-LD data
   const jsonLd = {
@@ -114,12 +111,11 @@ export default async function CaseStudyPage({ params }: Props) {
   };
 
   return (
-    <>
-      <JsonLd data={jsonLd} />
-      <PostContent post={post} successStoryInfo={successStoryInfo} />
-      <div className="container mx-auto px-4 max-w-6xl">
-        <RelatedPosts posts={relatedPosts} currentPostId={post.id} />
-      </div>
-    </>
+    <CaseStudyContentServer
+      post={post}
+      successStoryInfo={successStoryInfo}
+      relatedPosts={relatedPosts}
+      jsonLd={jsonLd}
+    />
   );
 }
