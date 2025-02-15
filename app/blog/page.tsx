@@ -48,24 +48,24 @@ export default async function BlogPage({
     <main className="flex min-h-screen flex-col">
       {/* Blog Header */}
       <section className="w-full border-b border-border/40 bg-gradient-to-b from-background/60 to-background">
-        <div className="container mx-auto px-4 py-16 max-w-6xl">
+        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
           <div className="max-w-2xl">
-            <h1 className="text-4xl font-heading font-medium mb-4">
+            <h1 className="text-3xl sm:text-4xl font-heading font-medium mb-4">
               Blog
             </h1>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8">
               Insights, updates, and stories about loyalty programs, customer retention,
               and building lasting relationships with your customers.
             </p>
-            <SearchInput className="max-w-md" />
+            <SearchInput className="max-w-full sm:max-w-md" />
           </div>
         </div>
       </section>
 
       {/* Blog Content */}
-      <section className="container mx-auto px-4 py-16 max-w-6xl">
+      <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
         {totalPosts === 0 ? (
-          <div className="text-center py-12">
+          <div className="text-center py-8 sm:py-12">
             <h2 className="text-lg font-medium mb-2">No results found</h2>
             <p className="text-muted-foreground">
               Try adjusting your search terms or browse all articles
@@ -79,7 +79,7 @@ export default async function BlogPage({
             />
             
             {totalPages > 1 && (
-              <div className="mt-12 flex justify-center">
+              <div className="mt-8 sm:mt-12 flex justify-center">
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}

@@ -170,7 +170,6 @@ export async function getRegularPosts({
       page: page,
       order: 'published_at DESC'
     });
-  
 
     const res = await fetch(url, {
       next: { revalidate: 60 },

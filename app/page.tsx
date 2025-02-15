@@ -18,7 +18,16 @@ export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Hero />
-      <StaggerContainer>
+      <SponsorsSection />
+      <LoyaltyPreview />
+      <FeaturesPreview />
+      <WidgetsPreview />
+      <LoyaltyFeatures />
+      <ShopifyPOS />
+      <StampedMigration />
+      <CustomerStories />
+      <TestimonialSection />
+      {/* <StaggerContainer>
         <Reveal width="100%">
           <SponsorsSection />
         </Reveal>
@@ -46,7 +55,7 @@ export default function HomePage() {
         <Reveal width="100%">
           <TestimonialSection />
         </Reveal>
-      </StaggerContainer>
+      </StaggerContainer> */}
     </main>
   );
 }
