@@ -1,6 +1,11 @@
 import Image from "next/image";
 
-export const LoyaltyPreview = () => {
+interface LoyaltyPreviewProps {
+  showImage?: boolean;
+  children?: React.ReactNode;
+}
+
+export const LoyaltyPreview = ({ showImage = true, children }: LoyaltyPreviewProps) => {
   return (
     <section className="w-full max-w-7xl mx-auto px-4 py-16 md:py-24">
       <div className="flex flex-col items-center gap-8">
@@ -10,19 +15,22 @@ export const LoyaltyPreview = () => {
             Giving merchants all<br />
             the essentials to grow
           </h2>
+          {children}
         </div>
-        
-        <div className="w-full rounded-2xl border border-border/50 overflow-hidden bg-card">
-          <Image
-            src="https://cdn-web.joy.so/cdn/image/2025/01/Mask-group-1.png"
-            alt="Joy Loyalty Dashboard Preview"
-            width={1200}
-            height={800}
-            className="w-full h-auto"
-            priority
-          />
-        </div>
+
+        {showImage && (
+          <div className="w-full rounded-2xl border border-border/50 overflow-hidden bg-card">
+            <Image
+              src="https://cdn-web.joy.so/cdn/image/2025/01/Mask-group-1.png"
+              alt="Joy Loyalty Dashboard Preview"
+              width={1200}
+              height={800}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
+        )}
       </div>
     </section>
   );
-}; 
+};
