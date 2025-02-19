@@ -1,12 +1,10 @@
 import { frontEndDomain } from '@/lib/frontend';
-import {NextResponse} from 'next/server';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   const robotsTxt = `
     User-agent: *
-    Allow: /
-    Disallow: /api/
-    Disallow: /admin/
+    Disallow: /
 
     Sitemap: https://${frontEndDomain}/sitemap.xml
   `.trim();
