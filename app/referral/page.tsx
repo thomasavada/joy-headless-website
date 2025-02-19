@@ -5,6 +5,7 @@ import { CustomCollapsible } from '@/components/ui/collapsible';
 import { TestimonialSection } from '@/components/layout/sections/testimonial';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { CTASection } from '@/components/layout/sections/cta';
 
 export const metadata: Metadata = {
   title: 'Referral Program - Joy',
@@ -142,17 +143,13 @@ export default function ReferralPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="w-full py-20 sm:py-32 md:py-40 bg-gray-900 border-t border-gray-800">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                Drive repeat sales.<br />
-                Reward your customers with Joy
-              </h2>
-              <Button size="lg">Book a demo</Button>
-            </div>
-          </div>
-        </section>
+        <CTASection
+          title={[
+            "Drive repeat sales.",
+            "Reward your customers with Joy"
+          ]}
+          variant="gradient"
+        />
       </main>
     </ForcedTheme>
   );

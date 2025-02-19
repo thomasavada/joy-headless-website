@@ -8,6 +8,7 @@ import {ShopifyPOS} from "@/components/layout/sections/shopify-pos";
 import {StampedMigration} from "@/components/layout/sections/stamped-migration";
 import {CustomerStories} from "@/components/layout/sections/customer-stories";
 import {TestimonialSection} from "@/components/layout/sections/testimonial";
+import { CTASection } from '@/components/layout/sections/cta';
 // import {Reveal} from '@/components/ui/reveal';
 // import {StaggerContainer} from '@/components/ui/stagger-container';
 // import { ForcedThemeWrapper } from "../components/ForcedThemeWrapper";
@@ -59,6 +60,15 @@ export default function HomePage() {
           <TestimonialSection />
         </Reveal>
       </StaggerContainer> */}
+      {/* CTA Section */}
+      <CTASection
+        title={[
+          "Start growing your business",
+          "with Joy today"
+        ]}
+        buttonText="Get started for free"
+        buttonHref="/signup"
+      />
     </main>
     </ForcedTheme>
   );

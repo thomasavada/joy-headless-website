@@ -14,6 +14,7 @@ import {
   Sliders
 } from 'lucide-react';
 import Image from 'next/image';
+import { CTASection } from '@/components/layout/sections/cta';
 
 export const metadata: Metadata = {
   title: 'Milestone Program - Joy',
@@ -52,17 +53,17 @@ const features = [
   {
     title: 'Easily add rule for each milestone',
     description: 'Quickly choose the right rule type for each milestone.',
-    image: 'https://joy.so/wp-content/uploads/2025/02/Frame-2085653604-2.png',
+    image: 'https://cdn-web.joy.so/cdn/image/2025/02/Frame-2085653604-2.png',
   },
   {
     title: 'Set Custom Rules',
     description: 'Define unique rules for every milestone to tailor the experience to your needs.',
-    image: 'https://joy.so/wp-content/uploads/2025/02/Frame-2085653604-1-2.png',
+    image: 'https://cdn-web.joy.so/cdn/image/2025/02/Frame-2085653604-1-2.png',
   },
   {
     title: 'Track with Analytics',
     description: 'Monitor your milestones with detailed analytics to measure performance and success.',
-    image: 'https://joy.so/wp-content/uploads/2025/02/Frame-2085653604-2-1.png',
+    image: 'https://cdn-web.joy.so/cdn/image/2025/02/Frame-2085653604-2-1.png',
   }
 ];
 
@@ -177,17 +178,13 @@ export default function MilestonePage() {
         </section>
 
         {/* CTA Section */}
-        <section className="w-full py-20 sm:py-32 md:py-40 bg-gray-900 border-t border-gray-800">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                Drive repeat sales.<br />
-                Reward your customers with Joy
-              </h2>
-              <Button size="lg">Book a demo</Button>
-            </div>
-          </div>
-        </section>
+        <CTASection
+          title={[
+            "Drive repeat sales.",
+            "Reward your customers with Joy"
+          ]}
+          variant="gradient"
+        />
       </main>
     </ForcedTheme>
   );

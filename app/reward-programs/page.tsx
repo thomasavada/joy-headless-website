@@ -5,6 +5,7 @@ import { TestimonialSection } from '@/components/layout/sections/testimonial';
 import { Metadata } from 'next';
 import { Heart, UserPlus, ShoppingBag, Gift, Star } from 'lucide-react';
 import Image from 'next/image';
+import { CTASection } from '@/components/layout/sections/cta';
 
 export const metadata: Metadata = {
   title: 'Reward Programs - Joy',
@@ -43,21 +44,21 @@ const redeemRewards = [
   {
     title: 'Discount program',
     description: 'Boost repeat purchases with fixed or percentage discounts that keep customers returning',
-    image: 'https://joy.so/wp-content/uploads/2025/02/Frame-2085653604-0.avif',
+    image: 'https://cdn-web.joy.so/cdn/image/2025/02/Frame-2085653604-0.avif',
     imageWidth: 372,
     imageHeight: 269,
   },
   {
     title: 'Free gift program',
     description: 'Let customers collect points and trade them for free samples or products',
-    image: 'https://joy.so/wp-content/uploads/2025/02/Frame-2085653604.avif',
+    image: 'https://cdn-web.joy.so/cdn/image/2025/02/Frame-2085653604.avif',
     imageWidth: 372,
     imageHeight: 269,
   },
   {
     title: 'Free shipping program',
     description: 'Treat loyal customers to the delight of free shipping when they earn enough points',
-    image: 'https://joy.so/wp-content/uploads/2025/02/Frame-2085653604-1.avif',
+    image: 'https://cdn-web.joy.so/cdn/image/2025/02/Frame-2085653604-1.avif',
     imageWidth: 372,
     imageHeight: 269,
   }
@@ -201,17 +202,13 @@ export default function RewardProgramsPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="w-full py-20 sm:py-32 md:py-40 bg-gray-900 border-t border-gray-800">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                Drive repeat sales.<br />
-                Reward your customers with Joy
-              </h2>
-              <Button size="lg">Book a demo</Button>
-            </div>
-          </div>
-        </section>
+        <CTASection
+          title={[
+            "Drive repeat sales.",
+            "Reward your customers with Joy"
+          ]}
+          variant="gradient"
+        />
       </main>
     </ForcedTheme>
   );

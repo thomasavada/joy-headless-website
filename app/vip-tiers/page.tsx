@@ -5,6 +5,7 @@ import { TestimonialSection } from '@/components/layout/sections/testimonial';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { Gift, Percent, Star, Truck } from 'lucide-react';
+import { CTASection } from '@/components/layout/sections/cta';
 
 export const metadata: Metadata = {
   title: 'VIP Tiers - Joy',
@@ -38,19 +39,19 @@ const features = [
   {
     title: 'VIP Tier Settings',
     description: 'Tailor your VIP tiers with earned or spent calculations, set start dates, create unique discount codes, and manage tier demotion and resets for a seamless and rewarding loyalty experience.',
-    image: 'https://joy.so/wp-content/uploads/2025/02/Frame-2085653117-1-e1738839891633.png',
+    image: 'https://cdn-web.joy.so/cdn/image/2025/02/Frame-2085653117-1-e1738839891633.png',
   },
   {
     title: 'VIP Tier Design',
     description: 'Create a stunning VIP experience with custom membership cards, eye-catching icons, and personalized info boxes that highlight your top-tier benefits.',
-    image: 'https://joy.so/wp-content/uploads/2025/02/Joy-VIP-Tier-Design.png',
+    image: 'https://cdn-web.joy.so/cdn/image/2025/02/Joy-VIP-Tier-Design.png',
     imageWidth: 482,
     imageHeight: 245,
   },
   {
     title: 'VIP Tier Notification',
     description: 'Instant notifications keep customers engaged, alerting them to rewards and VIP tier upgrades for maximum excitement.',
-    image: 'https://joy.so/wp-content/uploads/2025/02/Joy-VIP-Tier-Notification%E2%80%8B.png',
+    image: 'https://cdn-web.joy.so/cdn/image/2025/02/Joy-VIP-Tier-Notification%E2%80%8B.png',
     imageWidth: 630,
     imageHeight: 69,
   }
@@ -200,17 +201,13 @@ export default function VIPTiersPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="w-full py-20 sm:py-32 md:py-40 bg-gray-900 border-t border-gray-800">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                Drive repeat sales.<br />
-                Reward your customers with Joy
-              </h2>
-              <Button size="lg">Book a demo</Button>
-            </div>
-          </div>
-        </section>
+        <CTASection
+          title={[
+            "Drive repeat sales.",
+            "Reward your customers with Joy"
+          ]}
+          variant="gradient"
+        />
       </main>
     </ForcedTheme>
   );

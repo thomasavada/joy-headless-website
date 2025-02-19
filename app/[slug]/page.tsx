@@ -7,6 +7,7 @@ import {RelatedPosts} from "@/components/blog/related-posts";
 import { processPostContent } from '@/components/blog/post-content-server';
 import {frontEndDomain} from "@/lib/frontend";
 import { ForcedTheme } from '../../components/ForcedTheme';
+import { CTASection } from '@/components/layout/sections/cta';
 
 interface Props {
   params: {
@@ -153,6 +154,15 @@ export default async function Page({ params }: Props) {
         <div className="container mx-auto px-4 max-w-6xl">
           <RelatedPosts posts={relatedPosts} currentPostId={post.id} />
         </div>
+        {/* CTA Section */}
+        <CTASection
+          title={[
+            "Ready to grow your business?",
+            "Start with Joy today"
+          ]}
+          buttonText="Start free trial"
+          buttonHref="/trial"
+        />
       </ForcedTheme>
     </>
   );

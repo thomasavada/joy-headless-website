@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { LoyaltyPreview } from '@/components/layout/sections/loyalty-preview';
 import { FeaturesPreview } from '@/components/layout/sections/features-preview';
+import { CTASection } from '@/components/layout/sections/cta';
 
 export const metadata: Metadata = {
   title: 'About us | Joy Rewards & Loyalty Program',
@@ -68,7 +69,7 @@ export default function AboutUsPage() {
               <div className="flex-1">
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
                   <Image
-                    src="https://joy.so/wp-content/uploads/2025/01/About-Joy.avif"
+                    src="https://cdn-web.joy.so/cdn/image/2025/01/About-Joy.avif"
                     alt="Joy team celebrating"
                     fill
                     className="object-cover"
@@ -93,7 +94,7 @@ export default function AboutUsPage() {
               <div className="flex-1">
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
                   <Image
-                    src="https://joy.so/wp-content/uploads/2025/01/we-are-Joy.avif"
+                    src="https://cdn-web.joy.so/cdn/image/2025/01/we-are-Joy.avif"
                     alt="Joy team working together"
                     fill
                     className="object-cover"
@@ -131,6 +132,14 @@ export default function AboutUsPage() {
 
         {/* Features Preview Section */}
         <FeaturesPreview />
+
+        {/* CTA Section */}
+        <CTASection
+          title={[
+            "Join thousands of merchants",
+            "who trust Joy"
+          ]}
+        />
       </main>
     </ForcedTheme>
   );
