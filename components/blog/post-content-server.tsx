@@ -21,7 +21,7 @@ const transformJoyUrl = (url: string, width?: number, height?: number): string =
       'https://cdn-web.joy.so/cdn/image/'
     )
   }
-  
+
   // Remove size suffix if present
   url = url.replace(/-\d+x\d+\.webp$/, '.webp')
 
@@ -29,11 +29,11 @@ const transformJoyUrl = (url: string, width?: number, height?: number): string =
   if (width || height) {
     const params = new URLSearchParams();
     if (width) params.append('w', width.toString());
-    if (height) params.append('h', height.toString());
+    // if (height) params.append('h', height.toString());
     params.append('q', '90'); // Add quality parameter
     url += (url.includes('?') ? '&' : '?') + params.toString();
   }
-  
+
   return url;
 }
 
@@ -50,14 +50,14 @@ export function processPostContent(html: string) {
       const alt = img.getAttribute('alt') || '';
       const figureParent = img.closest('.kg-image-card');
       const existingCaption = figureParent?.querySelector('figcaption')?.innerHTML;
-      
+
       if (src && img.parentNode) {
         const figure = doc.createElement('figure');
         figure.className = 'kg-card kg-image-card kg-card-hascaption';
-        
+
         const imgWrapper = doc.createElement('div');
         imgWrapper.className = 'relative aspect-video';
-        
+
         // Generate srcset with different sizes
         const srcset = imageSizes
           .map(size => {
@@ -70,7 +70,7 @@ export function processPostContent(html: string) {
         const sizes = '(max-width: 640px) 640px, ' +
                      '(max-width: 1024px) 768px, ' +
                      '1200px';
-        
+
         // Use mobile size as default src for faster initial load
         imgWrapper.innerHTML = `
           <img
@@ -86,16 +86,16 @@ export function processPostContent(html: string) {
             fetchpriority="auto"
           />
         `;
-        
+
         figure.appendChild(imgWrapper);
-        
+
         // Add caption if it exists in the original markup
         if (existingCaption) {
           const figcaption = doc.createElement('figcaption');
           figcaption.innerHTML = existingCaption;
           figure.appendChild(figcaption);
         }
-        
+
         // Replace the entire kg-image-card if it exists, otherwise just replace the img
         if (figureParent) {
           figureParent.parentNode?.replaceChild(figure, figureParent);
@@ -127,4 +127,4 @@ export function processPostContent(html: string) {
     return doc.body.innerHTML;
   }
   return html;
-} 
+}
