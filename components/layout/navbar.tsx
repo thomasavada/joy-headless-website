@@ -1,5 +1,5 @@
 "use client";
-import {ChevronDown, Menu} from "lucide-react";
+import {ChevronDown, Menu, Search} from "lucide-react";
 import React from "react";
 import {Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger,} from "../ui/sheet";
 import {
@@ -12,8 +12,9 @@ import {
 } from "../ui/navigation-menu";
 import {Button} from "../ui/button";
 import Link from "next/link";
-// import {ThemeToggle} from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
+import { SearchDialog } from "../search-dialog";
+// import {ThemeToggle} from "@/components/theme-toggle";
 
 interface RouteProps {
   href: string;
@@ -105,7 +106,7 @@ export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border dark:border-border-dark bg-background dark:bg-background-dark">
       <nav className="container flex h-16 items-center justify-between">
-        {/* Logo - Updated with CSS filter approach */}
+        {/* Logo */}
         <Link href="/" className="block">
           <img
             src="/joy-logo-dark.svg"
@@ -116,6 +117,7 @@ export const Navbar = () => {
 
         {/* Mobile Menu */}
         <div className="flex items-center gap-4 lg:hidden">
+          <SearchDialog />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Menu className="cursor-pointer lg:hidden" />
@@ -297,7 +299,7 @@ export const Navbar = () => {
             </NavigationMenuList>
           </NavigationMenu>
 
-          {/* <ThemeToggle /> */}
+          <SearchDialog />
 
           <Button
             asChild

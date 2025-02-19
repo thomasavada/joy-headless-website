@@ -25,7 +25,7 @@ export default async function IntegrationsPage() {
           Joy integrates with your most-loved tools
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          Connect Joy with 20+ carefully curated integrations to streamline your workflow and enhance your store's performance
+          Connect Joy with 20+ carefully curated integrations to streamline your workflow and enhance your store&apos;s performance
         </p>
         <div className="flex items-center justify-center gap-4 pt-4">
           <a

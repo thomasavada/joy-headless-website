@@ -35,7 +35,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
             // Single featured post - Full width layout
             <div className="max-w-4xl">
               <Link
-                href={`/blog/${featuredPosts[0].slug}`}
+                href={`/${featuredPosts[0].slug}`}
                 className="group block"
               >
                 <article className="grid md:grid-cols-2 gap-8 items-center">
@@ -68,7 +68,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
             <div className="grid md:grid-cols-[1.5fr_1fr] gap-8">
               {/* Main featured post */}
               <Link
-                href={`/blog/${featuredPosts[0].slug}`}
+                href={`/${featuredPosts[0].slug}`}
                 className="group"
               >
                 <article className="space-y-4">
@@ -101,7 +101,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
                 {featuredPosts.slice(1).map((post) => (
                   <Link
                     key={post.id}
-                    href={`/blog/${post.slug}`}
+                    href={`/${post.slug}`}
                     className="group block"
                   >
                     <article className="space-y-3">
@@ -142,7 +142,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
             {regularPosts.map((post) => (
               <Link
                 key={post.id}
-                href={`/blog/${post.slug}`}
+                href={`/${post.slug}`}
                 className="group"
               >
                 <article className="space-y-3">

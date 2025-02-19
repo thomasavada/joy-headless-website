@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { PostGrid } from '@/components/blog/post-grid';
 import { FooterSection } from "@/components/layout/sections/footer";
 import { Pagination } from '@/components/ui/pagination';
-import { SearchInput } from '@/components/ui/search-input';
 
 // Number of posts per page
 const POSTS_PER_PAGE = 9;
@@ -48,8 +47,8 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     page: currentPage,
     limit: POSTS_PER_PAGE,
     search: searchTerm,
-    filter: `tag:${params.slug}`,
-  });
+    filter: `tag:${params.slug}` as string,
+  } as { page: number; limit: number; search: string; filter: string });
 
   if (!regularPosts.length && currentPage === 1 && !searchTerm) {
     notFound();
@@ -74,9 +73,8 @@ export default async function CategoryPage({ params, searchParams }: Props) {
                 {categoryName}
               </h1>
               <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8">
-                Read articles about {categoryName.toLowerCase()} and learn how to grow your business with Joy's loyalty program.
+                Read articles about {categoryName.toLowerCase()} and learn how to grow your business with Joy&apos;s loyalty program.
               </p>
-              <SearchInput className="max-w-full sm:max-w-md" />
             </div>
           </div>
         </section>
@@ -109,8 +107,6 @@ export default async function CategoryPage({ params, searchParams }: Props) {
             </>
           )}
         </section>
-
-        <FooterSection />
       </main>
     </ForcedTheme>
   );

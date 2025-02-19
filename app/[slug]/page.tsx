@@ -8,6 +8,7 @@ import { processPostContent } from '@/components/blog/post-content-server';
 import {frontEndDomain} from "@/lib/frontend";
 import { ForcedTheme } from '../../components/ForcedTheme';
 import { CTASection } from '@/components/layout/sections/cta';
+import { SharePost } from '@/components/blog/share-post';
 
 interface Props {
   params: {
@@ -152,6 +153,9 @@ export default async function Page({ params }: Props) {
           processedHtml={processedHtml}
         />
         <div className="container mx-auto px-4 max-w-6xl">
+          <div className="border-y border-border/10 my-8">
+            <SharePost title={post.title} slug={post.slug} />
+          </div>
           <RelatedPosts posts={relatedPosts} currentPostId={post.id} />
         </div>
         {/* CTA Section */}
