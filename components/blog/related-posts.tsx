@@ -10,11 +10,7 @@ interface RelatedPostsProps {
 export function RelatedPosts({ posts, currentPostId }: RelatedPostsProps) {
   // Transform the URL to case-study format if it's a success story
   const getPostUrl = (post: Post) => {
-    if (post.tags?.some(tag => tag.slug === 'success-stories')) {
-      // Transform from /blog/slug to /case-study/slug
-      return `/case-study/${post.slug}`;
-    }
-    return `/blog/${post.slug}`;
+    return `/${post.slug}`;
   };
 
   // Filter out current post and get 3 related posts
