@@ -9,7 +9,7 @@ interface CaseStudyCardProps {
 export const CaseStudyCard = ({ post }: CaseStudyCardProps) => {
   return (
     <Link
-      href={`/case-study/${post.slug}`}
+      href={`/${post.slug}`}
       className="group block bg-white rounded-lg overflow-hidden transition-all hover:shadow-lg"
     >
       {/* Card Image */}

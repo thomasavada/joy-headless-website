@@ -36,9 +36,9 @@ export const SuccessStoriesGrid = ({ posts }: SuccessStoriesGridProps) => {
       {/* Success stories grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map((post) => (
-          <Link 
-            key={post.id} 
-            href={`/case-study/${post.slug}`}
+          <Link
+            key={post.id}
+            href={`/${post.slug}`}
             className="group block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
           >
             {post.feature_image && (
@@ -64,4 +64,4 @@ export const SuccessStoriesGrid = ({ posts }: SuccessStoriesGridProps) => {
       </div>
     </section>
   );
-}; 
+};
