@@ -4,6 +4,7 @@ import {FooterSection} from "@/components/layout/sections/footer";
 import {Metadata} from 'next';
 import { Pagination } from '@/components/ui/pagination';
 import { SearchInput } from '@/components/ui/search-input';
+import { ForcedTheme } from '../../components/ForcedTheme';
 
 // Number of posts per page
 const POSTS_PER_PAGE = 9;
@@ -45,6 +46,7 @@ export default async function BlogPage({
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
   return (
+    <ForcedTheme theme="light">
     <main className="flex min-h-screen flex-col">
       {/* Blog Header */}
       <section className="w-full border-b border-border/40 bg-gradient-to-b from-background/60 to-background">
@@ -77,7 +79,7 @@ export default async function BlogPage({
               featuredPosts={!searchTerm && currentPage === 1 ? featuredPosts : []}
               regularPosts={regularPosts}
             />
-            
+
             {totalPages > 1 && (
               <div className="mt-8 sm:mt-12 flex justify-center">
                 <Pagination
@@ -93,5 +95,6 @@ export default async function BlogPage({
 
       <FooterSection />
     </main>
+    </ForcedTheme>
   );
 }

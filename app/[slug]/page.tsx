@@ -6,6 +6,7 @@ import {JsonLd} from '@/components/blog/json-ld';
 import {RelatedPosts} from "@/components/blog/related-posts";
 import { processPostContent } from '@/components/blog/post-content-server';
 import {frontEndDomain} from "@/lib/frontend";
+import { ForcedTheme } from '../../components/ForcedTheme';
 
 // ... existing interfaces and types ...
 
@@ -108,15 +109,17 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <>
+    <ForcedTheme theme="light">
       <JsonLd data={jsonLd} />
-      <PostContent
-        post={post}
-        processedHtml={processedHtml}
-        successStoryInfo={post.successStoryInfo}
-      />
-      <div className="container mx-auto px-4 max-w-6xl">
-        <RelatedPosts posts={relatedPosts} currentPostId={post.id} />
-      </div>
+        <PostContent
+          post={post}
+          processedHtml={processedHtml}
+          successStoryInfo={post.successStoryInfo}
+        />
+        <div className="container mx-auto px-4 max-w-6xl">
+          <RelatedPosts posts={relatedPosts} currentPostId={post.id} />
+        </div>
+    </ForcedTheme>
     </>
   );
 }

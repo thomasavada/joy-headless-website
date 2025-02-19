@@ -10,12 +10,14 @@ import {CustomerStories} from "@/components/layout/sections/customer-stories";
 import {TestimonialSection} from "@/components/layout/sections/testimonial";
 import {Reveal} from '@/components/ui/reveal';
 import {StaggerContainer} from '@/components/ui/stagger-container';
+import { ForcedThemeWrapper } from "../components/ForcedThemeWrapper";
 
 // Remove the metadata generation from the home page since we want to use the layout's metadata
 // The layout's metadata will be used as the default for the home page
 
 export default function HomePage() {
   return (
+    <ForcedThemeWrapper theme="light">
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Hero />
       <SponsorsSection />
@@ -57,5 +59,6 @@ export default function HomePage() {
         </Reveal>
       </StaggerContainer> */}
     </main>
+    </ForcedThemeWrapper>
   );
 }

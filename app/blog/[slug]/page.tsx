@@ -6,6 +6,7 @@ import {JsonLd} from '@/components/blog/json-ld';
 import {RelatedPosts} from "@/components/blog/related-posts";
 import { processPostContent } from '@/components/blog/post-content-server';
 import {frontEndDomain} from "@/lib/frontend";
+import { ForcedTheme } from '@/components/ForcedTheme'
 
 interface Props {
   params: {
@@ -108,7 +109,7 @@ export default async function PostPage({ params }: Props) {
   };
 
   return (
-    <>
+    <ForcedTheme theme="light">
       <JsonLd data={jsonLd} />
       <PostContent
         post={post}
@@ -118,6 +119,6 @@ export default async function PostPage({ params }: Props) {
       <div className="container mx-auto px-4 max-w-6xl">
         <RelatedPosts posts={relatedPosts} currentPostId={post.id} />
       </div>
-    </>
+    </ForcedTheme>
   );
 }
