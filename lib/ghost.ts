@@ -58,10 +58,10 @@ if (!ghostUrl || !ghostKey) {
 // URL Builder helper
 const buildGhostUrl = (endpoint: string, params: Record<string, any>) => {
   const searchParams = new URLSearchParams();
-  
+
   // Add API key
   searchParams.append('key', ghostKey || '');
-  
+
   // Add all other params
   Object.entries(params).forEach(([key, value]) => {
     if (Array.isArray(value)) {
@@ -91,7 +91,7 @@ export const getPosts = async ({
       limit,
       order: 'published_at DESC'
     });
-    
+
     const res = await fetch(url, {
       next: { revalidate: 60 },
       headers: {
@@ -145,12 +145,12 @@ export async function getFeaturedPosts() {
 }
 
 // Get regular posts (excluding success stories)
-export async function getRegularPosts({ 
-  page = 1, 
+export async function getRegularPosts({
+  page = 1,
   limit = 9,
   search = ''
-}: { 
-  page?: number; 
+}: {
+  page?: number;
   limit?: number;
   search?: string;
 } = {}) {
@@ -322,6 +322,63 @@ export async function getRelatedPosts(post: Post) {
     return data.posts;
   } catch (error) {
     console.error('Error fetching related posts:', error);
+    return [];
+  }
+}
+
+// Get a single page by slug
+export async function getPage(slug: string): Promise<Post | null> {
+  try {
+    const url = buildGhostUrl(`content/pages/slug/${slug}/`, {
+      include: ['tags', 'authors']
+    });
+
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      headers: {
+        'Accept-Version': 'v5.0',
+        'Accept': 'application/json',
+      }
+    });
+
+    if (!res.ok) {
+      console.error('Failed to fetch page:', await res.text());
+      return null;
+    }
+
+    const data = await res.json();
+    return data.pages[0] || null;
+  } catch (err) {
+    console.error('Error fetching page:', err);
+    return null;
+  }
+}
+
+// Get all pages
+export async function getPages(): Promise<Post[]> {
+  try {
+    const url = buildGhostUrl('content/pages/', {
+      include: ['tags', 'authors'],
+      limit: 'all'
+    });
+
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      headers: {
+        'Accept-Version': 'v5.0',
+        'Accept': 'application/json',
+      }
+    });
+
+    if (!res.ok) {
+      console.error('Failed to fetch pages:', await res.text());
+      return [];
+    }
+
+    const data = await res.json();
+    return data.pages;
+  } catch (err) {
+    console.error('Error fetching pages:', err);
     return [];
   }
 }

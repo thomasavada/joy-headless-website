@@ -1,4 +1,4 @@
-import {getPosts, getRelatedPosts, getSettings, getSinglePost, Post, Settings} from '@/lib/ghost';
+import {getPosts, getRelatedPosts, getSettings, getSinglePost, Post, Settings, getPage, getPages} from '@/lib/ghost';
 import {notFound} from 'next/navigation';
 import {Metadata, ResolvingMetadata} from 'next';
 import {PostContent} from '@/components/blog/post-content';
@@ -8,29 +8,45 @@ import { processPostContent } from '@/components/blog/post-content-server';
 import {frontEndDomain} from "@/lib/frontend";
 import { ForcedTheme } from '../../components/ForcedTheme';
 
-// ... existing interfaces and types ...
+interface Props {
+  params: {
+    slug: string;
+  };
+}
 
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const [post, { settings }] = await Promise.all([
-    getSinglePost(params.slug) as Promise<Post>,
+  // Try to get as page first
+  const [page, { settings }] = await Promise.all([
+    getPage(params.slug) as Promise<Post>,
     getSettings() as Promise<Settings>
   ]);
+
+  // If page exists, return page metadata
+  if (page) {
+    return {
+      title: page.meta_title || `${page.title} | ${settings.title}`,
+      description: page.meta_description || page.excerpt,
+    };
+  }
+
+  // If not a page, try to get as blog post
+  const post = await getSinglePost(params.slug) as Post;
 
   if (!post) {
     return {
       title: `Not Found | ${settings.title}`,
-      description: 'The requested blog post could not be found.',
+      description: 'The requested content could not be found.',
     };
   }
 
+  // Return blog post metadata
   return {
     title: post.meta_title || `${post.title} | ${settings.title}`,
     description: post.meta_description || post.excerpt,
     alternates: {
-      // Update canonical URL to remove /blog/
       canonical: post.canonical_url || post.url || `https://${frontEndDomain}/${post.slug}`,
     },
     openGraph: {
@@ -41,7 +57,6 @@ export async function generateMetadata(
       authors: post.primary_author.name,
       publishedTime: post.published_at,
       modifiedTime: post.updated_at,
-      // Update URL to remove /blog/
       url: post.canonical_url || post.url || `https://${frontEndDomain}/${post.slug}`,
     },
     twitter: {
@@ -54,72 +69,91 @@ export async function generateMetadata(
 }
 
 export async function generateStaticParams() {
-  const posts = await getPosts();
-  return posts.map((post: Post) => ({
-    slug: post.slug,
+  const pages = await getPages();
+  return pages.map((page: Post) => ({
+    slug: page.slug,
   }));
 }
 
-export default async function PostPage({ params }: Props) {
-  const post = await getSinglePost(params.slug) as Post;
-  const relatedPosts = await getRelatedPosts(post);
-  const processedHtml = processPostContent(post.html);
+export default async function Page({ params }: Props) {
+  // Try to get as page first
+  const page = await getPage(params.slug);
+
+  // If it's a page, use simple layout
+  if (page) {
+    const processedHtml = processPostContent(page.html);
+    return (
+      <ForcedTheme theme="light">
+        <main className="flex min-h-screen flex-col">
+          <div className="container max-w-4xl mx-auto px-4 py-20">
+            <h1 className="text-4xl font-bold mb-12">{page.title}</h1>
+            <div
+              className="prose max-w-none"
+              dangerouslySetInnerHTML={{ __html: processedHtml }}
+            />
+          </div>
+        </main>
+      </ForcedTheme>
+    );
+  }
+
+  // If not a page, try to get as blog post
+  const post = await getSinglePost(params.slug);
 
   if (!post) {
     notFound();
   }
 
-  // Create JSON-LD data
+  // Use blog layout for posts
+  const processedHtml = processPostContent(post.html);
+  const relatedPosts = await getRelatedPosts(post);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "publisher": {
+    publisher: {
       "@type": "Organization",
-      "name": "Joy Loyalty",
-      "url": `https://${frontEndDomain}/`,
-      "logo": {
+      name: "Joy Loyalty",
+      url: `https://${frontEndDomain}/`,
+      logo: {
         "@type": "ImageObject",
-        "url": `https://${frontEndDomain}/favicon.ico`,
-        "width": 48,
-        "height": 48
+        url: `https://${frontEndDomain}/favicon.ico`,
+        width: 48,
+        height: 48
       }
     },
-    "author": {
+    author: {
       "@type": "Person",
-      "name": post.primary_author.name,
-      // Update URL to remove /blog/
-      "url": `https://${frontEndDomain}/author/${post.primary_author.slug}/`,
-      "sameAs": []
+      name: post.primary_author.name,
+      url: `https://${frontEndDomain}/author/${post.primary_author.slug}/`,
+      sameAs: []
     },
-    "headline": post.title,
-    // Update URL to remove /blog/
-    "url": `https://${frontEndDomain}/${post.slug}/`,
-    "datePublished": post.published_at,
-    "dateModified": post.updated_at,
-    "image": {
+    headline: post.title,
+    url: `https://${frontEndDomain}/${post.slug}/`,
+    datePublished: post.published_at,
+    dateModified: post.updated_at,
+    image: {
       "@type": "ImageObject",
-      "url": post.feature_image,
-      "width": 1200,
-      "height": 800
+      url: post.feature_image,
+      width: 1200,
+      height: 800
     },
-    "description": post.excerpt,
-    // Update URL to remove /blog/
-    "mainEntityOfPage": `https://${frontEndDomain}/${post.slug}/`
+    description: post.excerpt,
+    mainEntityOfPage: `https://${frontEndDomain}/${post.slug}/`
   };
 
   return (
     <>
-    <ForcedTheme theme="light">
-      <JsonLd data={jsonLd} />
+      <ForcedTheme theme="light">
+        <JsonLd data={jsonLd} />
         <PostContent
           post={post}
           processedHtml={processedHtml}
-          successStoryInfo={post.successStoryInfo}
         />
         <div className="container mx-auto px-4 max-w-6xl">
           <RelatedPosts posts={relatedPosts} currentPostId={post.id} />
         </div>
-    </ForcedTheme>
+      </ForcedTheme>
     </>
   );
 }

@@ -2,6 +2,7 @@ require('dotenv').config({ path: './../.env' });
 const GhostAdminAPI = require('@tryghost/admin-api');
 const axios = require('axios');
 const xml2js = require('xml2js');
+const { getPosts, getPages } = require('../lib/ghost');
 
 console.log('Environment Variables:');
 console.log('NEXT_PUBLIC_GHOST_URL:', process.env.NEXT_PUBLIC_GHOST_URL);
@@ -90,6 +91,18 @@ async function updatePostSlug(post, newSlug) {
 
 async function syncSlugs() {
   try {
+    // Get all posts and pages
+    const [posts, pages] = await Promise.all([
+      getPosts(),
+      getPages()
+    ]);
+
+    // Combine slugs from both posts and pages
+    const slugs = [
+      ...posts.map(post => post.slug),
+      ...pages.map(page => page.slug)
+    ];
+
     // Get all sitemap URLs
     console.log('Fetching sitemap...');
     const sitemapUrls = await getSitemapUrls();
@@ -140,6 +153,7 @@ async function syncSlugs() {
     if (error.response) {
       console.error('Error details:', error.response.body);
     }
+    process.exit(1);
   }
 }
 
