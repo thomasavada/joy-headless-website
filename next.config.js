@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  trailingSlash: true,
   images: {
     domains: ['cdn-web.joy.so', 'storage.googleapis.com', 'joy.so'],
     remotePatterns: [
