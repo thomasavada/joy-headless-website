@@ -45,7 +45,7 @@ const megaMenuCategories: MegaMenuCategory[] = [
     title: "Resources",
     items: [
       {
-        href: "/blog",
+        href: "/category/loyalty-program",
         label: "Blog",
         description: "Latest updates and insights about loyalty programs",
       },
@@ -84,14 +84,10 @@ const megaMenuCategories: MegaMenuCategory[] = [
       {
         href: "/about-us/",
         label: "About us",
-      },
-      {
-        href: "/contact/",
-        label: "Contact",
       }
     ],
   },
-  
+
 ];
 
 export const Navbar = () => {
@@ -99,8 +95,8 @@ export const Navbar = () => {
   const [expandedCategories, setExpandedCategories] = React.useState<string[]>([]);
 
   const toggleCategory = (category: string) => {
-    setExpandedCategories(prev => 
-      prev.includes(category) 
+    setExpandedCategories(prev =>
+      prev.includes(category)
         ? prev.filter(c => c !== category)
         : [...prev, category]
     );
@@ -166,14 +162,14 @@ export const Navbar = () => {
                           )}
                         >
                           {category.title}
-                          <ChevronDown 
+                          <ChevronDown
                             className={cn(
                               "w-4 h-4 transition-transform duration-200",
                               expandedCategories.includes(category.title) && "rotate-180 dark:text-primary-dark text-primary"
-                            )} 
+                            )}
                           />
                         </button>
-                        
+
                         {expandedCategories.includes(category.title) && (
                           <div>
                             {category.items.map((item) => (
@@ -211,7 +207,7 @@ export const Navbar = () => {
 
               <SheetFooter className="p-4">
                 <Button asChild className="w-full">
-                  <Link 
+                  <Link
                     href="http://shopify.pxf.io/Vx4jma"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -307,7 +303,7 @@ export const Navbar = () => {
             asChild
             className="bg-primary hover:bg-primary/90 text-white"
           >
-            <Link 
+            <Link
               href="http://shopify.pxf.io/Vx4jma"
               target="_blank"
               rel="noopener noreferrer"

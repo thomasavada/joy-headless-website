@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {fetchIntegrations} from '@/lib/strapi';
 import {Integration} from '@/types/integration';
 import {Metadata} from 'next';
+import { ForcedTheme } from '../../components/ForcedTheme';
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -16,7 +17,8 @@ export default async function IntegrationsPage() {
   const { data: integrations } = await fetchIntegrations();
 
   return (
-    <div className="container mx-auto px-4">
+    <ForcedTheme theme="light">
+<div className="container mx-auto px-4">
       {/* Hero Section */}
       <div className="py-20 text-center space-y-6">
         <h1 className="text-4xl md:text-5xl font-bold text-foreground max-w-3xl mx-auto leading-tight">
@@ -96,5 +98,7 @@ export default async function IntegrationsPage() {
         ))}
       </div>
     </div>
+    </ForcedTheme>
+
   );
 }

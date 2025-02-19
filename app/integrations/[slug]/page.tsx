@@ -5,6 +5,7 @@ import {Integration} from '@/types/integration';
 import Link from 'next/link';
 import {ImageCarousel} from '@/components/ui/image-carousel';
 import {Metadata, ResolvingMetadata} from 'next';
+import { ForcedTheme } from '../../../components/ForcedTheme';
 
 interface IntegrationPageProps {
   params: {
@@ -62,7 +63,8 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
   }
 
   return (
-    <div className="container mx-auto px-4 py-16 max-w-7xl">
+    <ForcedTheme theme="light">
+       <div className="container mx-auto px-4 py-16 max-w-7xl">
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Secondary Sidebar */}
         <aside className="lg:w-80">
@@ -257,5 +259,7 @@ export default async function IntegrationPage({ params }: IntegrationPageProps) 
         </div>
       )}
     </div>
+    </ForcedTheme>
+
   );
 }
