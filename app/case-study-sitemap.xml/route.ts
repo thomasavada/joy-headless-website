@@ -12,17 +12,17 @@ export async function GET() {
 
   try {
     const posts = await getPosts({
-      filter: 'tag:-case-study', // Exclude case studies
+      filter: 'tag:case-study',
     });
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${posts.map(post => `
   <url>
-    <loc>${ensureTrailingSlash(`${baseUrl}/${post.slug}`)}</loc>
+    <loc>${ensureTrailingSlash(`${baseUrl}/case-study/${post.slug}`)}</loc>
     <lastmod>${post.updated_at}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>`).join('\n  ')}
 </urlset>`;
 
@@ -33,7 +33,7 @@ export async function GET() {
       },
     });
   } catch (error) {
-    console.error('Error generating post sitemap:', error);
+    console.error('Error generating case study sitemap:', error);
     return new NextResponse('Error generating sitemap', { status: 500 });
   }
 }

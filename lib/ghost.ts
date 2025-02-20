@@ -481,3 +481,31 @@ export async function getPostsByAuthor(authorSlug: string): Promise<Post[]> {
     return [];
   }
 }
+
+// Get all authors
+export async function getAuthors(): Promise<Author[]> {
+  try {
+    const url = buildGhostUrl('content/authors/', {
+      limit: 'all'
+    });
+
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      headers: {
+        'Accept-Version': 'v5.0',
+        'Accept': 'application/json',
+      }
+    });
+
+    if (!res.ok) {
+      console.error('Failed to fetch authors:', await res.text());
+      return [];
+    }
+
+    const data = await res.json();
+    return data.authors;
+  } catch (error) {
+    console.error('Error fetching authors:', error);
+    return [];
+  }
+}

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { frontEndDomain } from "@/lib/frontend";
-import { getPosts } from '@/lib/ghost';
+import { getAuthors } from '@/lib/ghost';
 
 // Function to ensure trailing slash
 const ensureTrailingSlash = (url: string) => {
@@ -11,18 +11,16 @@ export async function GET() {
   const baseUrl = `https://${frontEndDomain}`;
 
   try {
-    const posts = await getPosts({
-      filter: 'tag:-case-study', // Exclude case studies
-    });
+    const authors = await getAuthors();
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${posts.map(post => `
+  ${authors.map(author => `
   <url>
-    <loc>${ensureTrailingSlash(`${baseUrl}/${post.slug}`)}</loc>
-    <lastmod>${post.updated_at}</lastmod>
+    <loc>${ensureTrailingSlash(`${baseUrl}/author/${author.slug}`)}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.5</priority>
   </url>`).join('\n  ')}
 </urlset>`;
 
@@ -33,7 +31,7 @@ export async function GET() {
       },
     });
   } catch (error) {
-    console.error('Error generating post sitemap:', error);
+    console.error('Error generating author sitemap:', error);
     return new NextResponse('Error generating sitemap', { status: 500 });
   }
 }

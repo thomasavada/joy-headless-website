@@ -4,6 +4,11 @@ import { readdirSync } from 'fs';
 import { join } from 'path';
 import { getPages } from '@/lib/ghost';
 
+// Function to ensure trailing slash
+const ensureTrailingSlash = (url: string) => {
+  return url.endsWith('/') ? url : `${url}/`;
+};
+
 // Function to recursively get all page routes from the app directory
 function getPageRoutes(dir: string, baseDir: string = ''): string[] {
   const routes: string[] = [];
@@ -23,7 +28,7 @@ function getPageRoutes(dir: string, baseDir: string = ''): string[] {
         // If directory contains page.tsx, add the route
         try {
           if (readdirSync(fullPath).some(file => file === 'page.tsx')) {
-            routes.push(relativePath === 'page' ? '/' : `/${relativePath}`);
+            routes.push(relativePath === 'page' ? '/' : ensureTrailingSlash(`/${relativePath}`));
           }
         } catch (error) {
           console.error(`Error reading directory ${fullPath}:`, error);
@@ -48,7 +53,7 @@ export async function GET() {
 
     // Get pages from Ghost CMS
     const ghostPages = await getPages();
-    const ghostRoutes = ghostPages.map(page => `/${page.slug}`);
+    const ghostRoutes = ghostPages.map(page => ensureTrailingSlash(`/${page.slug}`));
 
     // Combine both sets of routes
     const allRoutes = [...new Set([...appRoutes, ...ghostRoutes])];
@@ -57,12 +62,12 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${allRoutes.map(route => {
     // Find matching Ghost page for lastmod date
-    const ghostPage = ghostPages.find(page => `/${page.slug}` === route);
+    const ghostPage = ghostPages.find(page => ensureTrailingSlash(`/${page.slug}`) === route);
     const lastmod = ghostPage ? ghostPage.updated_at : new Date().toISOString();
 
     return `
   <url>
-    <loc>${baseUrl}${route}</loc>
+    <loc>${ensureTrailingSlash(baseUrl + route)}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>${route === '/' ? '1.0' : '0.8'}</priority>
@@ -88,16 +93,16 @@ export async function GET() {
       '/referral',
       '/reward-programs',
       '/vip-tiers',
-    ];
+    ].map(route => ensureTrailingSlash(route));
 
     const fallbackXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${fallbackRoutes.map(route => `
   <url>
-    <loc>${baseUrl}${route}</loc>
+    <loc>${ensureTrailingSlash(baseUrl + route)}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>${route === '' ? '1.0' : '0.8'}</priority>
+    <priority>${route === '/' ? '1.0' : '0.8'}</priority>
   </url>`).join('\n  ')}
 </urlset>`;
 
