@@ -122,6 +122,10 @@ const megaMenuCategories: MegaMenuCategory[] = [
       {
         href: "/about-us/",
         label: "About us",
+      },
+      {
+        href: "/book-demo/",
+        label: "Book a demo",
       }
     ],
   },

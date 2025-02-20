@@ -22,20 +22,11 @@ export const FooterSection = () => {
             Rewards & Loyalty Program for Shopify Business
           </p>
           <div className="flex gap-4">
-            <Link href="https://twitter.com/joyplatform_" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+            <Link href="https://x.com/loyalty_jo69314" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
               <Twitter className="w-5 h-5" />
             </Link>
-            <Link href="https://www.linkedin.com/company/joyplatform" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+            <Link href="https://www.linkedin.com/company/joy-loyalty-program/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
               <Linkedin className="w-5 h-5" />
-            </Link>
-            <Link href="https://www.facebook.com/joyplatform" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-              <Facebook className="w-5 h-5" />
-            </Link>
-            <Link href="https://www.instagram.com/joyplatform_" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-              <Instagram className="w-5 h-5" />
-            </Link>
-            <Link href="https://github.com/joy-platform" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-              <Github className="w-5 h-5" />
             </Link>
           </div>
         </div>
@@ -45,18 +36,28 @@ export const FooterSection = () => {
           <h3 className="text-white font-semibold">Company</h3>
           <ul className="space-y-2">
             <li>
-              <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/about-us" className="text-gray-400 hover:text-white transition-colors">
                 About Us
               </Link>
             </li>
             <li>
-              <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/category/loyalty-program/" className="text-gray-400 hover:text-white transition-colors">
                 Blog
               </Link>
             </li>
             <li>
-              <Link href="/case-studies" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/case-study/" className="text-gray-400 hover:text-white transition-colors">
                 Case Studies
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms-of-use/" className="text-gray-400 hover:text-white transition-colors">
+                Term of use
+              </Link>
+            </li>
+            <li>
+              <Link href="/privacy-policy/" className="text-gray-400 hover:text-white transition-colors">
+                Privacy Policy
               </Link>
             </li>
           </ul>
@@ -67,18 +68,23 @@ export const FooterSection = () => {
           <h3 className="text-white font-semibold">Case Studies</h3>
           <ul className="space-y-2">
             <li>
-              <Link href="/case-studies/korean-skincare" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/case-study-vinamilk/" className="text-gray-400 hover:text-white transition-colors">
+                Vinamilk
+              </Link>
+            </li>
+            <li>
+              <Link href="/case-study-glamour-us/" className="text-gray-400 hover:text-white transition-colors">
+                Glamour US
+              </Link>
+            </li>
+            <li>
+              <Link href="/case-study-allbirds/" className="text-gray-400 hover:text-white transition-colors">
+                Allbirds
+              </Link>
+            </li>
+            <li>
+              <Link href="/case-study-koreanskincare/" className="text-gray-400 hover:text-white transition-colors">
                 Korean Skincare
-              </Link>
-            </li>
-            <li>
-              <Link href="/case-studies/beauty-box" className="text-gray-400 hover:text-white transition-colors">
-                Beauty Box
-              </Link>
-            </li>
-            <li>
-              <Link href="/case-studies/fashion-store" className="text-gray-400 hover:text-white transition-colors">
-                Fashion Store
               </Link>
             </li>
           </ul>
@@ -88,11 +94,6 @@ export const FooterSection = () => {
         <div className="space-y-4">
           <h3 className="text-white font-semibold">Product</h3>
           <ul className="space-y-2">
-            <li>
-              <Link href="/features" className="text-gray-400 hover:text-white transition-colors">
-                Features
-              </Link>
-            </li>
             <li>
               <Link href="/pricing" className="text-gray-400 hover:text-white transition-colors">
                 Pricing
@@ -121,7 +122,7 @@ export const FooterSection = () => {
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/book-demo" className="text-gray-400 hover:text-white transition-colors">
                 Contact
               </Link>
             </li>
