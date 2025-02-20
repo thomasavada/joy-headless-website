@@ -165,7 +165,7 @@ export default async function Page({ params }: Props) {
             "Start with Joy today"
           ]}
           buttonText="Start free trial"
-          buttonHref="/trial"
+          buttonHref="http://shopify.pxf.io/Vx4jma"
         />
       </ForcedTheme>
     </>
