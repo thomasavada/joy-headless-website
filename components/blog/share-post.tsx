@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
-import { frontEndDomain } from "@/lib/frontend";
+import {cn} from "@/lib/utils";
+import {frontEndDomain} from "@/lib/frontend";
 
 interface SharePostProps {
   title: string;

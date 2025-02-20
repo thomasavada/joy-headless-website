@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server'
-import { getPosts } from '@/lib/ghost'
-import { frontEndDomain } from "@/lib/frontend";
+import {NextResponse} from 'next/server'
+import {getPosts} from '@/lib/ghost'
+import {frontEndDomain} from "@/lib/frontend";
 
 interface Post {
   slug: string;

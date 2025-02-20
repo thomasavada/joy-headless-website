@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server'
-import { frontEndDomain } from "@/lib/frontend";
-import { getTags, Tag } from '@/lib/ghost';
+import {NextResponse} from 'next/server'
+import {frontEndDomain} from "@/lib/frontend";
+import {getTags, Tag} from '@/lib/ghost';
 
 export async function GET() {
   const baseUrl = `https://${frontEndDomain}`

@@ -3,7 +3,7 @@ import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import {SponsorsSection} from "@/components/layout/sections/sponsors";
 import {ArrowRight, BarChart3, DollarSign, Gift} from "lucide-react";
-import { TypewriterText } from "@/components/layout/sections/stamped-migration";
+import {TypewriterText} from "@/components/layout/sections/stamped-migration";
 
 export const metadata: Metadata = {
   title: "Migration - Joy",

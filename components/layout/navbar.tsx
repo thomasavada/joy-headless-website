@@ -1,5 +1,5 @@
 "use client";
-import {ChevronDown, Menu, Search} from "lucide-react";
+import {ChevronDown, Menu} from "lucide-react";
 import React from "react";
 import {Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger,} from "../ui/sheet";
 import {
@@ -9,13 +9,13 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from "../ui/navigation-menu";
 import {Button} from "../ui/button";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { SearchDialog } from "../search-dialog";
+import {cn} from "@/lib/utils";
+import {SearchDialog} from "../search-dialog";
 import Image from "next/image";
-import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
 
 interface RouteProps {
   href: string;

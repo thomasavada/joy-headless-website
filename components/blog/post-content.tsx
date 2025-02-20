@@ -2,16 +2,14 @@
 import Image from 'next/image';
 import {Post} from '@/lib/ghost';
 import {TableOfContents} from "@/components/ui/table-of-contents";
-import {useEffect, useState} from "react";
 import {ReadingProgress} from "@/components/blog/reading-progress";
 import {ScrollToTop} from "@/components/ui/scroll-to-top";
 import {SuccessStoryInfo} from '@/lib/strapi';
 import {StatsCard} from '@/components/case-study/stats-card';
 import {MetricsSection} from '@/components/case-study/metrics-section';
-import { formatDate } from '@/lib/utils';
-import { Clock, Calendar, User } from 'lucide-react';
+import {formatDate} from '@/lib/utils';
+import {Calendar, ChevronRight, Clock, User} from 'lucide-react';
 import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
 
 interface PostContentProps {
   post: Post;
@@ -50,7 +48,7 @@ export function PostContent({ post, successStoryInfo, processedHtml }: PostConte
                   <ol className="flex items-center space-x-1 text-xs text-gray-400">
                     {breadcrumbItems.map((item, index) => (
                       <li key={item.href} className="flex items-center">
-                        <Link 
+                        <Link
                           href={item.href}
                           className="hover:text-primary transition-colors"
                         >
@@ -148,9 +146,9 @@ export function PostContent({ post, successStoryInfo, processedHtml }: PostConte
                     [&_.kg-embed-card]:my-8
                     [&_.kg-embed-card_iframe]:w-full [&_.kg-embed-card_iframe]:aspect-video [&_.kg-embed-card_iframe]:rounded-lg
                     [&_.kg-button-card]:my-8 [&_.kg-button-card]:text-center
-                    [&_.kg-btn]:inline-flex [&_.kg-btn]:items-center [&_.kg-btn]:justify-center 
-                    [&_.kg-btn]:px-6 [&_.kg-btn]:py-2.5 [&_.kg-btn]:text-sm [&_.kg-btn]:font-medium 
-                    [&_.kg-btn]:text-white [&_.kg-btn]:bg-[#0E0C3D] [&_.kg-btn]:hover:bg-[#0E0C3D]/90 
+                    [&_.kg-btn]:inline-flex [&_.kg-btn]:items-center [&_.kg-btn]:justify-center
+                    [&_.kg-btn]:px-6 [&_.kg-btn]:py-2.5 [&_.kg-btn]:text-sm [&_.kg-btn]:font-medium
+                    [&_.kg-btn]:text-white [&_.kg-btn]:bg-[#0E0C3D] [&_.kg-btn]:hover:bg-[#0E0C3D]/90
                     [&_.kg-btn]:rounded-full [&_.kg-btn]:transition-colors [&_.kg-btn]:no-underline
                     [&_.kg-gallery-card]:my-8
                     [&_.kg-gallery-container]:flex [&_.kg-gallery-container]:flex-col [&_.kg-gallery-container]:gap-4

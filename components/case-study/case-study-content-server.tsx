@@ -1,9 +1,9 @@
-import { Post } from '@/lib/ghost';
-import { SuccessStoryInfo } from '@/lib/strapi';
-import { PostContent } from '@/components/blog/post-content';
-import { JsonLd } from '@/components/blog/json-ld';
-import { RelatedPosts } from "@/components/blog/related-posts";
-import { JSDOM } from 'jsdom';
+import {Post} from '@/lib/ghost';
+import {SuccessStoryInfo} from '@/lib/strapi';
+import {PostContent} from '@/components/blog/post-content';
+import {JsonLd} from '@/components/blog/json-ld';
+import {RelatedPosts} from "@/components/blog/related-posts";
+import {JSDOM} from 'jsdom';
 
 interface CaseStudyContentServerProps {
   post: Post;
@@ -32,7 +32,7 @@ const transformJoyUrl = (url: string, width?: number, height?: number): string =
       'https://cdn-web.joy.so/cdn/image/'
     )
   }
-  
+
   // Remove size suffix if present
   url = url.replace(/-\d+x\d+\.webp$/, '.webp')
 
@@ -44,7 +44,7 @@ const transformJoyUrl = (url: string, width?: number, height?: number): string =
     params.append('q', '90');
     url += (url.includes('?') ? '&' : '?') + params.toString();
   }
-  
+
   return url;
 }
 
@@ -61,14 +61,14 @@ const processPostContent = (html: string) => {
       const alt = img.getAttribute('alt') || '';
       const figureParent = img.closest('.kg-image-card');
       const existingCaption = figureParent?.querySelector('figcaption')?.innerHTML;
-      
+
       if (src && img.parentNode) {
         const figure = doc.createElement('figure');
         figure.className = 'kg-card kg-image-card kg-card-hascaption';
-        
+
         const imgWrapper = doc.createElement('div');
         imgWrapper.className = 'relative aspect-video';
-        
+
         // Generate srcset with different sizes
         const srcset = imageSizes
           .map(size => {
@@ -81,7 +81,7 @@ const processPostContent = (html: string) => {
         const sizes = '(max-width: 640px) 640px, ' +
                      '(max-width: 1024px) 768px, ' +
                      '1200px';
-        
+
         // Use mobile size as default src for faster initial load
         imgWrapper.innerHTML = `
           <img
@@ -97,16 +97,16 @@ const processPostContent = (html: string) => {
             fetchpriority="auto"
           />
         `;
-        
+
         figure.appendChild(imgWrapper);
-        
+
         // Add caption if it exists in the original markup
         if (existingCaption) {
           const figcaption = doc.createElement('figcaption');
           figcaption.innerHTML = existingCaption;
           figure.appendChild(figcaption);
         }
-        
+
         // Replace the entire kg-image-card if it exists, otherwise just replace the img
         if (figureParent) {
           figureParent.parentNode?.replaceChild(figure, figureParent);
@@ -121,11 +121,11 @@ const processPostContent = (html: string) => {
   return html;
 }
 
-export function CaseStudyContentServer({ 
-  post, 
-  successStoryInfo, 
+export function CaseStudyContentServer({
+  post,
+  successStoryInfo,
   relatedPosts,
-  jsonLd 
+  jsonLd
 }: CaseStudyContentServerProps) {
   // Transform feature image URL if it exists
   if (post.feature_image) {
@@ -138,9 +138,9 @@ export function CaseStudyContentServer({
   return (
     <>
       <JsonLd data={jsonLd} />
-      <PostContent 
-        post={post} 
-        successStoryInfo={successStoryInfo || undefined} 
+      <PostContent
+        post={post}
+        successStoryInfo={successStoryInfo || undefined}
         processedHtml={processedHtml}
       />
       <div className="container mx-auto px-4 max-w-6xl">
@@ -148,4 +148,4 @@ export function CaseStudyContentServer({
       </div>
     </>
   );
-} 
+}

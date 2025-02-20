@@ -1,14 +1,14 @@
-import {getPosts, getRelatedPosts, getSettings, getSinglePost, Post, Settings, getPage, getPages} from '@/lib/ghost';
+import {getPage, getPages, getRelatedPosts, getSettings, getSinglePost, Post, Settings} from '@/lib/ghost';
 import {notFound} from 'next/navigation';
 import {Metadata, ResolvingMetadata} from 'next';
 import {PostContent} from '@/components/blog/post-content';
 import {JsonLd} from '@/components/blog/json-ld';
 import {RelatedPosts} from "@/components/blog/related-posts";
-import { processPostContent } from '@/components/blog/post-content-server';
+import {processPostContent} from '@/components/blog/post-content-server';
 import {frontEndDomain} from "@/lib/frontend";
-import { ForcedTheme } from '../../components/ForcedTheme';
-import { CTASection } from '@/components/layout/sections/cta';
-import { SharePost } from '@/components/blog/share-post';
+import {ForcedTheme} from '../../components/ForcedTheme';
+import {CTASection} from '@/components/layout/sections/cta';
+import {SharePost} from '@/components/blog/share-post';
 
 interface Props {
   params: {

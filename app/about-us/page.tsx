@@ -1,10 +1,8 @@
-import { ForcedTheme } from '@/components/ForcedTheme';
-import { Button } from '@/components/ui/button';
-import { Metadata } from 'next';
+import {ForcedTheme} from '@/components/ForcedTheme';
+import {Metadata} from 'next';
 import Image from 'next/image';
-import { LoyaltyPreview } from '@/components/layout/sections/loyalty-preview';
-import { FeaturesPreview } from '@/components/layout/sections/features-preview';
-import { CTASection } from '@/components/layout/sections/cta';
+import {FeaturesPreview} from '@/components/layout/sections/features-preview';
+import {CTASection} from '@/components/layout/sections/cta';
 
 export const metadata: Metadata = {
   title: 'About us | Joy Rewards & Loyalty Program',

@@ -1,5 +1,5 @@
-import { ForcedTheme } from '@/components/ForcedTheme';
-import { Metadata } from 'next';
+import {ForcedTheme} from '@/components/ForcedTheme';
+import {Metadata} from 'next';
 
 export const metadata: Metadata = {
   title: 'Book a Demo | Joy Rewards & Loyalty Program',

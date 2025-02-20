@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server'
-import { frontEndDomain } from "@/lib/frontend";
+import {NextResponse} from 'next/server'
+import {frontEndDomain} from "@/lib/frontend";
 
 export async function GET() {
   const baseUrl = `https://${frontEndDomain}`

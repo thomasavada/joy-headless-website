@@ -3,7 +3,7 @@
 import React from "react";
 import {Check} from "lucide-react";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from "@/components/ui/accordion";
-import { usePricing } from './pricing-context';
+import {usePricing} from './pricing-context';
 
 interface ComparisonSection {
   title: string;
@@ -22,15 +22,15 @@ interface ComparisonSection {
 const sortFeaturesByAvailability = (features: ComparisonSection['features']) => {
   return [...features].sort((a, b) => {
     // Count how many plans have this feature
-    const countPlans = (feature: typeof a) => 
-      Number(feature.starter) + 
-      Number(feature.professional) + 
-      Number(feature.advanced) + 
+    const countPlans = (feature: typeof a) =>
+      Number(feature.starter) +
+      Number(feature.professional) +
+      Number(feature.advanced) +
       Number(feature.enterprise);
-    
+
     const aCount = countPlans(a);
     const bCount = countPlans(b);
-    
+
     // Sort by number of plans (descending)
     return bCount - aCount;
   });
@@ -124,7 +124,7 @@ export function PlanComparison() {
           professional: true,
           advanced: true,
           enterprise: true
-        }, 
+        },
         {
           feature: "Customer Account blocks",
           subtitle: "Customer account page building blocks for online store 2.0",

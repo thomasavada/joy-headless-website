@@ -1,9 +1,9 @@
 "use client";
 
-import { Search } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useTransition } from "react";
-import { cn } from "@/lib/utils";
+import {Search} from "lucide-react";
+import {useRouter, useSearchParams} from "next/navigation";
+import {useCallback, useTransition} from "react";
+import {cn} from "@/lib/utils";
 
 interface SearchInputProps {
   className?: string;
@@ -17,7 +17,7 @@ export function SearchInput({ className }: SearchInputProps) {
   const handleSearch = useCallback(
     (term: string) => {
       const params = new URLSearchParams(searchParams.toString());
-      
+
       if (term) {
         params.set("search", term);
         params.delete("page"); // Reset to first page on new search
@@ -47,4 +47,4 @@ export function SearchInput({ className }: SearchInputProps) {
       )}
     </div>
   );
-} 
+}

@@ -1,7 +1,7 @@
 'use client'
 
-import { useTheme } from 'next-themes'
-import { useEffect, type ReactNode } from 'react'
+import {useTheme} from 'next-themes'
+import {type ReactNode, useEffect} from 'react'
 
 interface ForcedThemeProps {
   theme: string

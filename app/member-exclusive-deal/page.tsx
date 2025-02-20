@@ -1,10 +1,10 @@
-import { ForcedTheme } from '@/components/ForcedTheme';
-import { Metadata } from 'next';
+import {ForcedTheme} from '@/components/ForcedTheme';
+import {Metadata} from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { SponsorsSection } from '@/components/layout/sections/sponsors';
-import { TestimonialSection } from '@/components/layout/sections/testimonial';
-import { CTASection } from '@/components/layout/sections/cta';
+import {SponsorsSection} from '@/components/layout/sections/sponsors';
+import {TestimonialSection} from '@/components/layout/sections/testimonial';
+import {CTASection} from '@/components/layout/sections/cta';
 
 export const metadata: Metadata = {
   title: 'Member Exclusive Deal | Joy Rewards & Loyalty Program',

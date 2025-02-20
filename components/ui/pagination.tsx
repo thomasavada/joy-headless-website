@@ -1,8 +1,8 @@
 "use client";
 
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import {ChevronLeft, ChevronRight} from 'lucide-react';
+import {cn} from '@/lib/utils';
 
 interface PaginationProps {
   currentPage: number;
@@ -15,18 +15,18 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
   const getPageNumbers = () => {
     const pages = [];
     const showPages = 5; // Number of pages to show
-    
+
     let start = Math.max(1, currentPage - 2);
     let end = Math.min(totalPages, start + showPages - 1);
-    
+
     if (end - start + 1 < showPages) {
       start = Math.max(1, end - showPages + 1);
     }
-    
+
     for (let i = start; i <= end; i++) {
       pages.push(i);
     }
-    
+
     return pages;
   };
 
@@ -50,15 +50,15 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
         <ChevronLeft className="h-4 w-4" />
         <span className="sr-only">Previous page</span>
       </Link>
-      
+
       {pageNumbers.map((page) => (
         <Link
           key={page}
           href={`${baseUrl}?page=${page}`}
           className={cn(
             "inline-flex h-9 w-9 items-center justify-center rounded-md text-sm transition-colors",
-            currentPage === page 
-              ? "border-2 border-primary bg-primary/10 text-primary font-semibold pointer-events-none" 
+            currentPage === page
+              ? "border-2 border-primary bg-primary/10 text-primary font-semibold pointer-events-none"
               : "border border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           )}
           aria-current={currentPage === page ? "page" : undefined}
@@ -67,7 +67,7 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
           {page}
         </Link>
       ))}
-      
+
       <Link
         href={`${baseUrl}?page=${currentPage + 1}`}
         className={cn(
@@ -82,4 +82,4 @@ export function Pagination({ currentPage, totalPages, baseUrl }: PaginationProps
       </Link>
     </nav>
   );
-} 
+}

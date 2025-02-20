@@ -8,11 +8,11 @@ import {ShopifyPOS} from "@/components/layout/sections/shopify-pos";
 import {StampedMigration} from "@/components/layout/sections/stamped-migration";
 import {CustomerStories} from "@/components/layout/sections/customer-stories";
 import {TestimonialSection} from "@/components/layout/sections/testimonial";
-import { CTASection } from '@/components/layout/sections/cta';
+import {CTASection} from '@/components/layout/sections/cta';
 // import {Reveal} from '@/components/ui/reveal';
 // import {StaggerContainer} from '@/components/ui/stagger-container';
 // import { ForcedThemeWrapper } from "../components/ForcedThemeWrapper";
-import { ForcedTheme } from "../components/ForcedTheme";
+import {ForcedTheme} from "../components/ForcedTheme";
 
 // Remove the metadata generation from the home page since we want to use the layout's metadata
 // The layout's metadata will be used as the default for the home page

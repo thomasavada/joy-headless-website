@@ -1,15 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Search, Loader2, Command } from "lucide-react";
+import {useEffect, useState} from "react";
+import {Dialog, DialogContent, DialogTrigger,} from "@/components/ui/dialog";
+import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
+import {Command, Loader2, Search} from "lucide-react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import {cn} from "@/lib/utils";
 
 interface SearchResult {
   title: string;

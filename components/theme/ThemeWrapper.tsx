@@ -1,7 +1,7 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
-import { ThemeSetter } from './ThemeSetter';
+import {ReactNode, useEffect, useState} from 'react';
+import {ThemeSetter} from './ThemeSetter';
 
 export const ThemeWrapper = ({ children }: { children: ReactNode }) => {
   const [isMounted, setIsMounted] = useState(false);

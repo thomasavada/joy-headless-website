@@ -2,9 +2,9 @@ import {getFeaturedPosts, getRegularPosts, getSettings, Post, Settings} from '@/
 import {PostGrid} from '@/components/blog/post-grid';
 import {FooterSection} from "@/components/layout/sections/footer";
 import {Metadata} from 'next';
-import { Pagination } from '@/components/ui/pagination';
-import { SearchInput } from '@/components/ui/search-input';
-import { ForcedTheme } from '../../components/ForcedTheme';
+import {Pagination} from '@/components/ui/pagination';
+import {SearchInput} from '@/components/ui/search-input';
+import {ForcedTheme} from '../../components/ForcedTheme';
 
 // Number of posts per page
 const POSTS_PER_PAGE = 9;

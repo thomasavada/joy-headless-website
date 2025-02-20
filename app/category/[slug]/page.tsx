@@ -1,10 +1,9 @@
-import { ForcedTheme } from '@/components/ForcedTheme';
-import { getPosts, getRegularPosts, getSettings, Post, Settings } from '@/lib/ghost';
-import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { PostGrid } from '@/components/blog/post-grid';
-import { FooterSection } from "@/components/layout/sections/footer";
-import { Pagination } from '@/components/ui/pagination';
+import {ForcedTheme} from '@/components/ForcedTheme';
+import {getRegularPosts, getSettings, Settings} from '@/lib/ghost';
+import {Metadata} from 'next';
+import {notFound} from 'next/navigation';
+import {PostGrid} from '@/components/blog/post-grid';
+import {Pagination} from '@/components/ui/pagination';
 
 // Number of posts per page
 const POSTS_PER_PAGE = 9;

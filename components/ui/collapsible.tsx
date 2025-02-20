@@ -1,8 +1,8 @@
 "use client"
 
 import * as CollapsiblePrimitive from "@radix-ui/react-collapsible"
-import { Plus, Minus } from 'lucide-react';
-import { useState } from 'react';
+import {Minus, Plus} from 'lucide-react';
+import {useState} from 'react';
 
 const Collapsible = CollapsiblePrimitive.Root
 

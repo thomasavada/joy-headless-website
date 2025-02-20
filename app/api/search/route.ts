@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import { getRegularPosts } from '@/lib/ghost';
+import {NextResponse} from 'next/server';
+import {getRegularPosts} from '@/lib/ghost';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

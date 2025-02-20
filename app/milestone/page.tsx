@@ -1,20 +1,11 @@
-import { ForcedTheme } from '@/components/ForcedTheme';
-import { Button } from '@/components/ui/button';
-import { SponsorsSection } from '@/components/layout/sections/sponsors';
-import { TestimonialSection } from '@/components/layout/sections/testimonial';
-import { Metadata } from 'next';
-import {
-  ShoppingBag,
-  DollarSign,
-  Star,
-  MessageSquare,
-  Clock,
-  Settings,
-  BarChart3,
-  Sliders
-} from 'lucide-react';
+import {ForcedTheme} from '@/components/ForcedTheme';
+import {Button} from '@/components/ui/button';
+import {SponsorsSection} from '@/components/layout/sections/sponsors';
+import {TestimonialSection} from '@/components/layout/sections/testimonial';
+import {Metadata} from 'next';
+import {Clock, DollarSign, MessageSquare, ShoppingBag, Star} from 'lucide-react';
 import Image from 'next/image';
-import { CTASection } from '@/components/layout/sections/cta';
+import {CTASection} from '@/components/layout/sections/cta';
 
 export const metadata: Metadata = {
   title: 'Milestone Program - Joy',

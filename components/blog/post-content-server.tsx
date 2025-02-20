@@ -1,5 +1,4 @@
-import { JSDOM } from 'jsdom';
-import { Post } from '@/lib/ghost';
+import {JSDOM} from 'jsdom';
 
 interface ImageSize {
   width: number;

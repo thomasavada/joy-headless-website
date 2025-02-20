@@ -6,8 +6,8 @@ import {Reveal} from "@/components/ui/reveal";
 import {PlanComparison} from "@/components/pricing/plan-comparison";
 import {CantDecide} from "@/components/pricing/cant-decide";
 import {FAQ} from "@/components/pricing/faq";
-import {PricingProvider, PriceCalculator} from "@/components/pricing/pricing-context";
-import { ForcedTheme } from '@/components/ForcedTheme'
+import {PriceCalculator, PricingProvider} from "@/components/pricing/pricing-context";
+import {ForcedTheme} from '@/components/ForcedTheme'
 
 const pricingPlans = [
   {

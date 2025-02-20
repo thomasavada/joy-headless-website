@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useState} from 'react';
+import React from 'react';
 import {Check, Info} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
@@ -165,7 +165,7 @@ export const PricingCard = ({
           ))}
         </ul>
 
-       
+
 
         {/* Ideal For */}
         {idealFor && (

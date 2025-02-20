@@ -5,7 +5,7 @@ import {Integration} from '@/types/integration';
 import Link from 'next/link';
 import {ImageCarousel} from '@/components/ui/image-carousel';
 import {Metadata, ResolvingMetadata} from 'next';
-import { ForcedTheme } from '../../../components/ForcedTheme';
+import {ForcedTheme} from '../../../components/ForcedTheme';
 
 interface IntegrationPageProps {
   params: {

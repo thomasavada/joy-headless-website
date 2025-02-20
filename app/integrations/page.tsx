@@ -3,7 +3,7 @@ import Link from 'next/link';
 import {fetchIntegrations} from '@/lib/strapi';
 import {Integration} from '@/types/integration';
 import {Metadata} from 'next';
-import { ForcedTheme } from '../../components/ForcedTheme';
+import {ForcedTheme} from '../../components/ForcedTheme';
 
 export const revalidate = 3600; // Revalidate every hour
 
