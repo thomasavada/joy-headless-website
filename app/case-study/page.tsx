@@ -10,8 +10,8 @@ interface PageProps {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const title = "Case Study x Joy integration";
-  const description = "Explore real-world case studies showcasing how our loyalty platform drives engagement and growth. See measurable results from successful implementations across retail, fashion, and F&B sectors.";
+  const title = "Case Study | Joy Rewards & Loyalty Program - Joy retention | Loyalty for Shopify";
+  const description = "Working with top global brands across industries has helped us create a powerful, flexible loyalty platform and gain the expertise to deliver exceptional";
 
   return {
     title,

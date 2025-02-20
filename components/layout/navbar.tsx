@@ -35,7 +35,7 @@ const mainRoutes: RouteProps[] = [
     label: "Pricing",
   },
   {
-    href: "/case-studies/",
+    href: "/case-study/",
     label: "Case Studies",
   },
 ];
@@ -300,7 +300,7 @@ export const Navbar = () => {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link href="/case-studies" legacyBehavior passHref>
+                <Link href="/case-study/" legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     Case studies
                   </NavigationMenuLink>
