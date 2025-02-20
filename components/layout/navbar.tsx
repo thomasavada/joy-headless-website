@@ -267,7 +267,7 @@ export const Navbar = () => {
                                       target: "_blank",
                                       rel: "noopener noreferrer"
                                     } : {})}
-                                    className="group flex flex-col gap-1.5 rounded-lg px-4 py-3 hover:bg-muted/50 transition-all duration-200"
+                                    className="group flex flex-col gap-1.5 rounded-lg px-4 py-3  transition-all duration-200"
                                   >
                                     <div className="flex items-center gap-2">
                                       <span className="text-sm font-medium text-foreground/90 dark:text-white/90 group-hover:text-primary dark:group-hover:text-primary-dark transition-colors duration-200">
