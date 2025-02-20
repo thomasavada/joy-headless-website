@@ -424,3 +424,60 @@ export async function getTags(): Promise<Tag[]> {
     return [];
   }
 }
+
+// Get a single author by slug
+export async function getAuthor(slug: string): Promise<Author | null> {
+  try {
+    const url = buildGhostUrl(`content/authors/slug/${slug}/`, {});
+
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      headers: {
+        'Accept-Version': 'v5.0',
+        'Accept': 'application/json',
+      }
+    });
+
+    if (!res.ok) {
+      console.error('Failed to fetch author:', await res.text());
+      return null;
+    }
+
+    const data = await res.json();
+    return data.authors[0] || null;
+  } catch (err) {
+    console.error('Error fetching author:', err);
+    return null;
+  }
+}
+
+// Get posts by author
+export async function getPostsByAuthor(authorSlug: string): Promise<Post[]> {
+  try {
+    const url = buildGhostUrl('content/posts/', {
+      filter: `author:${authorSlug}`,
+      include: ['tags', 'authors'],
+      limit: 'all',
+      order: 'published_at DESC'
+    });
+
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      headers: {
+        'Accept-Version': 'v5.0',
+        'Accept': 'application/json',
+      }
+    });
+
+    if (!res.ok) {
+      console.error('Failed to fetch author posts:', await res.text());
+      return [];
+    }
+
+    const data = await res.json();
+    return data.posts;
+  } catch (err) {
+    console.error('Error fetching author posts:', err);
+    return [];
+  }
+}
