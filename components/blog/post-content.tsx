@@ -2,14 +2,16 @@
 import Image from 'next/image';
 import {Post} from '@/lib/ghost';
 import {TableOfContents} from "@/components/ui/table-of-contents";
+import {useEffect, useState} from "react";
 import {ReadingProgress} from "@/components/blog/reading-progress";
 import {ScrollToTop} from "@/components/ui/scroll-to-top";
 import {SuccessStoryInfo} from '@/lib/strapi';
 import {StatsCard} from '@/components/case-study/stats-card';
 import {MetricsSection} from '@/components/case-study/metrics-section';
-import {formatDate} from '@/lib/utils';
-import {Calendar, ChevronRight, Clock, User} from 'lucide-react';
+import { formatDate } from '@/lib/utils';
+import { Clock, Calendar, User } from 'lucide-react';
 import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 
 interface PostContentProps {
   post: Post;
@@ -40,9 +42,9 @@ export function PostContent({ post, successStoryInfo, processedHtml }: PostConte
         <div className="w-full bg-white border-b border-gray-100">
           <div className="container mx-auto px-4 py-16 max-w-6xl">
             {/* Title and Meta */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_600px] gap-12 items-start">
               {/* Left Column - Title and Meta */}
-              <div className="space-y-4">
+              <div className="space-y-4 lg:sticky lg:top-24">
                 {/* Breadcrumbs */}
                 <nav>
                   <ol className="flex items-center space-x-1 text-xs text-gray-400">
@@ -114,14 +116,14 @@ export function PostContent({ post, successStoryInfo, processedHtml }: PostConte
 
               {/* Right Column - Featured Image */}
               {post.feature_image && (
-                <div className="lg:block">
+                <div className="lg:block overflow-hidden rounded-xl shadow-lg">
                   <Image
                     src={post.feature_image}
                     alt={post.title}
                     width={1200}
                     height={800}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
-                    className="w-full h-auto object-cover rounded-lg"
+                    className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500"
                     priority
                   />
                 </div>
@@ -143,18 +145,26 @@ export function PostContent({ post, successStoryInfo, processedHtml }: PostConte
                 <div
                   dangerouslySetInnerHTML={{ __html: processedHtml }}
                   className="prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-primary
+                    [&_.kg-card]:my-8
+                    [&_.kg-image-card]:overflow-hidden [&_.kg-image-card]:rounded-lg [&_.kg-image-card]:shadow-md
+                    [&_.kg-image-card_img]:w-full [&_.kg-image-card_img]:h-auto
+                    [&_.kg-card-hascaption]:space-y-4
+
                     [&_.kg-embed-card]:my-8
                     [&_.kg-embed-card_iframe]:w-full [&_.kg-embed-card_iframe]:aspect-video [&_.kg-embed-card_iframe]:rounded-lg
+
                     [&_.kg-button-card]:my-8 [&_.kg-button-card]:text-center
                     [&_.kg-btn]:inline-flex [&_.kg-btn]:items-center [&_.kg-btn]:justify-center
                     [&_.kg-btn]:px-6 [&_.kg-btn]:py-2.5 [&_.kg-btn]:text-sm [&_.kg-btn]:font-medium
                     [&_.kg-btn]:text-white [&_.kg-btn]:bg-[#0E0C3D] [&_.kg-btn]:hover:bg-[#0E0C3D]/90
                     [&_.kg-btn]:rounded-full [&_.kg-btn]:transition-colors [&_.kg-btn]:no-underline
+
                     [&_.kg-gallery-card]:my-8
                     [&_.kg-gallery-container]:flex [&_.kg-gallery-container]:flex-col [&_.kg-gallery-container]:gap-4
                     [&_.kg-gallery-row]:grid [&_.kg-gallery-row]:grid-cols-1 [&_.kg-gallery-row]:sm:grid-cols-2 [&_.kg-gallery-row]:lg:grid-cols-3 [&_.kg-gallery-row]:gap-4
-                    [&_.kg-gallery-image]:relative [&_.kg-gallery-image]:aspect-[3/2] [&_.kg-gallery-image]:overflow-hidden [&_.kg-gallery-image]:rounded-lg
-                    [&_.kg-gallery-image_img]:absolute [&_.kg-gallery-image_img]:inset-0 [&_.kg-gallery-image_img]:w-full [&_.kg-gallery-image_img]:h-full [&_.kg-gallery-image_img]:object-cover
+                    [&_.kg-gallery-image]:overflow-hidden [&_.kg-gallery-image]:rounded-lg [&_.kg-gallery-image]:shadow-md
+                    [&_.kg-gallery-image_img]:w-full [&_.kg-gallery-image_img]:h-auto [&_.kg-gallery-image_img]:hover:scale-105 [&_.kg-gallery-image_img]:transition-transform [&_.kg-gallery-image_img]:duration-500
+
                     [&_.kg-callout-card]:flex [&_.kg-callout-card]:gap-4 [&_.kg-callout-card]:p-6 [&_.kg-callout-card]:rounded-lg [&_.kg-callout-card]:my-8
                     [&_.kg-callout-card-blue]:bg-blue-50
                     [&_.kg-callout-card-green]:bg-green-50
@@ -162,7 +172,8 @@ export function PostContent({ post, successStoryInfo, processedHtml }: PostConte
                     [&_.kg-callout-card-red]:bg-red-50
                     [&_.kg-callout-emoji]:text-2xl [&_.kg-callout-emoji]:flex-shrink-0
                     [&_.kg-callout-text]:text-gray-700 [&_.kg-callout-text]:flex-grow
-                    [&_figcaption]:text-center"
+
+                    [&_figcaption]:text-center [&_figcaption]:mt-4 [&_figcaption]:text-sm [&_figcaption]:text-gray-500"
                 />
               </article>
             </div>

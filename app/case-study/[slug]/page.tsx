@@ -1,15 +1,16 @@
-import {getPage, getPages, getRelatedPosts, getSettings, getSinglePost, Post, Settings} from '@/lib/ghost';
-import {notFound} from 'next/navigation';
-import {Metadata, ResolvingMetadata} from 'next';
-import {PostContent} from '@/components/blog/post-content';
-import {JsonLd} from '@/components/blog/json-ld';
-import {RelatedPosts} from "@/components/blog/related-posts";
-import {processPostContent} from '@/components/blog/post-content-server';
-import {frontEndDomain} from "@/lib/frontend";
-import {ForcedTheme} from '../../components/ForcedTheme';
-import {CTASection} from '@/components/layout/sections/cta';
-import {SharePost} from '@/components/blog/share-post';
-import { getSuccessStoryInfo } from '../../lib/strapi';
+import { getPosts, getRelatedPosts, getSettings, getSinglePost, Post, Settings } from '@/lib/ghost';
+import { getSuccessStoryInfo } from '@/lib/strapi';
+import { notFound } from 'next/navigation';
+import { Metadata, ResolvingMetadata } from 'next';
+import { PostContent } from '@/components/blog/post-content';
+import { JsonLd } from '@/components/blog/json-ld';
+import { RelatedPosts } from "@/components/blog/related-posts";
+import { frontEndDomain } from "@/lib/frontend";
+import { ForcedTheme } from '@/components/ForcedTheme';
+import { CTASection } from '@/components/layout/sections/cta';
+import { SharePost } from '@/components/blog/share-post';
+
+export const revalidate = 3600; // Revalidate every hour
 
 interface Props {
   params: {
@@ -17,40 +18,28 @@ interface Props {
   };
 }
 
+// Generate metadata for each case study
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // Try to get as page first
-  const [page, { settings }] = await Promise.all([
-    getPage(params.slug) as Promise<Post>,
+  const [post, { settings }] = await Promise.all([
+    getSinglePost(params.slug) as Promise<Post>,
     getSettings() as Promise<Settings>
   ]);
-
-  // If page exists, return page metadata
-  if (page) {
-    return {
-      title: page.meta_title || `${page.title} | ${settings.title}`,
-      description: page.meta_description || page.excerpt,
-    };
-  }
-
-  // If not a page, try to get as blog post
-  const post = await getSinglePost(params.slug) as Post;
 
   if (!post) {
     return {
       title: `Not Found | ${settings.title}`,
-      description: 'The requested content could not be found.',
+      description: 'The requested case study could not be found.',
     };
   }
 
-  // Return blog post metadata
   return {
     title: post.meta_title || `${post.title} | ${settings.title}`,
     description: post.meta_description || post.excerpt,
     alternates: {
-      canonical: post.canonical_url || post.url || `https://${frontEndDomain}/${post.slug}`,
+      canonical: post.canonical_url || post.url || `https://${frontEndDomain}/case-study/${post.slug}`,
     },
     openGraph: {
       title: post.og_title || post.title,
@@ -60,7 +49,7 @@ export async function generateMetadata(
       authors: post.primary_author.name,
       publishedTime: post.published_at,
       modifiedTime: post.updated_at,
-      url: post.canonical_url || post.url || `https://${frontEndDomain}/${post.slug}`,
+      url: post.canonical_url || post.url || `https://${frontEndDomain}/case-study/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -71,44 +60,27 @@ export async function generateMetadata(
   };
 }
 
+// Generate static pages for all case studies at build time
 export async function generateStaticParams() {
-  const pages = await getPages();
-  return pages.map((page: Post) => ({
-    slug: page.slug,
+  const posts = await getPosts({
+    filter: 'tag:case-study',
+  });
+  return posts.map((post: Post) => ({
+    slug: post.slug,
   }));
 }
 
-export default async function Page({ params }: Props) {
-  // Try to get as page first
-  const page = await getPage(params.slug);
-
-  // If it's a page, use simple layout
-  if (page) {
-    const processedHtml = processPostContent(page.html);
-    return (
-      <ForcedTheme theme="light">
-        <main className="flex min-h-screen flex-col">
-          <div className="container max-w-4xl mx-auto px-4 py-20">
-            <h1 className="text-4xl font-bold mb-12">{page.title}</h1>
-            <div
-              className="prose max-w-none"
-              dangerouslySetInnerHTML={{ __html: processedHtml }}
-            />
-          </div>
-        </main>
-      </ForcedTheme>
-    );
-  }
-
-  // If not a page, try to get as blog post
+export default async function CaseStudyPage({ params }: Props) {
   const post = await getSinglePost(params.slug);
 
   if (!post) {
     notFound();
   }
 
-  // Use blog layout for posts
+  // Process the HTML content
   const processedHtml = processPostContent(post.html);
+
+  // Fetch additional info from Strapi and related posts in parallel
   const [successStoryInfo, relatedPosts] = await Promise.all([
     getSuccessStoryInfo(post.id),
     getRelatedPosts(post)
@@ -135,7 +107,7 @@ export default async function Page({ params }: Props) {
       sameAs: []
     },
     headline: post.title,
-    url: `https://${frontEndDomain}/${post.slug}/`,
+    url: `https://${frontEndDomain}/case-study/${post.slug}/`,
     datePublished: post.published_at,
     dateModified: post.updated_at,
     image: {
@@ -145,7 +117,7 @@ export default async function Page({ params }: Props) {
       height: 800
     },
     description: post.excerpt,
-    mainEntityOfPage: `https://${frontEndDomain}/${post.slug}/`
+    mainEntityOfPage: `https://${frontEndDomain}/case-study/${post.slug}/`
   };
 
   return (
@@ -159,7 +131,7 @@ export default async function Page({ params }: Props) {
         />
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="border-y border-border/10 my-8">
-            <SharePost title={post.title} slug={post.slug} />
+            <SharePost title={post.title} slug={`case-study/${post.slug}`} />
           </div>
           <RelatedPosts posts={relatedPosts} currentPostId={post.id} />
         </div>
