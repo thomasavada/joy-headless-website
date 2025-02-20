@@ -78,6 +78,8 @@ export async function generateStaticParams() {
   }));
 }
 
+export const revalidate = 3600; // Revalidate every hour
+
 export default async function Page({ params }: Props) {
   // Try to get as page first
   const page = await getPage(params.slug);
@@ -110,7 +112,7 @@ export default async function Page({ params }: Props) {
   // Use blog layout for posts
   const processedHtml = processPostContent(post.html);
   const [successStoryInfo, relatedPosts] = await Promise.all([
-    getSuccessStoryInfo(post.id),
+    getSuccessStoryInfo(post.id).catch(() => null),
     getRelatedPosts(post)
   ]);
 

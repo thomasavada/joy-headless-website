@@ -62,14 +62,20 @@ export interface SuccessStoryInfo {
 }
 
 export async function getSuccessStoryInfo(ghostPostId: string) {
-  try {
-    const data = await fetchFromStrapi<{data: SuccessStoryInfo[]}>(
-      `success-stories-infos?filters[ghost_post_id][$eq]=${ghostPostId}&populate=*`
-    );
-    
-    return data.data[0];
-  } catch (error) {
-    console.error('Error fetching success story info:', error);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/success-stories-infos?filters[ghost_post_id][$eq]=${ghostPostId}&populate=*`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_STRAPI_API_KEY}`,
+      },
+      next: { revalidate: 3600 }, // Cache for 1 hour
+    }
+  );
+
+  if (!response.ok) {
     return null;
   }
+
+  const data = await response.json();
+  return data.data?.[0] || null;
 }

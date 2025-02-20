@@ -15,11 +15,11 @@ import { ChevronRight } from 'lucide-react';
 
 interface PostContentProps {
   post: Post;
-  successStoryInfo?: SuccessStoryInfo;
   processedHtml: string;
+  successStoryInfo: SuccessStoryInfo | null;
 }
 
-export function PostContent({ post, successStoryInfo, processedHtml }: PostContentProps) {
+export function PostContent({ post, processedHtml, successStoryInfo }: PostContentProps) {
   // Calculate reading time
   const getReadingTime = (content: string) => {
     if (!content) return 0;
