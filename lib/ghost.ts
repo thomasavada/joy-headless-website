@@ -27,6 +27,11 @@ export interface Tag {
   name: string;
   slug: string;
   description?: string;
+  feature_image?: string;
+  visibility: string;
+  meta_title?: string;
+  meta_description?: string;
+  updated_at?: string;
 }
 
 export interface Author {
@@ -148,23 +153,30 @@ export async function getFeaturedPosts() {
 export async function getRegularPosts({
   page = 1,
   limit = 9,
-  search = ''
+  search = '',
+  filter = ''
 }: {
   page?: number;
   limit?: number;
   search?: string;
+  filter?: string;
 } = {}) {
   try {
-    // Build the filter string based on search term
-    let filter = 'tag:-case-study';
+    // Build the filter string
+    let filterString = 'tag:-case-study';
+
+    // Add search filter if provided
     if (search) {
-      // Use proper Ghost Content API search syntax
-      // ~' operator performs a case-insensitive contains search
-      filter = `${filter}+title:~'${search}'`;
+      filterString += `+title:~'${search}'`;
+    }
+
+    // Add additional filter if provided
+    if (filter) {
+      filterString += `+${filter}`;
     }
 
     const url = buildGhostUrl('content/posts/', {
-      filter,
+      filter: filterString,
       include: ['tags', 'authors'],
       limit: limit,
       page: page,
@@ -379,6 +391,36 @@ export async function getPages(): Promise<Post[]> {
     return data.pages;
   } catch (err) {
     console.error('Error fetching pages:', err);
+    return [];
+  }
+}
+
+// Add getTags function
+export async function getTags(): Promise<Tag[]> {
+  try {
+    const url = buildGhostUrl('content/tags/', {
+      include: ['count.posts'],
+      filter: 'visibility:public',
+      limit: 'all'
+    });
+
+    const res = await fetch(url, {
+      next: { revalidate: 60 },
+      headers: {
+        'Accept-Version': 'v5.0',
+        'Accept': 'application/json',
+      }
+    });
+
+    if (!res.ok) {
+      console.error('Failed to fetch tags:', await res.text());
+      return [];
+    }
+
+    const data = await res.json();
+    return data.tags;
+  } catch (error) {
+    console.error('Error fetching tags:', error);
     return [];
   }
 }

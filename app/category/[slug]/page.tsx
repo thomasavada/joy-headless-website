@@ -47,8 +47,8 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     page: currentPage,
     limit: POSTS_PER_PAGE,
     search: searchTerm,
-    filter: `tag:${params.slug}` as string,
-  } as { page: number; limit: number; search: string; filter: string });
+    filter: `tag:${params.slug}`
+  });
 
   if (!regularPosts.length && currentPage === 1 && !searchTerm) {
     notFound();

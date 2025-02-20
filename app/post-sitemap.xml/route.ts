@@ -16,7 +16,7 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${posts.map(post => `
   <url>
-    <loc>${baseUrl}/blog/${post.slug}</loc>
+    <loc>${baseUrl}/${post.slug}</loc>
     <lastmod>${new Date(post.updated_at || post.published_at).toISOString()}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
