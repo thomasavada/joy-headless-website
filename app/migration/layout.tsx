@@ -1,4 +1,5 @@
 import {Metadata} from "next";
+import { ForcedTheme } from "../../components/ForcedTheme";
 
 export const metadata: Metadata = {
   title: "Migration - Joy",
@@ -10,5 +11,5 @@ export default function MigrationLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <ForcedTheme theme="dark">{children}</ForcedTheme>;
 }

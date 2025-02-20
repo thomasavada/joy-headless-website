@@ -80,7 +80,6 @@ export const PricingCard = ({
       case "Professional":
         return "+$15";
       case "Advanced":
-      case "Starter":
         return "+$10";
       case "Enterprise":
         return "+$5";
