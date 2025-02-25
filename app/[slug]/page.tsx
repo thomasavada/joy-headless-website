@@ -118,101 +118,36 @@ export default async function Page({ params }: Props) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@graph": [
+    "@type": "BreadcrumbList",
+    "itemListElement": [
       {
-        "@type": ["Person", "Organization"],
-        "@id": `https://${frontEndDomain}/#person`,
-        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
-        "logo": {
-          "@type": "ImageObject",
-          "@id": `https://${frontEndDomain}/#logo`,
-          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
-          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
-          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
-          "inLanguage": "en-US"
-        },
-        "image": {
-          "@type": "ImageObject",
-          "@id": `https://${frontEndDomain}/#logo`,
-          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
-          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
-          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
-          "inLanguage": "en-US"
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "WebPage",
+          "@id": `https://${frontEndDomain}`,
+          "url": `https://${frontEndDomain}`,
+          "name": "Home"
         }
       },
       {
-        "@type": "WebSite",
-        "@id": `https://${frontEndDomain}/#website`,
-        "url": `https://${frontEndDomain}`,
-        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
-        "alternateName": "Joy | Rewards & Loyalty Program for Shopify Business",
-        "publisher": {
-          "@id": `https://${frontEndDomain}/#person`
-        },
-        "inLanguage": "en-US"
-      },
-      {
-        "@type": "ImageObject",
-        "@id": post.feature_image,
-        "url": post.feature_image,
-        "width": "1600",
-        "height": "900",
-        "caption": post.title,
-        "inLanguage": "en-US"
-      },
-      {
-        "@type": "WebPage",
-        "@id": `https://${frontEndDomain}/${post.slug}/#webpage`,
-        "url": `https://${frontEndDomain}/${post.slug}/`,
-        "name": post.title,
-        "datePublished": post.published_at,
-        "dateModified": post.updated_at,
-        "isPartOf": {
-          "@id": `https://${frontEndDomain}/#website`
-        },
-        "primaryImageOfPage": {
-          "@id": post.feature_image
-        },
-        "inLanguage": "en-US"
-      },
-      {
-        "@type": "Person",
-        "@id": `https://${frontEndDomain}/author/${post.primary_author.slug}/`,
-        "name": post.primary_author.name,
-        "url": `https://${frontEndDomain}/author/${post.primary_author.slug}/`,
-        "image": {
-          "@type": "ImageObject",
-          "@id": post.primary_author.profile_image || "",
-          "url": post.primary_author.profile_image || "",
-          "caption": post.primary_author.name,
-          "inLanguage": "en-US"
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "WebPage",
+          "@id": `https://${frontEndDomain}/blog`,
+          "url": `https://${frontEndDomain}/blog`,
+          "name": "Blog"
         }
       },
       {
-        "@type": "BlogPosting",
-        "headline": post.title,
-        "keywords": post.tags?.map(tag => tag.name).join(", ") || "",
-        "datePublished": post.published_at,
-        "dateModified": post.updated_at,
-        "articleSection": post.primary_tag?.name || "Blog",
-        "author": {
-          "@id": `https://${frontEndDomain}/author/${post.primary_author.slug}/`
-        },
-        "publisher": {
-          "@id": `https://${frontEndDomain}/#person`
-        },
-        "description": post.excerpt,
-        "name": post.title,
-        "@id": `https://${frontEndDomain}/${post.slug}/#richSnippet`,
-        "isPartOf": {
-          "@id": `https://${frontEndDomain}/${post.slug}/#webpage`
-        },
-        "image": {
-          "@id": post.feature_image
-        },
-        "inLanguage": "en-US",
-        "mainEntityOfPage": {
-          "@id": `https://${frontEndDomain}/${post.slug}/#webpage`
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "WebPage",
+          "@id": `https://${frontEndDomain}/${post.slug}`,
+          "url": `https://${frontEndDomain}/${post.slug}`,
+          "name": post.title
         }
       }
     ]
