@@ -6,10 +6,17 @@ import {TestimonialSection} from '@/components/layout/sections/testimonial';
 import {Metadata} from 'next';
 import Image from 'next/image';
 import {CTASection} from '@/components/layout/sections/cta';
+import {JsonLd} from '@/components/blog/json-ld';
+import {frontEndDomain} from "@/lib/frontend";
 
 export const metadata: Metadata = {
-  title: 'Referral Program - Joy',
-  description: `Transform loyal customers into powerful brand ambassadors with Joy's referral program. Encourage sharing and reward both referrers and their friends.`,
+  title: 'Shopify Referral Program | Customer Referral Marketing - Joy',
+  description: 'Grow your Shopify store with a powerful referral program. Reward customers for sharing, automate referral tracking, and boost word-of-mouth marketing. Easy to set up and manage.',
+  openGraph: {
+    title: 'Shopify Referral Program | Customer Referral Marketing - Joy',
+    description: 'Grow your Shopify store with a powerful referral program. Reward customers for sharing, automate referral tracking, and boost word-of-mouth marketing. Easy to set up and manage.',
+    type: 'website',
+  },
 };
 
 const rewardTypes = [
@@ -49,9 +56,138 @@ const sharingFeatures = [
 ];
 
 export default function ReferralPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Person", "Organization"],
+        "@id": `https://${frontEndDomain}/#person`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        },
+        "image": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": `https://${frontEndDomain}/#website`,
+        "url": `https://${frontEndDomain}`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "alternateName": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "publisher": {
+          "@id": `https://${frontEndDomain}/#person`
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": `https://${frontEndDomain}/referral/#webpage`,
+        "url": `https://${frontEndDomain}/referral/`,
+        "name": "Referral Program - Joy",
+        "description": "Transform loyal customers into powerful brand ambassadors with Joy's referral program. Encourage sharing and reward both referrers and their friends.",
+        "isPartOf": {
+          "@id": `https://${frontEndDomain}/#website`
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "Product",
+        "@id": `https://${frontEndDomain}/referral/#product`,
+        "name": "Joy Referral Program",
+        "description": "Transform Loyal Customers into Powerful Brand Ambassadors - Encourage loyal customers to share their positive experiences and become advocates.",
+        "brand": {
+          "@id": `https://${frontEndDomain}/#person`
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "USD",
+          "seller": {
+            "@id": `https://${frontEndDomain}/#person`
+          }
+        }
+      },
+      {
+        "@type": "ItemList",
+        "@id": `https://${frontEndDomain}/referral/#features`,
+        "name": "Referral Program Features",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Discount percentage",
+            "description": "Give a percentage discount on customers' next purchase as a token of appreciation for spreading the word."
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Discount amount",
+            "description": "Offer a fixed discount amount for each successful referral, rewarding customers' efforts with immediate savings."
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Points reward",
+            "description": "Award points for every successful referral, which customers can redeem for future purchases or exclusive rewards."
+          }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "@id": `https://${frontEndDomain}/referral/#sharing`,
+        "name": "How to Share Referrals",
+        "description": "Make referral rewards simple to access and redeem",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Share via social media",
+            "text": "Automatically generate a unique referral link for each customer to share with their friends."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Share across platforms",
+            "text": "Easily share referral links across multiple social platforms with ease using Joy."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Email Marketing Integration",
+            "text": "Integrate effortlessly with your email marketing tool for smooth customer communication."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `https://${frontEndDomain}/referral/#testimonials`,
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What do customers say about Joy's referral program?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Customers praise Joy's user-friendly interface and flexibility. The referral program is noted for being easy to understand and use, with seamless integration across different platforms."
+            }
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <ForcedTheme theme="dark">
       <main className="flex min-h-screen flex-col">
+        <JsonLd data={jsonLd} />
         {/* Hero Section */}
         <section className="w-full py-20 sm:py-32 md:py-40">
           <div className="container px-4 md:px-6">

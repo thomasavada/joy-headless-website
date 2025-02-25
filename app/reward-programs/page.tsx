@@ -6,10 +6,17 @@ import {Metadata} from 'next';
 import {Gift, Heart, ShoppingBag, Star, UserPlus} from 'lucide-react';
 import Image from 'next/image';
 import {CTASection} from '@/components/layout/sections/cta';
+import {JsonLd} from '@/components/blog/json-ld';
+import {frontEndDomain} from "@/lib/frontend";
 
 export const metadata: Metadata = {
-  title: 'Reward Programs - Joy',
-  description: 'Boost repeat purchase rate with Earn & Redeem points. Incentivize customers to buy more by rewarding them with points, discounts or exclusive offers.',
+  title: 'Shopify Reward Programs | Points & Loyalty System - Joy',
+  description: 'Launch powerful reward programs on Shopify. Flexible point systems, multiple earning methods, and customizable redemption options. Increase customer retention and boost sales.',
+  openGraph: {
+    title: 'Shopify Reward Programs | Points & Loyalty System - Joy',
+    description: 'Launch powerful reward programs on Shopify. Flexible point systems, multiple earning methods, and customizable redemption options. Increase customer retention and boost sales.',
+    type: 'website',
+  },
 };
 
 const earningPoints = [
@@ -84,9 +91,169 @@ const advancedFeatures = [
 ];
 
 export default function RewardProgramsPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Person", "Organization"],
+        "@id": `https://${frontEndDomain}/#person`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        },
+        "image": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": `https://${frontEndDomain}/#website`,
+        "url": `https://${frontEndDomain}`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "alternateName": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "publisher": {
+          "@id": `https://${frontEndDomain}/#person`
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": `https://${frontEndDomain}/reward-programs/#webpage`,
+        "url": `https://${frontEndDomain}/reward-programs/`,
+        "name": "Reward Programs - Joy",
+        "description": "Boost repeat purchase rate with Earn & Redeem points. Incentivize customers to buy more by rewarding them with points, discounts or exclusive offers.",
+        "isPartOf": {
+          "@id": `https://${frontEndDomain}/#website`
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "Product",
+        "@id": `https://${frontEndDomain}/reward-programs/#product`,
+        "name": "Joy Reward Programs",
+        "description": "Boost repeat purchase rate with Earn & Redeem points - Incentivize customers to buy more by rewarding them with points, discounts or exclusive offers.",
+        "brand": {
+          "@id": `https://${frontEndDomain}/#person`
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "USD",
+          "seller": {
+            "@id": `https://${frontEndDomain}/#person`
+          }
+        }
+      },
+      {
+        "@type": "ItemList",
+        "@id": `https://${frontEndDomain}/reward-programs/#earning-points`,
+        "name": "Ways to Earn Points",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Social follows",
+            "description": "Boost your social following by rewarding points for a follow"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Account Creation",
+            "description": "Inspire your customers to register for a store account"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Purchases",
+            "description": "Offer reward points with every purchase to encourage repeat buying"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Birthdays",
+            "description": "Give bonus points to customers on their birthday"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": "Writing reviews",
+            "description": "Boost brand trust by rewarding points for reviews"
+          }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": `https://${frontEndDomain}/reward-programs/#redeem-rewards`,
+        "name": "Redeem Rewards Options",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Discount program",
+            "description": "Boost repeat purchases with fixed or percentage discounts that keep customers returning"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Free gift program",
+            "description": "Let customers collect points and trade them for free samples or products"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Free shipping program",
+            "description": "Treat loyal customers to the delight of free shipping when they earn enough points"
+          }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": `https://${frontEndDomain}/reward-programs/#advanced-features`,
+        "name": "Advanced Features",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "POS extension",
+            "description": "Seamlessly integrate rewards with POS system for a smooth customer experience"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Points expiration",
+            "description": "Encourage timely redemptions and boost customer engagement"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Report & Analytics",
+            "description": "Provide valuable insights to track performance and make data-driven decisions"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Advanced custom CSS",
+            "description": "Customize the look and feel of your site for a unique brand experience"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <ForcedTheme theme="dark">
       <main className="flex min-h-screen flex-col">
+        <JsonLd data={jsonLd} />
         {/* Hero Section */}
         <section className="w-full py-20 sm:py-32 md:py-40">
           <div className="container px-4 md:px-6">

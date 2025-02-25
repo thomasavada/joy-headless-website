@@ -4,6 +4,8 @@ import {Button} from "@/components/ui/button";
 import {SponsorsSection} from "@/components/layout/sections/sponsors";
 import {ArrowRight, BarChart3, DollarSign, Gift} from "lucide-react";
 import {TypewriterText} from "@/components/layout/sections/stamped-migration";
+import {JsonLd} from '@/components/blog/json-ld';
+import {frontEndDomain} from "@/lib/frontend";
 
 export const metadata: Metadata = {
   title: "Migration - Joy",
@@ -77,8 +79,103 @@ const migrationGuides = [
 ];
 
 export default function MigrationPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Person", "Organization"],
+        "@id": `https://${frontEndDomain}/#person`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        },
+        "image": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": `https://${frontEndDomain}/#website`,
+        "url": `https://${frontEndDomain}`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "alternateName": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "publisher": {
+          "@id": `https://${frontEndDomain}/#person`
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": `https://${frontEndDomain}/migrate/#webpage`,
+        "url": `https://${frontEndDomain}/migrate/`,
+        "name": "Migration - Joy",
+        "description": "Easily migrate your loyalty program to Joy",
+        "isPartOf": {
+          "@id": `https://${frontEndDomain}/#website`
+        },
+        "inLanguage": "en-US",
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "@id": "https://cdn-web.joy.so/cdn/image/2024/12/image-3.png",
+          "url": "https://cdn-web.joy.so/cdn/image/2024/12/image-3.png",
+          "caption": "Migration Data Types"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `https://${frontEndDomain}/migrate/#faq`,
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What customer data can Joy migrate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Joy can migrate customer names, VIP tier names, birth dates, points balances, emails, and other custom data. The migration process is backed by 24/7 expert support and includes no migration fee."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which platforms can I migrate from?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Joy supports migration from Yotpo, Stamped, Smile, Appstle, Rivo, Bon, and other loyalty platforms. Each migration comes with step-by-step guides and expert support."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "Service",
+        "@id": `https://${frontEndDomain}/migrate/#service`,
+        "name": "Joy Migration Service",
+        "description": "Transfer your customer data and loyalty settings with our powerful, user-friendly platform – no hassle, just results",
+        "provider": {
+          "@id": `https://${frontEndDomain}/#person`
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "No migration fee"
+        },
+        "serviceType": "Loyalty Program Migration",
+        "termsOfService": `https://${frontEndDomain}/terms-of-use/`
+      }
+    ]
+  };
+
   return (
     <main className="flex min-h-screen flex-col">
+      <JsonLd data={jsonLd} />
       {/* Hero Section */}
       <section className="w-full py-12 sm:py-24">
         <div className="container">

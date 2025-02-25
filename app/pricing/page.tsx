@@ -8,6 +8,8 @@ import {CantDecide} from "@/components/pricing/cant-decide";
 import {FAQ} from "@/components/pricing/faq";
 import {PriceCalculator, PricingProvider} from "@/components/pricing/pricing-context";
 import {ForcedTheme} from '@/components/ForcedTheme'
+import {JsonLd} from '@/components/blog/json-ld';
+import {frontEndDomain} from "@/lib/frontend";
 
 const pricingPlans = [
   {
@@ -79,10 +81,124 @@ const pricingPlans = [
 ];
 
 export default function PricingPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Person", "Organization"],
+        "@id": `https://${frontEndDomain}/#person`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        },
+        "image": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": `https://${frontEndDomain}/#website`,
+        "url": `https://${frontEndDomain}`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "alternateName": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "publisher": {
+          "@id": `https://${frontEndDomain}/#person`
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": `https://${frontEndDomain}/pricing/#webpage`,
+        "url": `https://${frontEndDomain}/pricing/`,
+        "name": "Pricing - Joy Rewards & Loyalty Program",
+        "description": "Our pricing plans are tailored to meet the unique needs of businesses of all sizes, ensuring flexibility and value at every stage of growth.",
+        "isPartOf": {
+          "@id": `https://${frontEndDomain}/#website`
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "Product",
+        "@id": `https://${frontEndDomain}/pricing/#product`,
+        "name": "Joy Loyalty Program",
+        "description": "A customized pricing plan for every business size - Loyalty program solution for Shopify businesses",
+        "brand": {
+          "@id": `https://${frontEndDomain}/#person`
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "USD",
+          "lowPrice": "0",
+          "highPrice": "499",
+          "offerCount": "4",
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Starter",
+              "price": "0",
+              "priceCurrency": "USD",
+              "description": "Up to 150 monthly free orders",
+              "availability": "https://schema.org/InStock"
+            },
+            {
+              "@type": "Offer",
+              "name": "Professional",
+              "price": "24.99",
+              "priceCurrency": "USD",
+              "description": "Up to 1000 monthly free orders",
+              "availability": "https://schema.org/InStock"
+            },
+            {
+              "@type": "Offer",
+              "name": "Advanced",
+              "price": "99",
+              "priceCurrency": "USD",
+              "description": "Up to 2,000 monthly free orders",
+              "availability": "https://schema.org/InStock"
+            },
+            {
+              "@type": "Offer",
+              "name": "Enterprise",
+              "price": "499",
+              "priceCurrency": "USD",
+              "description": "Custom solution for large enterprises",
+              "availability": "https://schema.org/InStock"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `https://${frontEndDomain}/pricing/#faq`,
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can't decide which pricing plan is right for you?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Share your needs with us, and we'll create a customized offer with all the promotional features you need. Contact our team for personalized assistance."
+            }
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <ForcedTheme theme="dark">
       <PricingProvider>
         <main className="flex flex-col min-h-screen">
+          <JsonLd data={jsonLd} />
           {/* Header Section */}
           <section className="w-full py-12 sm:py-24 md:py-32">
             <div className="container">

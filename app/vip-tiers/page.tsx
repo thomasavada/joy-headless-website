@@ -1,15 +1,13 @@
+'use client';
+
 import {ForcedTheme} from '@/components/ForcedTheme';
 import {Button} from '@/components/ui/button';
 import {SponsorsSection} from '@/components/layout/sections/sponsors';
 import {TestimonialSection} from '@/components/layout/sections/testimonial';
-import {Metadata} from 'next';
 import {Gift, Percent, Star, Truck} from 'lucide-react';
 import {CTASection} from '@/components/layout/sections/cta';
-
-export const metadata: Metadata = {
-  title: 'VIP Tiers - Joy',
-  description: 'Build tiered loyalty campaigns with point thresholds, easily managed through Joy\'s user-friendly platform.',
-};
+import {JsonLd} from '@/components/blog/json-ld';
+import {frontEndDomain} from "@/lib/frontend";
 
 const rewardTypes = [
   {
@@ -57,9 +55,146 @@ const features = [
 ];
 
 export default function VIPTiersPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Person", "Organization"],
+        "@id": `https://${frontEndDomain}/#person`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        },
+        "image": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": `https://${frontEndDomain}/#website`,
+        "url": `https://${frontEndDomain}`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "alternateName": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "publisher": {
+          "@id": `https://${frontEndDomain}/#person`
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": `https://${frontEndDomain}/vip-tiers/#webpage`,
+        "url": `https://${frontEndDomain}/vip-tiers/`,
+        "name": "VIP Tiers - Joy",
+        "description": "Build tiered loyalty campaigns with point thresholds, easily managed through Joy's user-friendly platform.",
+        "isPartOf": {
+          "@id": `https://${frontEndDomain}/#website`
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "Product",
+        "@id": `https://${frontEndDomain}/vip-tiers/#product`,
+        "name": "Joy VIP Tiers Program",
+        "description": "The freedom to customize VIP Tiers as you desire - Build tiered loyalty campaigns with point thresholds, easily managed through Joy's platform.",
+        "brand": {
+          "@id": `https://${frontEndDomain}/#person`
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "USD",
+          "seller": {
+            "@id": `https://${frontEndDomain}/#person`
+          }
+        }
+      },
+      {
+        "@type": "ItemList",
+        "@id": `https://${frontEndDomain}/vip-tiers/#rewards`,
+        "name": "VIP Tier Rewards",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Free products",
+            "description": "Encourage repeat business by offering free products as incentives"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Discounts",
+            "description": "Drive more sales with exclusive discounts for returning customers"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Bonus points",
+            "description": "Reward customers with bonus points to keep them coming back"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": "Free Shipping",
+            "description": "Enhance customer satisfaction by offering free shipping on future purchases"
+          }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": `https://${frontEndDomain}/vip-tiers/#features`,
+        "name": "VIP Tier Features",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "VIP Tier Settings",
+            "description": "Tailor your VIP tiers with earned or spent calculations, set start dates, create unique discount codes, and manage tier demotion and resets for a seamless and rewarding loyalty experience."
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "VIP Tier Design",
+            "description": "Create a stunning VIP experience with custom membership cards, eye-catching icons, and personalized info boxes that highlight your top-tier benefits."
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "VIP Tier Notification",
+            "description": "Instant notifications keep customers engaged, alerting them to rewards and VIP tier upgrades for maximum excitement."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `https://${frontEndDomain}/vip-tiers/#testimonials`,
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What do customers say about Joy's VIP tiers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Customers praise Joy's flexibility in customizing VIP tiers and the user-friendly interface. The program is noted for being easy to understand and manage, with seamless integration across different platforms."
+            }
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <ForcedTheme theme="dark">
       <main className="flex min-h-screen flex-col">
+        <JsonLd data={jsonLd} />
         {/* Hero Section */}
         <section className="w-full py-20 sm:py-32 md:py-40">
           <div className="container px-4 md:px-6">

@@ -3,6 +3,8 @@ import {Metadata} from 'next';
 import Image from 'next/image';
 import {FeaturesPreview} from '@/components/layout/sections/features-preview';
 import {CTASection} from '@/components/layout/sections/cta';
+import {JsonLd} from '@/components/blog/json-ld';
+import {frontEndDomain} from "@/lib/frontend";
 
 export const metadata: Metadata = {
   title: 'About us | Joy Rewards & Loyalty Program',
@@ -29,8 +31,77 @@ const stats = [
 ];
 
 export default function AboutUsPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Person", "Organization"],
+        "@id": `https://${frontEndDomain}/#person`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        },
+        "image": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "contentUrl": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business",
+          "inLanguage": "en-US"
+        },
+        "description": "Founded in 2021, Joy is the all-in-one solution for creating and managing effortless loyalty programs that cultivate brand affection and influence customer actions.",
+        "foundingDate": "2021",
+        "url": `https://${frontEndDomain}`,
+        "sameAs": [
+          "https://twitter.com/joyrewards",
+          "https://www.linkedin.com/company/joy-rewards"
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "1800",
+          "bestRating": "5"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": `https://${frontEndDomain}/#website`,
+        "url": `https://${frontEndDomain}`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "alternateName": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "publisher": {
+          "@id": `https://${frontEndDomain}/#person`
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": `https://${frontEndDomain}/about-us/#webpage`,
+        "url": `https://${frontEndDomain}/about-us/`,
+        "name": "About us | Joy Rewards & Loyalty Program",
+        "description": "Founded in 2021, Joy is the all-in-one solution for creating and managing effortless loyalty programs that cultivate brand affection and influence customer actions.",
+        "isPartOf": {
+          "@id": `https://${frontEndDomain}/#website`
+        },
+        "inLanguage": "en-US",
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "@id": "https://cdn-web.joy.so/cdn/image/2025/01/About-Joy.avif",
+          "url": "https://cdn-web.joy.so/cdn/image/2025/01/About-Joy.avif",
+          "caption": "Joy team celebrating"
+        }
+      }
+    ]
+  };
+
   return (
     <ForcedTheme theme="dark">
+      <JsonLd data={jsonLd} />
       <main className="flex min-h-screen flex-col bg-[#020817]">
         {/* Hero Section */}
         <section className="w-full py-20 sm:py-32 md:py-40">
