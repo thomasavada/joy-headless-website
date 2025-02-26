@@ -118,37 +118,72 @@ export default async function Page({ params }: Props) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
+    "@graph": [
       {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@type": "WebPage",
-          "@id": `https://${frontEndDomain}`,
-          "url": `https://${frontEndDomain}`,
-          "name": "Home"
-        }
+        "@type": ["Person", "Organization"],
+        "@id": `https://${frontEndDomain}/#person`,
+        // ... existing code ...
       },
       {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@type": "WebPage",
-          "@id": `https://${frontEndDomain}/blog`,
-          "url": `https://${frontEndDomain}/blog`,
-          "name": "Blog"
-        }
+        "@type": "WebSite",
+        "@id": `https://${frontEndDomain}/#website`,
+        // ... existing code ...
       },
       {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@type": "WebPage",
-          "@id": `https://${frontEndDomain}/${post.slug}`,
-          "url": `https://${frontEndDomain}/${post.slug}`,
-          "name": post.title
-        }
+        "@type": "ImageObject",
+        "@id": post.feature_image,
+        // ... existing code ...
+      },
+      {
+        "@type": "WebPage",
+        "@id": `https://${frontEndDomain}/${post.slug}/#webpage`,
+        // ... existing code ...
+      },
+      {
+        "@type": "Person",
+        "@id": `https://${frontEndDomain}/author/${post.primary_author.slug}/`,
+        // ... existing code ...
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": post.title,
+        // ... existing code ...
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `https://${frontEndDomain}/${post.slug}/#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "WebPage",
+              "@id": `https://${frontEndDomain}`,
+              "url": `https://${frontEndDomain}`,
+              "name": "Home"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "WebPage",
+              "@id": `https://${frontEndDomain}/blog`,
+              "url": `https://${frontEndDomain}/blog`,
+              "name": "Blog"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "WebPage",
+              "@id": `https://${frontEndDomain}/${post.slug}`,
+              "url": `https://${frontEndDomain}/${post.slug}`,
+              "name": post.title
+            }
+          }
+        ]
       }
     ]
   };
