@@ -120,9 +120,31 @@ export default async function Page({ params }: Props) {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["Person", "Organization"],
-        "@id": `https://${frontEndDomain}/#person`,
-        // ... existing code ...
+        "@type": "Organization",
+        "@id": `https://${frontEndDomain}/#organization`,
+        "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+        "url": `https://${frontEndDomain}`,
+        "description": "Build a Loyalty Program that Actually Works. Designed to look great, built to perform with advanced customization and logic",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp",
+          "width": 150,
+          "height": 40,
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business"
+        },
+        "image": {
+          "@type": "ImageObject",
+          "@id": `https://${frontEndDomain}/#logo`,
+          "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp",
+          "width": 150,
+          "height": 40,
+          "caption": "Joy | Rewards & Loyalty Program for Shopify Business"
+        },
+        "sameAs": [
+          "https://twitter.com/joyloyaltyapp",
+          "https://www.linkedin.com/company/joyloyaltyapp"
+        ]
       },
       {
         "@type": "WebSite",
