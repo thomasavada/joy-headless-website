@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" suppressHydrationWarning>
+    <html lang="en-US" suppressHydrationWarning>
       <head />
       <body className={cn(
         "min-h-screen bg-background dark:bg-background-dark transition-colors",

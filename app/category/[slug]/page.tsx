@@ -1,5 +1,6 @@
 import {ForcedTheme} from '@/components/ForcedTheme';
 import {getRegularPosts, getSettings, Settings} from '@/lib/ghost';
+import {frontEndDomain} from '@/lib/frontend';
 import {Metadata} from 'next';
 import {notFound} from 'next/navigation';
 import {PostGrid} from '@/components/blog/post-grid';
@@ -18,21 +19,42 @@ interface Props {
   };
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { settings } = await getSettings() as Settings;
+  const currentPage = Number(searchParams.page) || 1;
   const categoryName = params.slug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
+  // Get total posts to determine if next page exists
+  const { totalPosts } = await getRegularPosts({
+    page: 1,
+    limit: POSTS_PER_PAGE,
+    filter: `tag:${params.slug}`
+  });
+
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+  const hasNextPage = currentPage < totalPages;
+
+  const baseUrl = `https://${frontEndDomain}/category/${params.slug}/`;
+  const canonicalUrl = currentPage === 1
+    ? baseUrl
+    : `${baseUrl}?page=${currentPage}`;
+
   return {
     title: `${categoryName} - ${settings.title}`,
     description: `Read articles about ${categoryName.toLowerCase()} and learn how to grow your business with Joy's loyalty program.`,
+    alternates: {
+      canonical: canonicalUrl,
+      next: hasNextPage ? `${baseUrl}?page=${currentPage + 1}` : undefined
+    },
     openGraph: {
       title: `${categoryName} - ${settings.title}`,
       description: `Read articles about ${categoryName.toLowerCase()} and learn how to grow your business with Joy's loyalty program.`,
       type: 'website',
       images: settings.cover_image ? [settings.cover_image] : [],
+      url: canonicalUrl
     },
   };
 }

@@ -31,7 +31,7 @@ export function PostContent({ post, processedHtml, successStoryInfo }: PostConte
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
-    { label: "Blog", href: "/blog" },
+    { label: "Loyalty Program", href: "/category/loyalty-program/" },
   ];
 
   return (

@@ -4,9 +4,9 @@ import {NextResponse} from 'next/server';
 export async function GET() {
   const robotsTxt = `
     User-agent: *
-    Disallow: /
-
-    Sitemap: https://${frontEndDomain}/sitemap.xml
+    Disallow: *?
+    Disallow: */search/
+    Sitemap: https://${frontEndDomain}/sitemap_index.xml
   `.trim();
 
   return new NextResponse(robotsTxt, {

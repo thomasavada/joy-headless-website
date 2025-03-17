@@ -50,7 +50,9 @@ export async function generateMetadata(
     title: post.meta_title || `${post.title} | ${settings.title}`,
     description: post.meta_description || post.excerpt,
     alternates: {
-      canonical: post.canonical_url || post.url || `https://${frontEndDomain}/${post.slug}`,
+      canonical: post.canonical_url
+        ? post.canonical_url.replace('ghost.joy.so', frontEndDomain)
+        : `https://${frontEndDomain}/${post.slug}`,
     },
     openGraph: {
       title: post.og_title || post.title,

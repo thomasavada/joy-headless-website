@@ -65,10 +65,37 @@ export default async function AuthorPage({ params }: Props) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `https://${frontEndDomain}/author/${author.slug}#person`,
     name: author.name,
-    description: author.bio,
-    image: author.profile_image,
+    description: author.bio || `Articles written by ${author.name}`,
+    image: author.profile_image || undefined,
     url: `https://${frontEndDomain}/author/${author.slug}`,
+    jobTitle: "Author",
+    worksFor: {
+      "@type": "Organization",
+      "@id": `https://${frontEndDomain}/#organization`,
+      name: "Joy.so",
+      url: `https://${frontEndDomain}`
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://${frontEndDomain}/author/${author.slug}`
+    },
+    sameAs: [
+      author.website || undefined,
+      author.twitter || undefined,
+      author.facebook || undefined
+    ].filter(Boolean),
+    knowsAbout: ["Loyalty Programs", "Customer Retention", "E-commerce"],
+    publishedBy: {
+      "@type": "Organization",
+      "@id": `https://${frontEndDomain}/#organization`,
+      name: "Joy.so"
+    },
+    author: {
+      "@type": "Person",
+      "@id": `https://${frontEndDomain}/author/${author.slug}#person`
+    }
   };
 
   return (
