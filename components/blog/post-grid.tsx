@@ -37,6 +37,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
               <Link
                 href={`/${featuredPosts[0].slug}`}
                 className="group block"
+                target="_blank"
               >
                 <article className="grid md:grid-cols-2 gap-8 items-center">
                   {featuredPosts[0].feature_image && (
@@ -70,6 +71,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
               <Link
                 href={`/${featuredPosts[0].slug}`}
                 className="group"
+                target="_blank"
               >
                 <article className="space-y-4">
                   {featuredPosts[0].feature_image && (
@@ -103,6 +105,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
                     key={post.id}
                     href={`/${post.slug}`}
                     className="group block"
+                    target="_blank"
                   >
                     <article className="space-y-3">
                       {post.feature_image && (
@@ -144,6 +147,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
                 key={post.id}
                 href={`/${post.slug}`}
                 className="group"
+                target="_blank"
               >
                 <article className="space-y-3">
                   {post.feature_image && (

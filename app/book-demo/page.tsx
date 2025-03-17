@@ -2,13 +2,51 @@ import {ForcedTheme} from '@/components/ForcedTheme';
 import {Metadata} from 'next';
 import {JsonLd} from '@/components/blog/json-ld';
 import {frontEndDomain} from "@/lib/frontend";
+import { useFormState } from 'react-dom';
 
 export const metadata: Metadata = {
   title: 'Book a Demo | Joy Rewards & Loyalty Program',
   description: 'Schedule a demo with our experts to learn how Joy can help grow your business with loyalty programs.',
 };
 
+async function submitForm(prevState: any, formData: FormData) {
+  'use server'
+
+  try {
+    const data = {
+      shop_name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      shop_url: formData.get('store'),
+      monthly_orders: formData.get('orders'),
+      ref_source: formData.get('referral'),
+      description: formData.get('message'),
+    };
+
+    const response = await fetch(`https://${frontEndDomain}/api/contact`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.error || 'Failed to submit form');
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error('Form submission error:', error);
+    return { success: false, error: 'Failed to submit form. Please try again.' };
+  }
+}
+
 export default function BookDemoPage() {
+  const [state, formAction] = useFormState(submitForm, null);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -96,7 +134,18 @@ export default function BookDemoPage() {
 
               {/* Right Column - Form */}
               <div>
-                <form className="space-y-6 max-w-lg">
+                <form action={formAction} className="space-y-6 max-w-lg">
+                  {state?.error && (
+                    <div className="p-4 text-sm text-red-500 bg-red-500/10 rounded">
+                      {state.error}
+                    </div>
+                  )}
+                  {state?.success && (
+                    <div className="p-4 text-sm text-green-500 bg-green-500/10 rounded">
+                      Thank you! We&apos;ll be in touch soon.
+                    </div>
+                  )}
+
                   {/* Name Field */}
                   <div>
                     <label htmlFor="name" className="block text-sm mb-2">
