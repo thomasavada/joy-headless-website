@@ -1,13 +1,15 @@
 'use client';
 
-import {ForcedTheme} from '@/components/ForcedTheme';
-import {Button} from '@/components/ui/button';
-import {SponsorsSection} from '@/components/layout/sections/sponsors';
-import {TestimonialSection} from '@/components/layout/sections/testimonial';
-import {Gift, Percent, Star, Truck} from 'lucide-react';
-import {CTASection} from '@/components/layout/sections/cta';
-import {JsonLd} from '@/components/blog/json-ld';
-import {frontEndDomain} from "@/lib/frontend";
+import { Metadata } from 'next';
+import { ForcedTheme } from '@/components/ForcedTheme';
+import { Button } from '@/components/ui/button';
+import { SponsorsSection } from '@/components/layout/sections/sponsors';
+import { TestimonialSection } from '@/components/layout/sections/testimonial';
+import { Gift, Percent, Star, Truck } from 'lucide-react';
+import { CTASection } from '@/components/layout/sections/cta';
+import { JsonLd } from '@/components/blog/json-ld';
+import { frontEndDomain } from "@/lib/frontend";
+import { metadata } from './metadata';
 
 const rewardTypes = [
   {
@@ -53,6 +55,8 @@ const features = [
     imageHeight: 69,
   }
 ];
+
+export { metadata };
 
 export default function VIPTiersPage() {
   const jsonLd = {
@@ -193,8 +197,8 @@ export default function VIPTiersPage() {
 
   return (
     <ForcedTheme theme="dark">
+      <JsonLd data={jsonLd} />
       <main className="flex min-h-screen flex-col">
-        <JsonLd data={jsonLd} />
         {/* Hero Section */}
         <section className="w-full py-20 sm:py-32 md:py-40">
           <div className="container px-4 md:px-6">

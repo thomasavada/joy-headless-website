@@ -1,14 +1,14 @@
-'use client';
-
-import {ForcedTheme} from '@/components/ForcedTheme';
-import {Button} from '@/components/ui/button';
-import {SponsorsSection} from '@/components/layout/sections/sponsors';
-import {TestimonialSection} from '@/components/layout/sections/testimonial';
-import {Clock, DollarSign, MessageSquare, ShoppingBag, Star} from 'lucide-react';
+import { Metadata } from 'next';
+import { ForcedTheme } from '@/components/ForcedTheme';
+import { Button } from '@/components/ui/button';
+import { SponsorsSection } from '@/components/layout/sections/sponsors';
+import { TestimonialSection } from '@/components/layout/sections/testimonial';
+import { Clock, DollarSign, MessageSquare, ShoppingBag, Star } from 'lucide-react';
 import Image from 'next/image';
-import {CTASection} from '@/components/layout/sections/cta';
-import {JsonLd} from '@/components/blog/json-ld';
-import {frontEndDomain} from "@/lib/frontend";
+import { CTASection } from '@/components/layout/sections/cta';
+import { JsonLd } from '@/components/blog/json-ld';
+import { frontEndDomain } from "@/lib/frontend";
+import { metadata } from './metadata';
 
 const loyaltyIncentives = [
   {
@@ -55,6 +55,8 @@ const features = [
     image: 'https://cdn-web.joy.so/cdn/image/2025/02/Frame-2085653604-2-1.png',
   }
 ];
+
+export { metadata };
 
 export default function MilestonePage() {
   const jsonLd = {
