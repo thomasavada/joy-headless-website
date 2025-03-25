@@ -92,10 +92,10 @@ export const StampedMigration = () => {
           </span>
 
           {/* Heading with Typing Effect */}
-          <h1 className="text-4xl sm:text-5xl font-bold text-white">
+          <h2 className="text-4xl sm:text-5xl font-bold text-white">
             Easily migrate from<br />
             <TypewriterText />
-          </h1>
+          </h2>
 
           {/* CTA Button */}
           <Link

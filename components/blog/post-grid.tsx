@@ -163,7 +163,7 @@ export function PostGrid({ featuredPosts, regularPosts }: PostGridProps) {
                   )}
                   <div className="space-y-2">
                     {post.tags && renderTags(post.tags)}
-                    <h3 className="text-sm font-heading font-medium line-clamp-2 group-hover:text-primary transition-colors">
+                    <h3 className="text-lg font-heading font-medium line-clamp-2 group-hover:text-primary transition-colors">
                       {post.title}
                     </h3>
                     <p className="text-xs text-muted-foreground/80 line-clamp-2">
