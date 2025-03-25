@@ -13,8 +13,12 @@ interface SearchResult {
   excerpt?: string;
 }
 
-export function SearchDialog() {
-  const [isOpen, setIsOpen] = useState(false);
+interface SearchDialogProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,16 +56,7 @@ export function SearchDialog() {
   }, [query]);
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-muted-foreground hover:text-foreground"
-        >
-          <Search className="h-5 w-5" />
-        </Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-3xl h-[80vh] max-h-[680px] p-0 gap-0">
         <div className="container flex flex-col h-full py-6">
           {/* Search Header */}
@@ -94,7 +89,7 @@ export function SearchDialog() {
                   <Link
                     key={result.slug}
                     href={`/${result.slug}`}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => onOpenChange?.(false)}
                     className={cn(
                       "block px-4 py-3 rounded-lg",
                       "hover:bg-muted/50 dark:hover:bg-muted/25",
