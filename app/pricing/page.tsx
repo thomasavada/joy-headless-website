@@ -200,8 +200,8 @@ export default function PricingPage() {
         <main className="flex flex-col min-h-screen">
           <JsonLd data={jsonLd} />
           {/* Header Section */}
-          <section className="w-full py-12 sm:py-24 md:py-32">
-            <div className="container">
+          <section className="w-full py-12 md:py-20 lg:py-32">
+            <div className="container px-4 mx-auto max-w-7xl">
               <Reveal>
                 <div className="text-center space-y-6 max-w-3xl mx-auto">
                   <span className="text-[#00A6ED] text-sm font-medium">
@@ -210,7 +210,7 @@ export default function PricingPage() {
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white">
                     A customized pricing plan for <span className="dark:text-primary-dark">every business size</span>
                   </h1>
-                  <p className="text-lg sm:text-xl text-white leading-relaxed">
+                  <p className="text-lg sm:text-xl text-white leading-relaxed max-w-2xl mx-auto">
                     Our pricing plans are tailored to meet the unique needs of businesses of all
                     sizes, ensuring flexibility and value at every stage of growth.
                   </p>
@@ -221,27 +221,27 @@ export default function PricingPage() {
 
           {/* Sponsors Section */}
           <section className="w-full py-12">
-            <div className="container">
+            <div className="container px-4 mx-auto max-w-7xl">
               <SponsorsSection />
             </div>
           </section>
 
-          {/* Calculator Section - Now positioned where we want it */}
+          {/* Calculator Section */}
           <section className="w-full py-12">
-            <div className="container">
+            <div className="container px-4 mx-auto max-w-7xl">
               <PriceCalculator />
             </div>
           </section>
 
           {/* Pricing Cards Section */}
-          <section className="w-full py-12 sm:py-24">
-            <div className="container">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <section className="w-full py-12 md:py-20">
+            <div className="container px-4 mx-auto max-w-7xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8">
                 {pricingPlans.map((plan) => (
                   <Reveal key={plan.title}>
                     <PricingCard
                       {...plan}
-                      className="text-center"
+                      className="h-full"
                     />
                   </Reveal>
                 ))}
@@ -250,22 +250,22 @@ export default function PricingPage() {
           </section>
 
           {/* Plan Comparison Section */}
-          <section className="w-full py-12 sm:py-24">
-            <div className="container">
+          <section className="w-full py-12 md:py-20">
+            <div className="container px-4 mx-auto max-w-7xl overflow-x-auto">
               <PlanComparison />
             </div>
           </section>
 
           {/* FAQ Section */}
-          <section className="w-full py-12 sm:py-24">
-            <div className="container">
+          <section className="w-full py-12 md:py-20">
+            <div className="container px-4 mx-auto max-w-7xl">
               <FAQ />
             </div>
           </section>
 
-           {/* Can't Decide Section */}
-           <section className="w-full py-12 sm:py-24 md:py-32">
-            <div className="container">
+          {/* Can't Decide Section */}
+          <section className="w-full py-12 md:py-20 lg:py-32">
+            <div className="container px-4 mx-auto max-w-7xl">
               <CantDecide />
             </div>
           </section>
