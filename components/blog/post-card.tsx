@@ -1,71 +1,72 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {formatDate} from '@/lib/utils';
-
-interface Post {
-  slug: string;
-  title: string;
-  excerpt: string;
-  feature_image: string;
-  published_at: string;
-  reading_time: number;
-  primary_author: {
-    name: string;
-    profile_image: string;
-  };
-}
+import { Post, Tag } from "@/lib/types";
 
 interface PostCardProps {
   post: Post;
-  priority?: boolean;
+  variant?: 'default' | 'featured' | 'secondary';
 }
 
-export function PostCard({ post, priority = false }: PostCardProps) {
+export function PostCard({ post, variant = 'default' }: PostCardProps) {
+  const renderTags = (tags: Tag[]) => (
+    <div className="flex flex-wrap gap-2 mb-3">
+      {tags.slice(0, 3).map(tag => (
+        <span
+          key={tag.id}
+          className="px-2.5 py-1 bg-primary/5 text-primary rounded-full text-xs font-medium"
+        >
+          {tag.name}
+        </span>
+      ))}
+    </div>
+  );
+
+  const variants = {
+    default: {
+      imageSize: { width: 400, height: 225 },
+      titleSize: 'text-lg',
+      excerptSize: 'text-xs',
+      spacing: 'space-y-3',
+    },
+    featured: {
+      imageSize: { width: 1000, height: 562 },
+      titleSize: 'text-2xl',
+      excerptSize: 'text-lg',
+      spacing: 'space-y-4',
+    },
+    secondary: {
+      imageSize: { width: 400, height: 225 },
+      titleSize: 'text-base',
+      excerptSize: 'text-sm',
+      spacing: 'space-y-3',
+    },
+  };
+
+  const styles = variants[variant];
+
   return (
-    <article className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200">
-      <Link href={`/blog/${post.slug}`} className="block">
-        <div className="relative aspect-[16/9]">
+    <article className={styles.spacing}>
+      {post.feature_image && (
+        <div className="aspect-[16/9] overflow-hidden rounded-lg bg-muted/20">
           <Image
             src={post.feature_image}
             alt={post.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority={priority}
+            width={styles.imageSize.width}
+            height={styles.imageSize.height}
+            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+            priority={variant === 'featured'}
           />
         </div>
-      </Link>
-
-      <div className="p-6">
-        <Link href={`/blog/${post.slug}`} className="block">
-          <h2 className="text-xl font-bold mb-2 hover:text-blue-600 transition-colors">
-            {post.title}
-          </h2>
-        </Link>
-
-        <p className="text-gray-600 mb-4 line-clamp-2">
+      )}
+      <div className="space-y-2">
+        {post.tags && renderTags(post.tags)}
+        <h3 className={`${styles.titleSize} font-heading font-medium line-clamp-2 group-hover:text-primary transition-colors`}>
+          {post.title}
+        </h3>
+        <p className={`${styles.excerptSize} text-muted-foreground opacity-60 line-clamp-2`}>
           {post.excerpt}
         </p>
-
-        <div className="flex items-center justify-between text-sm text-gray-500">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center">
-              <div className="relative w-6 h-6 rounded-full overflow-hidden mr-2">
-                <Image
-                  src={post.primary_author.profile_image}
-                  alt={post.primary_author.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <span>{post.primary_author.name}</span>
-            </div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <span>{formatDate(post.published_at)}</span>
-            <span>{post.reading_time} min read</span>
-          </div>
-        </div>
       </div>
     </article>
   );
