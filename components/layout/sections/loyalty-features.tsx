@@ -35,8 +35,8 @@ export const LoyaltyFeatures = () => {
   ];
 
   return (
-    <section className="w-full bg-background py-20">
-      <div className="container px-4 mx-auto">
+    <section className="w-full bg-background py-12 sm:py-20">
+      <div className="container px-4 mx-auto max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           {/* Left Content */}
           <div className="space-y-8">
@@ -48,13 +48,13 @@ export const LoyaltyFeatures = () => {
                 Discover how our app not only saves time but also reduces errors and improves employee engagement.
               </p>
             </div>
-            
-            <Link 
+
+            <Link
               href="#"
               className="inline-flex items-center  hover:underline text-primary dark:text-primary-dark"
             >
               Learn More
-              <svg 
+              <svg
                 className="ml-2 w-4 h-4"
                 fill="currentColor"
                 viewBox="0 0 256 512"
@@ -95,4 +95,4 @@ export const LoyaltyFeatures = () => {
       </div>
     </section>
   );
-}; 
+};
