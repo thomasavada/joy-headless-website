@@ -1,4 +1,5 @@
 import {JSDOM} from 'jsdom';
+import { frontEndDomain } from '../../lib/frontend';
 
 interface ImageSize {
   width: number;
@@ -41,6 +42,25 @@ export function processPostContent(html: string) {
   if (typeof window === 'undefined') {
     const dom = new JSDOM(html);
     const doc = dom.window.document;
+
+    // Add external link handling
+    const links = doc.querySelectorAll('a');
+    links.forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href && (href.startsWith('http') || href.startsWith('https'))) {
+        try {
+          const url = new URL(href);
+          // Check if the hostname is different from our domain
+          if (!url.hostname.includes(frontEndDomain)) {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'nofollow noopener');
+          }
+        } catch (e) {
+          // Invalid URL, skip this link
+          console.warn('Invalid URL found:', href);
+        }
+      }
+    });
 
     // Transform image URLs in the content
     const images = doc.querySelectorAll('img');
