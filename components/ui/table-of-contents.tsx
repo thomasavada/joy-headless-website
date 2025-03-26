@@ -39,7 +39,7 @@ export function TableOfContents({ content }: TableOfContentsProps) {
           }
         });
       },
-      { 
+      {
         rootMargin: '-80px 0px -80% 0px',
         threshold: 0.1
       }
@@ -80,26 +80,36 @@ export function TableOfContents({ content }: TableOfContentsProps) {
         Table of Contents
       </div>
 
-      <div className="space-y-1">
-        {headings.map((heading) => (
-          <a
-            key={heading.id}
-            href={`#${heading.id}`}
-            className={`block text-sm py-1 px-4 rounded-md transition-colors
-              ${
-                activeId === heading.id
-                  ? 'text-primary bg-primary/5 font-medium'
-                  : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
-              }
-            `}
-            onClick={() => {
-              // Just update the active ID
-              setActiveId(heading.id);
-            }}
-          >
-            {heading.text}
-          </a>
-        ))}
+      <div className="max-h-[150px] overflow-y-auto pr-4
+        [&::-webkit-scrollbar]:w-2
+        [&::-webkit-scrollbar-thumb]:rounded-full
+        [&::-webkit-scrollbar-track]:transparent
+        [&::-webkit-scrollbar-thumb]:bg-gray-300
+        dark:[&::-webkit-scrollbar-thumb]:bg-gray-700
+        scrollbar-thin
+        scrollbar-thumb-gray-300
+        dark:scrollbar-thumb-gray-700
+        scrollbar-track-transparent">
+        <div className="space-y-1">
+          {headings.map((heading) => (
+            <a
+              key={heading.id}
+              href={`#${heading.id}`}
+              className={`block text-sm py-1 px-4 rounded-md transition-colors
+                ${
+                  activeId === heading.id
+                    ? 'text-primary bg-primary/5 font-medium'
+                    : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
+                }
+              `}
+              onClick={() => {
+                setActiveId(heading.id);
+              }}
+            >
+              {heading.text}
+            </a>
+          ))}
+        </div>
       </div>
 
       {/* Schedule Demo - Desktop */}
@@ -113,7 +123,7 @@ export function TableOfContents({ content }: TableOfContentsProps) {
           <div className="flex flex-col gap-2">
             <h3 className="font-medium">Request a demo</h3>
             <p className="text-sm text-muted-foreground">
-              Get on a demo with Joy, and we'll walk you through the app and help you migrate over from another solution.
+              Get on a demo with Joy, and we&apos;ll walk you through the app and help you migrate over from another solution.
             </p>
             <div className="flex items-center gap-2 text-primary text-sm font-medium mt-2">
               Request a demo
