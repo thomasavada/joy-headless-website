@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import { Calendar } from 'lucide-react';
+import { JsonLd } from '@/components/blog/json-ld';
 
 interface Props {
   params: {
@@ -81,11 +82,6 @@ export default async function AuthorPage({ params }: Props) {
       "@type": "WebPage",
       "@id": `https://${frontEndDomain}/author/${author.slug}`
     },
-    sameAs: [
-      author.website || undefined,
-      author.twitter || undefined,
-      author.facebook || undefined
-    ].filter(Boolean),
     knowsAbout: ["Loyalty Programs", "Customer Retention", "E-commerce"],
     publishedBy: {
       "@type": "Organization",
@@ -101,6 +97,7 @@ export default async function AuthorPage({ params }: Props) {
   return (
     <ForcedTheme theme="light">
       <main className="flex min-h-screen flex-col">
+        <JsonLd data={jsonLd} />
         {/* Author Header */}
         <div className="w-full bg-white border-b border-gray-100">
           <div className="container mx-auto px-4 py-16 max-w-6xl">
