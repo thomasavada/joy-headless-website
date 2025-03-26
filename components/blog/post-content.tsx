@@ -92,10 +92,15 @@ export function PostContent({ post, processedHtml, successStoryInfo }: PostConte
 
                 {/* Meta Information */}
                 <div className="flex flex-wrap gap-3 text-xs text-gray-500">
-                  {/* Author */}
+                  {/* Author with Link */}
                   <div className="flex items-center gap-1.5">
                     <User className="w-3.5 h-3.5" />
-                    <span>{post.primary_author.name}</span>
+                    <Link
+                      href={`/author/${post.primary_author.slug}`}
+                      className="hover:text-primary transition-colors"
+                    >
+                      {post.primary_author.name}
+                    </Link>
                   </div>
 
                   {/* Publication Date */}
