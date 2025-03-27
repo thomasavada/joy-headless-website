@@ -1,1 +1,1 @@
-export const frontEndDomain = 'webv2.joy.so';
+export const frontEndDomain = 'joy.so';
