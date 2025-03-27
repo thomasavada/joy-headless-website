@@ -65,32 +65,65 @@ export default async function AuthorPage({ params }: Props) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": `https://${frontEndDomain}/author/${author.slug}#person`,
-    name: author.name,
-    description: author.bio || `Articles written by ${author.name}`,
-    image: author.profile_image || undefined,
-    url: `https://${frontEndDomain}/author/${author.slug}`,
-    jobTitle: "Author",
-    worksFor: {
-      "@type": "Organization",
-      "@id": `https://${frontEndDomain}/#organization`,
-      name: "Joy.so",
-      url: `https://${frontEndDomain}`
+    "@type": "ProfilePage",
+    "@id": `https://${frontEndDomain}/author/${author.slug}#webpage`,
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": `https://${frontEndDomain}/#website`,
+      "name": "Joy.so",
+      "url": `https://${frontEndDomain}`
     },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `https://${frontEndDomain}/author/${author.slug}`
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "@id": `https://${frontEndDomain}/author/${author.slug}#primaryimage`,
+      "url": author.profile_image || `https://${frontEndDomain}/default-author.png`,
+      "width": 120,
+      "height": 120
     },
-    knowsAbout: ["Loyalty Programs", "Customer Retention", "E-commerce"],
-    publishedBy: {
-      "@type": "Organization",
-      "@id": `https://${frontEndDomain}/#organization`,
-      name: "Joy.so"
+    "headline": `${author.name} - Author at Joy.so`,
+    "description": author.bio || `Articles written by ${author.name}`,
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "WebPage",
+            "@id": `https://${frontEndDomain}`,
+            "name": "Home"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "WebPage",
+            "@id": `https://${frontEndDomain}/author/${author.slug}`,
+            "name": author.name
+          }
+        }
+      ]
     },
-    author: {
+    "mainEntity": {
       "@type": "Person",
-      "@id": `https://${frontEndDomain}/author/${author.slug}#person`
+      "@id": `https://${frontEndDomain}/author/${author.slug}#person`,
+      "name": author.name,
+      "description": author.bio || `Articles written by ${author.name}`,
+      "image": {
+        "@type": "ImageObject",
+        "url": author.profile_image || `https://${frontEndDomain}/default-author.png`,
+        "width": 120,
+        "height": 120
+      },
+      "url": `https://${frontEndDomain}/author/${author.slug}`,
+      "jobTitle": "Author",
+      "worksFor": {
+        "@type": "Organization",
+        "@id": `https://${frontEndDomain}/#organization`,
+        "name": "Joy.so",
+        "url": `https://${frontEndDomain}`
+      }
     }
   };
 
