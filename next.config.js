@@ -33,6 +33,7 @@ const nextConfig = {
     // your project has type errors.
     ignoreBuildErrors: true,
   },
+  compress: false
 }
 
 module.exports = nextConfig
