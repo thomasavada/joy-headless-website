@@ -5,6 +5,7 @@ import {Metadata} from 'next';
 import {notFound} from 'next/navigation';
 import {PostGrid} from '@/components/blog/post-grid';
 import {Pagination} from '@/components/ui/pagination';
+import { JsonLd } from '@/components/blog/json-ld';
 
 // Number of posts per page
 const POSTS_PER_PAGE = 9;
@@ -83,9 +84,57 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `https://${frontEndDomain}/category/${params.slug}/#webpage`,
+    "url": `https://${frontEndDomain}/category/${params.slug}/`,
+    "name": `${categoryName} - Articles and Guides`,
+    "description": `Read articles about ${categoryName.toLowerCase()} and learn how to grow your business with Joy's loyalty program.`,
+    "isPartOf": {
+      "@type": "Website",
+      "@id": `https://${frontEndDomain}/#website`,
+      "name": "Joy | Rewards & Loyalty Program for Shopify Business",
+      "url": `https://${frontEndDomain}`
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": `https://${frontEndDomain}`,
+            "name": "Home"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@id": `https://${frontEndDomain}/category/${params.slug}/`,
+            "name": categoryName
+          }
+        }
+      ]
+    },
+    "about": {
+      "@type": "Thing",
+      "name": categoryName,
+      "description": `Articles and guides about ${categoryName.toLowerCase()} for Shopify businesses`
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": `https://${frontEndDomain}/#organization`,
+      "name": "Joy.so",
+      "url": `https://${frontEndDomain}`
+    }
+  };
+
   return (
     <ForcedTheme theme="light">
       <main className="flex min-h-screen flex-col">
+        <JsonLd data={jsonLd} />
         {/* Category Header */}
         <section className="w-full border-b border-border/40 bg-gradient-to-b from-background/60 to-background">
           <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
