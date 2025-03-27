@@ -86,17 +86,36 @@ export default async function CategoryPage({ params, searchParams }: Props) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": `https://${frontEndDomain}/category/${params.slug}/#webpage`,
-    "url": `https://${frontEndDomain}/category/${params.slug}/`,
-    "name": `${categoryName} - Articles and Guides`,
-    "description": `Read articles about ${categoryName.toLowerCase()} and learn how to grow your business with Joy's loyalty program.`,
-    "isPartOf": {
-      "@type": "Website",
-      "@id": `https://${frontEndDomain}/#website`,
-      "name": "Joy | Rewards & Loyalty Program for Shopify Business",
-      "url": `https://${frontEndDomain}`
+    "@type": "WebPage",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Joy.so",
+      "url": `https://${frontEndDomain}`,
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+        "width": 150,
+        "height": 150
+      }
     },
+    "author": {
+      "@type": "Organization",
+      "name": "Joy.so",
+      "url": `https://${frontEndDomain}`,
+      "sameAs": [`https://${frontEndDomain}`]
+    },
+    "headline": `${categoryName} - Articles and Guides`,
+    "description": `Read articles about ${categoryName.toLowerCase()} and learn how to grow your business with Joy's loyalty program.`,
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://cdn-web.joy.so/cdn/image/2024/10/Logo_Joy.webp?width=150",
+      "width": 150,
+      "height": 150
+    },
+    "url": `https://${frontEndDomain}/category/${params.slug}/`,
+    "datePublished": new Date().toISOString(),
+    "dateModified": new Date().toISOString(),
+    "mainEntityOfPage": `https://${frontEndDomain}/category/${params.slug}/`,
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
@@ -122,12 +141,6 @@ export default async function CategoryPage({ params, searchParams }: Props) {
       "@type": "Thing",
       "name": categoryName,
       "description": `Articles and guides about ${categoryName.toLowerCase()} for Shopify businesses`
-    },
-    "publisher": {
-      "@type": "Organization",
-      "@id": `https://${frontEndDomain}/#organization`,
-      "name": "Joy.so",
-      "url": `https://${frontEndDomain}`
     }
   };
 
